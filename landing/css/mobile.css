@@ -1,0 +1,159 @@
+/* Utility */
+.container {
+  height: auto;
+}
+
+.empty {
+  display: none;
+}
+
+.form-container {
+  height: auto;
+  padding: 5rem 1.5rem;
+}
+
+.form-container .form {
+  padding: 0 1rem;
+}
+
+.form-container .form label,
+.form-container .form input {
+  margin: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 15px;
+}
+
+.form-container .form p {
+  margin: 0.75rem 0;
+  padding: 0 0.75rem;
+}
+
+/* Navbar */
+.navbar {
+  position: static;
+  padding: 0;
+}
+
+.navbar__container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.navbar__container .logo a {
+  margin: 0;
+}
+
+.navbar__container ul {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.navbar__container ul li {
+  margin: 1rem 0;
+}
+
+.navbar__container ul li a {
+  padding: 0;
+}
+
+.navbar__container .register-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.navbar__container .register-buttons a {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.navbar__container .my-profile {
+  text-align: center;
+  margin: 1rem 0;
+  padding-right: 0;
+}
+
+.navbar__container .my-profile:hover .my-profile__dropdown {
+  display: none;
+}
+
+.navbar__container .my-profile:hover .my-profile__options {
+  display: block;
+}
+
+.navbar__container .my-profile .my-profile__options {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.navbar__container .my-profile .my-profile__options p {
+  padding: 0.5rem;
+}
+
+/* quote*/
+.quote {
+  padding-top: 3rem;
+  padding-bottom: 0;
+}
+
+.quote__container {
+  padding: 0;
+}
+
+.quote__container h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/*features*/
+.features {
+  padding: 3rem 0;
+}
+
+.features__container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.features__container i {
+  font-size: 2em;
+}
+
+.features__item {
+  padding: 2rem 0;
+}
+
+/*footer*/
+footer {
+  padding: 0.75rem 0;
+}
+
+footer .footer__container {
+  height: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+footer .footer__container .links {
+  margin-bottom: 1rem;
+}
+
+footer .footer__container .links a {
+  padding: 0 0.75rem;
+}
+
+/*Login Form*/
+/* Sign Up Form */
