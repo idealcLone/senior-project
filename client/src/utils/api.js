@@ -1,19 +1,19 @@
 import axios from 'axios'
 import { getToken } from "./token";
 
-const addToken = config => {
-  const token = getToken()
-
-  config.headers.Authorization = `Bearer ${token}`;
-  config.headers.Accept = 'application/json; version=1.0';
-
-  return config;
-}
+const token = getToken()
 
 const api = axios.create({
   baseURL: '/api',
 });
 
-api.interceptors.request.use(addToken);
+(() => {
+  if(token) {
+    api.defaults.headers.common['Authorization'] = `Token ${token}`
+  } else {
+    delete api.defaults.headers.common['Authorization']
+  }
+})()
+
 
 export default api

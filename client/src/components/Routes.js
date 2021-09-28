@@ -3,12 +3,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
-import { Login } from "../auth/Login";
-import { SignUp } from "../auth/SignUp";
 import { getToken } from "../utils/token";
 import { NotFound } from "../pages/NotFound";
-import { Home } from "../pages/Home";
-import { Profile } from "../pages/Profile";
+import { routes } from "../consts/routes";
 
 const ProtectedRoute = props => {
   const token = getToken()
@@ -22,10 +19,10 @@ const ProtectedRoute = props => {
 export const Routes = () => {
   return (
     <Switch>
-      <Route path={'/login'} component={Login}/>
-      <Route path={'/signup'} component={SignUp}/>
-      <ProtectedRoute path={'/profile'} component={Profile}/>
-      <Route exact path={'/'} component={Home}/>
+      {routes.map(route => route.protected ?
+        <ProtectedRoute path={route.path} component={route.component}/> :
+        <Route exact path={route.path} component={route.component}/>
+      )}
       <Route component={NotFound}/>
     </Switch>
   )

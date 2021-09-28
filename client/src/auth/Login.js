@@ -22,21 +22,30 @@ export const Login = () => {
 
   return (
     token ? <Redirect from={'/login'} to={'/'}/> : (
-      <form style={{width: 200, margin: '0 auto'}}>
-        <input
-          type="text"
-          placeholder={'username'}
-          value={info.username}
-          onChange={e => setInfo({...info, username: e.target.value})}
-        />
-        <input
-          type="password"
-          placeholder={'password'}
-          value={info.password}
-          onChange={e => setInfo({...info, password: e.target.value})}
-        />
-        <input type="submit" placeholder={'login'} onClick={onSubmit}/>
-      </form>
+      <div className="login-container form-container container">
+        <div className="login-form form">
+
+          <h1>Log In</h1>
+          <label htmlFor="email"> Email</label>
+          <input
+            name={'email'}
+            id={'email'}
+            type={'text'}
+            value={info.username}
+            onChange={e => setInfo({...info, username: e.target.value})}
+          />
+
+          <label htmlFor="password"> Password</label>
+          <input
+            name={'password'}
+            type="password"
+            value={info.password}
+            onChange={e => setInfo({...info, password: e.target.value})}
+          />
+          <button className={'btn'} onClick={onSubmit}>Log In</button>
+          <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+      </div>
     )
   )
 }

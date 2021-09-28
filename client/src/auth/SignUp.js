@@ -12,7 +12,6 @@ const classes = {
 
 export const SignUp = () => {
   const dispatch = useDispatch()
-  const majors = ['Computer Science', 'Mathematics', 'Biology', 'Chemistry']
 
   const [info, setInfo] = React.useState({
     username: '',
@@ -26,34 +25,28 @@ export const SignUp = () => {
   }
 
   return (
-    <form style={{width: 200, margin: '0 auto'}}>
-      <input
-        type="text"
-        placeholder={'username'}
-        value={info.username}
-        onChange={e => setInfo({ ...info, username: e.target.value })}
-      />
-      <input
-        type="major"
-        placeholder={'password'}
-        value={info.password}
-        onChange={e => setInfo({ ...info, password: e.target.value })}
-      />
-      <select
-        name="major"
-        value={info.major}
-        onChange={e => setInfo({ ...info, major: e.target.value })}
-      >
-        {
-          majors.map(major => <option key={major} value={major}>{major}</option>)
-        }
-      </select>
-      <input
-        type="submit"
-        style={classes.button}
-        value={'register'}
-        onClick={onSubmit}
-      />
-    </form>
+    <div className={'signup-container form-container container'}>
+      <div className={'signup-form form'}>
+
+        <h1>Sign Up</h1>
+        <label htmlFor="email"> Email</label>
+        <input
+          name={'email'}
+          type={'text'}
+          value={info.username}
+          onChange={e => setInfo({...info, username: e.target.value})}
+        />
+
+        <label htmlFor="password"> Password</label>
+        <input
+          name={'password'}
+          type={'password'}
+          value={info.password}
+          onChange={e => setInfo({...info, password: e.target.value})}
+        />
+        <button className={'btn'} onClick={onSubmit}>Sign Up</button>
+        <p>Alreay have an account? <a href="/login">Log In</a></p>
+      </div>
+    </div>
   )
 }

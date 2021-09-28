@@ -14,7 +14,7 @@ export const login = (user) => async (dispatch) => {
   await api.post('/user/login/', {...user})
     .then(res => res.data)
     .then(data => {
-      setToken(data.access)
+      setToken(data.token)
       dispatch({type: LOGIN_SUCCESS})
     })
     .then(() => {
@@ -27,7 +27,7 @@ export const login = (user) => async (dispatch) => {
 export const signup = (user) => async (dispatch) => {
   dispatch({ type: SIGN_UP_REQUEST })
 
-  await api.post('/api/user/create/', {...user})
+  await api.post('/user/create/', {...user})
     .then(() => dispatch({ type: SIGN_UP_SUCCESS }))
     .then(() => {
       history.push('/login')
