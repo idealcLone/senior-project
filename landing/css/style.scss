@@ -11,6 +11,10 @@ $background-color: #f6f6f6;
     font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
+.dl-flex {
+    display: flex;
+}
+
 .container {
     max-width: 85%;
     margin: auto;
@@ -25,6 +29,7 @@ $background-color: #f6f6f6;
     text-align: center;
     line-height: 2.5rem;
     margin-right: 0.75rem;
+    cursor: pointer;
     &:hover {
         background-color: #f4f4f4;
     }
@@ -264,6 +269,9 @@ footer {
             width: 14rem;
             font-size: 1.25rem;
             text-align: center;
+            &:focus {
+                outline: none;
+            }
         }
         input {
             width: 20rem;
@@ -279,13 +287,174 @@ footer {
 }
 
 /*Event-list*/
-.event-table {
-    padding: 4rem 0 1rem 0;
+.events__grid-container {
+    padding-top: 150px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    .events__grid-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 50px;
+        &__poster {
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        &__info {
+            font-size: 24px;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        &__title {
+            font-weight: 700;
+        }
+    }
 }
 
-.event-filters{
-    input[type="date"]{
-        border-radius: 0;
-        margin-right: 0;
+// Event Page
+
+.event-page {
+    &__container {
+        padding: 100px 0;
+        display: flex;
+        font-size: 36px;
+        .event-poster-big {
+            margin-right: 100px;
+        }
+        .event__info {
+            &__heading {
+                display: flex;
+                align-items: flex-end;
+                padding-bottom: 46px;
+                .event__title {
+                    font-size: 64px;
+                    line-height: 64px;
+                    margin-right: 24px;
+                }
+
+                .event__club-name {
+                    font-weight: 700;
+                    color: rgba(184, 184, 184, 1);
+                    text-align: end;
+                }
+            }
+
+            &__body {
+                .event__description {
+                    font-size: 32px;
+                    text-align: justify;
+                    margin-bottom: 64px;
+                }
+
+                .event__details {
+                    font-weight: 700;
+                    display: flex;
+                    margin-bottom: 100px;
+                    .event__date,
+                    .event__time {
+                        margin-right: 3rem;
+                    }
+                }
+
+                .event__link {
+                    margin-bottom: 100px;
+                }
+            }
+        }
+    }
+}
+
+// Club Page
+
+.club-page {
+    font-size: 36px;
+    .club-page__container {
+        padding: 100px 0;
+        .club__info {
+            margin-right: 100px;
+            padding-bottom: 100px;
+            .club__name {
+                font-size: 64px;
+                margin-bottom: 80px;
+            }
+        }
+        .club__contacts {
+            min-width: 250px;
+            div {
+                padding-bottom: 20px;
+            }
+            a {
+                color: #000;
+            }
+        }
+
+        .past-events {
+            &__container {
+                text-align: center;
+                padding-top: 40px;
+                justify-content: space-evenly;
+            }
+
+            img {
+                padding-bottom: 15px;
+            }
+        }
+    }
+}
+
+// FAQ
+
+.faq {
+
+    ul {
+        list-style: none;
+    }
+
+    &__container {
+        padding: 100px 0;
+        justify-content: space-between;
+        .faq__questions {
+            padding-left: 30px;
+            
+            .faq__filter {
+                padding-top: 0;
+                padding-bottom: 56px;
+            }
+
+            .qa-list{
+                .faq-question{
+                    font-size: 36px;
+                    font-weight: 700;
+                    line-height: 1.2;
+                }
+    
+                .faq-answer{
+                    font-size: 24px;
+                    line-height: 1.2;
+                }
+
+                li{
+                    margin-bottom: 60px;
+                }
+            }
+        }
+
+        .faq__links{
+            font-size: 24px;
+        }
+    }
+    
+}
+
+// Edit Info
+
+.edit-container{
+    padding: 100px 0;
+    text-align: center;
+    div{
+        margin-bottom: 25px;
+        font-size: 24px;
     }
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/mobile.css" media="screen and (max-width: 500px)">
-    <title>NU | Main</title>
+    <title>NU | Edit Info</title>
 </head>
 
 <body>
@@ -28,32 +28,27 @@
             </div>
         </div>
     </nav>
-    <div class="quote">
-        <div class="quote__container container">
-            <h1>SAVE UP YOUR TIME USING ALL NU SERVICES ON ONE WEBSITE</h1>
-        </div>
-    </div>
-    <div class="features">
-        <div class="features__container container">
-            <div class="features__item">
-                <div class="item-icon"><i class="fas fa-search fa-2x"></i></div>
-                <div class="item-name">Browse <br> Courses</div>
-            </div>
-            <div class="features__item">
-                <div class="item-icon"><img src="../img/1.png" alt=""></div>
-                <div class="item-name">Practice <br> Registration</div>
-            </div>
-            <div class="features__item">
-                <div class="item-icon"><img src="../img/2.png" alt=""></div>
-                <div class="item-name">Make your own <br> Schedule</div>
-            </div>
-            <div class="features__item">
-                <div class="item-icon"><img src="../img/3.png" alt=""></div>
-                <div class="item-name">Plan <br> Events</div>
-            </div>
-        </div>
-    </div>
+    <div class="edit-container form-container container">
+        <div>Personal Information</div>
+        <div class="edit-form form">
+            <label for="email"> Email</label>
+            <input type="email" name="email" id="email" required>
 
+            <label for="major"> Major</label>
+            <input type="text" name="major" id="major">
+
+            <label for="password"> Password</label>
+            <input type="password" name="password" id="password" required>
+            
+            <label for="new-password">New Password</label>
+            <input type="password" name="new-password" id="new-password" required>
+
+            <label for="repeat-password">Repeat New Password</label>
+            <input type="password" name="repeat-password" id="repeat-password" required>
+
+            <button class="btn">Edit</button>
+        </div>
+    </div>
 
     <footer>
         <div class="footer__container container">
