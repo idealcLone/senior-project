@@ -4,8 +4,14 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+          box-sizing: border-box;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+}
+
+.dl-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .container {
@@ -22,6 +28,7 @@
   text-align: center;
   line-height: 2.5rem;
   margin-right: 0.75rem;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -47,8 +54,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   padding: 2rem;
   border-radius: 25px;
   font-size: 1rem;
@@ -121,7 +128,6 @@ th {
 
 /* Navbar */
 .navbar {
-  padding: 0.5rem 0;
   background: #f6f6f6;
   position: -webkit-sticky;
   position: sticky;
@@ -131,23 +137,19 @@ th {
 
 .navbar__container {
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .navbar__container a {
   color: #000;
   font-size: 1rem;
-}
-
-.navbar__container a:hover {
-  background-color: lightgray;
 }
 
 .navbar__container .logo a {
@@ -160,10 +162,15 @@ th {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  height: 100%;
 }
 
-.navbar__container ul a {
-  padding: 0.75rem 2rem;
+.navbar__container ul li {
+  padding: 20px 3rem;
+}
+
+.navbar__container ul li:hover {
+  background-color: lightgray;
 }
 
 .navbar__container .register-buttons .btn-dark {
@@ -241,11 +248,11 @@ th {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
   font-size: 2rem;
   font-weight: 500;
@@ -257,8 +264,8 @@ th {
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .features__item .item-icon {
@@ -281,11 +288,11 @@ footer .footer__container {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: space-evenly;
-  -ms-flex-pack: space-evenly;
-  justify-content: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 footer .footer__container .links a {
@@ -317,6 +324,11 @@ footer .footer__container .links a {
   text-align: center;
 }
 
+.filters__container input:focus,
+.filters__container select:focus {
+  outline: none;
+}
+
 .filters__container input {
   width: 20rem;
   border-radius: 25px;
@@ -328,11 +340,187 @@ footer .footer__container .links a {
 }
 
 /*Event-list*/
-.event-table {
-  padding: 4rem 0 1rem 0;
+.events__grid-container {
+  padding-top: 150px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
 }
 
-.event-filters input[type="date"] {
-  border-radius: 0;
-  margin-right: 0;
+.events__grid-container .events__grid-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 50px;
+}
+
+.events__grid-container .events__grid-item__poster {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.events__grid-container .events__grid-item__info {
+  font-size: 24px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.events__grid-container .events__grid-item__title {
+  font-weight: 700;
+}
+
+.event-page__container {
+  padding: 100px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 36px;
+}
+
+.event-page__container .event-poster-big {
+  margin-right: 100px;
+}
+
+.event-page__container .event__info__heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding-bottom: 46px;
+}
+
+.event-page__container .event__info__heading .event__title {
+  font-size: 64px;
+  line-height: 64px;
+  margin-right: 24px;
+}
+
+.event-page__container .event__info__heading .event__club-name {
+  font-weight: 700;
+  color: #b8b8b8;
+  text-align: end;
+}
+
+.event-page__container .event__info__body .event__description {
+  font-size: 32px;
+  text-align: justify;
+  margin-bottom: 64px;
+}
+
+.event-page__container .event__info__body .event__details {
+  font-weight: 700;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 100px;
+}
+
+.event-page__container .event__info__body .event__details .event__date,
+.event-page__container .event__info__body .event__details .event__time {
+  margin-right: 3rem;
+}
+
+.event-page__container .event__info__body .event__link {
+  margin-bottom: 100px;
+}
+
+.club-page {
+  font-size: 36px;
+}
+
+.club-page .club-page__container {
+  padding: 100px 0;
+}
+
+.club-page .club-page__container .club__info {
+  margin-right: 100px;
+  padding-bottom: 100px;
+}
+
+.club-page .club-page__container .club__info .club__name {
+  font-size: 64px;
+  margin-bottom: 80px;
+}
+
+.club-page .club-page__container .club__contacts {
+  min-width: 250px;
+}
+
+.club-page .club-page__container .club__contacts div {
+  padding-bottom: 20px;
+}
+
+.club-page .club-page__container .club__contacts a {
+  color: #000;
+}
+
+.club-page .club-page__container .past-events__container {
+  text-align: center;
+  padding-top: 40px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.club-page .club-page__container .past-events img {
+  padding-bottom: 15px;
+}
+
+.faq ul {
+  list-style: none;
+}
+
+.faq__container {
+  padding: 100px 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.faq__container .faq__questions {
+  padding-left: 30px;
+}
+
+.faq__container .faq__questions .faq__filter {
+  padding-top: 0;
+  padding-bottom: 56px;
+}
+
+.faq__container .faq__questions .qa-list .faq-question {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.faq__container .faq__questions .qa-list .faq-answer {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.faq__container .faq__questions .qa-list li {
+  margin-bottom: 60px;
+}
+
+.faq__container .faq__links {
+  font-size: 24px;
+}
+
+.edit-container {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.edit-container div {
+  margin-bottom: 25px;
+  font-size: 24px;
 }

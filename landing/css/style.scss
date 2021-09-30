@@ -114,11 +114,11 @@ th {
 /* Navbar */
 
 .navbar {
-    padding: 0.5rem 0;
     background: $background-color;
     position: sticky;
     top: 0;
     z-index: 1;
+    // box-shadow: 0px 4px 4px 1px rgba(13, 14, 15, 0.2);
     &__container {
         align-items: center;
         display: flex;
@@ -126,9 +126,6 @@ th {
         a {
             color: #000;
             font-size: 1rem;
-            &:hover {
-                background-color: lightgray;
-            }
         }
         .logo {
             a {
@@ -139,9 +136,14 @@ th {
         ul {
             list-style: none;
             display: flex;
-            a {
-                padding: 0.75rem 2rem;
+            height: 100%;
+            li{
+                padding: 20px 3rem;
+                &:hover {
+                    background-color: lightgray;
+                }
             }
+            
         }
         .register-buttons {
             .btn-dark {
