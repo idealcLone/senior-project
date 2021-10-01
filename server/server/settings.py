@@ -9,14 +9,21 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-from datetime import timedelta
+from dotenv import load_dotenv
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+ENV_FILE = '.env'
+DB_CREDENTIALS_ENV_PATH = '.db_credentials'
+
+# LOADING ENV FILES
+load_dotenv(os.path.join(BASE_DIR / ENV_FILE))
+load_dotenv(os.path.join(BASE_DIR / DB_CREDENTIALS_ENV_PATH))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-$!90twhv_#_lkl9jfw8vfeu9^k%uv9mq8*qcd^*boghs9j%*w-'
@@ -88,10 +95,10 @@ WSGI_APPLICATION = 'server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'spdb',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': 'sp_db',
         'PORT': 5432,
     }
 }

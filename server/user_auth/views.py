@@ -10,14 +10,15 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import UserPermissions
-from .serializers import UserSerializer, ProfileSerializer
+from .serializers import UserSerializer
 
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def get_user(request):
     user = request.user
-    return Response('daun')
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
 
 
 @api_view(['POST'])
@@ -42,9 +43,14 @@ def login(request):
 
     user = authenticate(request, username=body['username'], password=body['password'])
 
+    if user is None:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
     try:
         token = Token.objects.get(user=user)
     except ObjectDoesNotExist:
         token = Token.objects.create(user=user)
 
-    return Response({'token': token.key})
+    serializer = UserSerializer(user)
+
+    return Response({**serializer.data, 'token': token.key})

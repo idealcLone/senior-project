@@ -20,8 +20,8 @@ export const Routes = () => {
   return (
     <Switch>
       {routes.map(route => route.protected ?
-        <ProtectedRoute path={route.path} component={route.component}/> :
-        <Route exact path={route.path} component={route.component}/>
+        <ProtectedRoute key={route.path} path={route.path} component={route.component}/> :
+        <Route key={route.path} exact path={route.path} component={route.component}/>
       )}
       <Route component={NotFound}/>
     </Switch>

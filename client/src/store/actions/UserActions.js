@@ -19,7 +19,7 @@ export const login = (user) => async (dispatch) => {
     })
     .then(() => {
       history.push('/')
-      window.location.reload()
+      //window.location.reload()
     })
     .catch(err => dispatch({ type: LOGIN_FAIL, payload: err.response }))
 }

@@ -1,0 +1,5 @@
+# Project exclude paths
+.db_credentials
+__pycache__/
+*.py[cod]
+/sp_db

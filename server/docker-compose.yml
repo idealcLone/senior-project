@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  sp_db:
+    image: postgres:12.6
+    restart: always
+    ports:
+      - "5111:5432"
+    env_file:
+      - ./.db_credentials
+    networks:
+      - sp_db-bridge
+
+  sp_server:
+    build: .
+    command: sh -c "./manage.py makemigrations && ./manage.py migrate && ./manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - sp_db
+    networks:
+      - sp_db-bridge
+
+networks:
+  sp_db-bridge:
+    driver: bridge

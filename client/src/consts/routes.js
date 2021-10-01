@@ -4,7 +4,7 @@ import { SignUp } from "../auth/SignUp";
 import { Profile } from "../pages/Profile";
 import { FAQ } from "../pages/FAQ";
 import { Admin } from "../pages/Admin";
-import { Courses } from "../pages/Courses";
+import { CoursesPage } from "../pages/courses/CoursesPage";
 
 export const routes = [
   {
@@ -46,7 +46,7 @@ export const routes = [
   {
     path: '/courses',
     name: 'Courses',
-    component: Courses,
+    component: CoursesPage,
     protected: false,
   }
 ]
