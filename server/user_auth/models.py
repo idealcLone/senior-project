@@ -1,28 +1,44 @@
-from django.contrib.auth.models import AbstractUser
-from django.contrib.auth import get_user_model
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
-from .consts import Permissions
+
+class UserManager(BaseUserManager):
+
+    def create_user(self, email, major, password):
+        if email is None:
+            raise TypeError('Email is required')
+
+        user = self.model(email=self.normalize_email(email), major=major)
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+
+    def create_superuser(self, email, password):
+        user = self.create_user(email, None, password)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+
+        return user
 
 
-class User(AbstractUser):
-    is_club_leader = models.BooleanField('is_club_leader', default=False)
+class User(AbstractBaseUser, PermissionsMixin):
+    id = models.AutoField(primary_key=True, editable=False)
+
+    email = models.CharField(max_length=100, null=False, blank=True, unique=True)
+
+    major = models.CharField(max_length=100, null=True)
+
+    is_club_leader = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
-        return self.username
-
-    pass
-
-
-class UserPermissions(models.Model):
-    PERMISSION_CHOICES = [
-        (Permissions.ADMIN, Permissions.ADMIN),
-        (Permissions.CLUB_LEADER, Permissions.CLUB_LEADER)
-    ]
-
-    user = models.ForeignKey(get_user_model(), db_index=True, related_name='permissions', on_delete=models.CASCADE)
-    permission = models.CharField(max_length=100, choices=PERMISSION_CHOICES)
-
-    def __str__(self):
-        return self.permission
+        return self.email
 

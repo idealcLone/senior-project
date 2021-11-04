@@ -1,6 +1,19 @@
-export const SEDS = 'SEDS'
-export const SSH = 'SSH'
-export const SMG = 'SMG'
-export const SOM = 'SOM'
-export const GSB = 'GSB'
-export const SCHOOLS = [SEDS, SSH, SMG, SOM, GSB]
+export const MAJORS = [
+  'Computer Science',
+  'Mathematics',
+  'Physics',
+  'Biology',
+  'Chemistry',
+  'Robotics',
+
+  'Political Sciences',
+  'History',
+  'Philosophy',
+  'World Languages',
+  'Economics',
+
+  'Electrical Engineering',
+  'Chemical Engineering',
+  'Mechanical Engineering',
+  'Civil Engineering',
+]

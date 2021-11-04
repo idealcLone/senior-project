@@ -2,7 +2,8 @@ import React from 'react'
 
 import axios from 'axios'
 import { useDispatch } from "react-redux";
-import { signup } from "../store/actions/UserActions";
+import api from "../../utils/api";
+import { history } from "../../App";
 
 const classes = {
   button: {
@@ -11,17 +12,21 @@ const classes = {
 }
 
 export const SignUp = () => {
-  const dispatch = useDispatch()
-
+  const [loading, setLoading] = React.useState(false)
   const [info, setInfo] = React.useState({
-    username: '',
+    email: '',
     major: '',
     password: '',
   })
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    dispatch(signup(info))
+    setLoading(true)
+    api
+      .post('/account/create/', { ...info })
+      .then(res => {
+        setLoading(false)
+        history.push('/login')
+      })
   }
 
   return (
@@ -34,7 +39,7 @@ export const SignUp = () => {
           name={'email'}
           type={'text'}
           value={info.username}
-          onChange={e => setInfo({...info, username: e.target.value})}
+          onChange={e => setInfo({...info, email: e.target.value})}
         />
 
         <label htmlFor="password"> Password</label>

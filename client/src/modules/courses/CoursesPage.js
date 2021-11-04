@@ -6,7 +6,8 @@ export const CoursesPage = () => {
   const [courses, setCourses] = React.useState([])
 
   React.useEffect(() => {
-    api.get('/course/all/')
+    api
+      .get('/courses/all/')
       .then(res => setCourses(res.data))
   }, [])
 

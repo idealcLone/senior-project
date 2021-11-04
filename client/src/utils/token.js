@@ -1,11 +1,20 @@
+import { Cookies } from "react-cookie";
+
+const cookies = new Cookies()
+
 export const getToken = () => {
-  return localStorage.getItem('token')
+  return cookies.get('TOKEN')
 }
 
 export const setToken = token => {
-  localStorage.setItem('token', token)
+  const date = new Date()
+  date.setTime(date.getTime() + (59 * 60 * 1000))
+  cookies.set('TOKEN', token, {
+    path: '/',
+    expires: date
+  })
 }
 
 export const removeToken = () => {
-  localStorage.removeItem('token')
+  cookies.remove('TOKEN')
 }

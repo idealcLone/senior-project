@@ -1,29 +1,27 @@
 import { Home } from "../pages/Home";
-import { Login } from "../auth/Login";
-import { SignUp } from "../auth/SignUp";
-import { Profile } from "../pages/Profile";
+import { Login } from "../modules/user/Login";
+import { SignUp } from "../modules/user/SignUp";
+import { Profile } from "../modules/user/Profile";
 import { FAQ } from "../pages/FAQ";
-import { Admin } from "../pages/Admin";
-import { CoursesPage } from "../pages/courses/CoursesPage";
+import { AdminPage } from "../modules/admin/AdminPage";
+import { CoursesPage } from "../modules/courses/CoursesPage";
+import { UserPage } from "../modules/admin/pages/UserPage";
 
 export const routes = [
   {
     path: '/',
     name: 'Home Page',
     component: Home,
-    protected: false,
   },
   {
     path: '/login',
     name: 'Login Page',
     component: Login,
-    protected: false,
   },
   {
     path: '/signup',
     name: 'Sign Up Page',
     component: SignUp,
-    protected: false,
   },
   {
     path: '/profile',
@@ -35,18 +33,22 @@ export const routes = [
     path: '/faq',
     name: 'FAQ',
     component: FAQ,
-    protected: false,
   },
   {
     path: '/admin',
     name: 'Admin Page',
-    component: Admin,
-    protected: true,
+    component: AdminPage,
+    adminRoute: true,
   },
   {
     path: '/courses',
     name: 'Courses',
     component: CoursesPage,
-    protected: false,
+  },
+  {
+    path: '/admin/users/:id',
+    name: 'User',
+    component: UserPage,
+    adminRoute: true,
   }
 ]

@@ -1,16 +1,22 @@
+import jwt
+
+from datetime import datetime, timedelta
+
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-
-from rest_framework.authtoken.models import Token
+from django.db import IntegrityError
 
 from rest_framework import status, generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import UserPermissions
 from .serializers import UserSerializer
+from .utils import generate_tokens
+
+User = get_user_model()
 
 
 @api_view(['GET'])
@@ -26,31 +32,52 @@ def create_user(request):
     body = request.data
 
     try:
-        user = get_user_model().objects.get(username=body['username'])
-    except ObjectDoesNotExist:
-        user = get_user_model().objects.create_user(username=body['username'], password=body['password'])
-        user.save()
-        serializer = UserSerializer(user)
+        User.objects.create_user(email=body['email'], major=body['major'], password=body['password'])
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_201_CREATED)
 
-    return Response("User with this username already exists", status=status.HTTP_400_BAD_REQUEST)
+    except IntegrityError as e:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
 def login(request):
     body = request.data
 
-    user = authenticate(request, username=body['username'], password=body['password'])
+    try:
+        user = User.objects.get(email=body['email'])
 
-    if user is None:
+        if not user.check_password(body['password']):
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        access_token, refresh_token = generate_tokens(user)
+
+        return Response({
+            'access_token': access_token,
+            'refresh_token': refresh_token
+        })
+    except ObjectDoesNotExist:
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+@api_view(['GET'])
+def generate_new_tokens(request):
+    token = request.query_params.get('token')
+
     try:
-        token = Token.objects.get(user=user)
-    except ObjectDoesNotExist:
-        token = Token.objects.create(user=user)
+        payload = jwt.decode(token, settings.SECRET_KEY, 'HS256')
 
-    serializer = UserSerializer(user)
+        try:
+            user = User.objects.get(id=payload['id'])
+        except ObjectDoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-    return Response({**serializer.data, 'token': token.key})
+        access_token, refresh_token = generate_tokens(user)
+
+        response = Response(refresh_token)
+        response.set_cookie('TOKEN', access_token, expires=datetime.now() + timedelta(hours=1))
+
+        return response
+
+    except jwt.ExpiredSignature or jwt.DecodeError or jwt.InvalidTokenError:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

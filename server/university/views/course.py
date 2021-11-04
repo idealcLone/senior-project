@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 
-from ..models import Course
-from ..serializers.course import CourseListSerializer, CourseCreateSerializer, CourseUpdateSerializer, \
+from university.models import Course
+from university.serializers.course import CourseListSerializer, CourseCreateSerializer, CourseUpdateSerializer, \
     CourseRetrieveSerializer
 
 

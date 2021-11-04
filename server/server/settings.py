@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     'user_auth',
-    'course',
+    'university',
 ]
 
 MIDDLEWARE = [
@@ -65,9 +65,11 @@ ROOT_URLCONF = 'server.urls'
 AUTH_USER_MODEL = 'user_auth.User'
 
 REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny"
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'user_auth.authentication.SPAuthentication',
     ],
 }
 

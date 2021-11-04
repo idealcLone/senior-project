@@ -1,80 +1,68 @@
 import React from 'react'
+
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/actions/UserActions";
+import { getUserInfo, userLogout } from "../store/actions/UserActions";
 import { getToken } from "../utils/token";
-import { makeStyles } from "@material-ui/core";
+import { getUser } from "../store/selectors/UserSelectors";
+import { Link } from "react-router-dom";
+
+const links = [
+  {
+    link: '/courses',
+    name: 'Courses',
+  },
+  {
+    link: '/events',
+    name: 'Events',
+  },
+  {
+    link: '/schedule',
+    name: 'Schedule Maker',
+  },
+  {
+    link: '/registration',
+    name: 'Registration Training',
+  },
+  {
+    link: '/faq',
+    name: 'FAQ',
+  },
+]
 
 export const Navbar = () => {
   const dispatch = useDispatch()
-  const [token, setToken] = React.useState(getToken())
+  const token = getToken()
 
-  const links = [
-    {
-      link: '/courses',
-      title: 'Courses',
-    },
-    {
-      link: '/events',
-      title: 'Events',
-    },
-    {
-      link: '/schedule',
-      title: 'Schedule Maker',
-    },
-    {
-      link: '/registration',
-      title: 'Registration Training',
-    },
-    {
-      link: '/faq',
-      title: 'FAQ',
-    },
-  ]
-
-  const handleLogOut = () => {
-    dispatch(logout())
+  const handleLogout = () => {
+    dispatch(userLogout())
   }
 
   return (
     <nav className={'navbar'}>
       <div className={'navbar__container container'}>
-        <div className={'logo'}><a href="/">Brand</a></div>
+        <div className={'logo'}>
+          <Link to="/">Brand</Link>
+        </div>
         <ul>
           {
             links.map(link =>
               <li key={link.link}>
-                <a href={link.link}>{link.title}</a>
+                <Link to={link.link}>{link.name}</Link>
               </li>
             )
           }
         </ul>
-        {token
-          ? (
-            <div className="my-profile">
-              <a href="/profile">My profile </a><i className="fas fa-caret-down"></i><i
-              className="fas fa-caret-up"></i>
-              <div className="my-profile__dropdown">
-                <p><a href="/profile">Edit Profile</a></p>
-                <p><a href="/calendar">My Calendar</a></p>
-                <p><a href="/schedule">My Schedule</a></p>
-                <p><a onClick={handleLogOut} href="/">Log Out</a></p>
-              </div>
-              <div className="my-profile__options">
-                <ul>
-                  <p><a href="/profile">Edit Profile</a></p>
-                  <p><a href="/calendar">My Calendar</a></p>
-                  <p><a href="/schedule">My Schedule</a></p>
-                  <p><a onClick={handleLogOut} href="/">Log Out</a></p>
-                </ul>
-              </div>
-            </div>
-          ) : (
-            <div className="register-buttons">
-              <a href="/login" className="btn">LOG IN</a>
-              <a href="/signup" className="btn btn-dark">SIGN UP</a>
-            </div>
-          )
-        }
+        {token ? (
+          <div className="my-profile">
+            <Link to="/profile">My profile</Link>
+            <div onClick={handleLogout}>Logout</div>
+          </div>
+        ) : (
+          <div className="register-buttons">
+            <Link to="/login" className="btn">LOG IN</Link>
+            <Link to="/signup" className="btn btn-dark">SIGN UP</Link>
+          </div>
+        )}
       </div>
     </nav>
   )

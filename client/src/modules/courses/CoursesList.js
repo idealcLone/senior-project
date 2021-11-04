@@ -4,7 +4,7 @@ export const CoursesList = ({ courses }) => {
 
   return (
     <div className={'course-table'}>
-      <div className={'course-table__container container'}>
+      <div className={'university-table__container container'}>
         <table>
           <thead>
             <tr>

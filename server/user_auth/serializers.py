@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
-from .models import UserPermissions
-
 
 class UserSerializer(serializers.ModelSerializer):
     is_admin = serializers.SerializerMethodField(read_only=True)
@@ -12,4 +10,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'is_club_leader', 'is_admin')
+        fields = ['id', 'email', 'is_admin', 'is_club_leader', 'major']

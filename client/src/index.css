@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /* Utility */
 * {
+  position: relative;
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
