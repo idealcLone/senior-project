@@ -27,7 +27,7 @@ function App() {
         })
     } else {
       const refreshToken = localStorage.getItem('token')
-      refreshToken && (
+      refreshToken ? (
         api
           .get('/account/refresh/', {
             params: {
@@ -38,6 +38,8 @@ function App() {
             localStorage.setItem('token', res.data)
             setStatus(true)
           })
+      ) : (
+        setStatus(true)
       )
     }
   }, [token])

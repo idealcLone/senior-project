@@ -5,11 +5,6 @@ import { useDispatch } from "react-redux";
 import api from "../../utils/api";
 import { history } from "../../App";
 
-const classes = {
-  button: {
-    display: 'block'
-  }
-}
 
 export const SignUp = () => {
   const [loading, setLoading] = React.useState(false)
@@ -26,6 +21,7 @@ export const SignUp = () => {
       .then(res => {
         setLoading(false)
         history.push('/login')
+        window.location.reload()
       })
   }
 

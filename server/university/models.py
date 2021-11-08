@@ -3,20 +3,15 @@ from django.db import models
 
 
 class Day(models.Model):
-    MONDAY = 'M'
-    TUESDAY = 'T'
-    WEDNESDAY = 'W'
-    THURSDAY = 'R'
-    FRIDAY = 'F'
     DAY_NAME_CHOICES = [
-        (MONDAY, 'MONDAY'),
-        (TUESDAY, 'TUESDAY'),
-        (WEDNESDAY, 'WEDNESDAY'),
-        (THURSDAY, 'THURSDAY'),
-        (FRIDAY, 'FRIDAY'),
+        ('M', 'MONDAY'),
+        ('T', 'TUESDAY'),
+        ('W', 'WEDNESDAY'),
+        ('R', 'THURSDAY'),
+        ('F', 'FRIDAY'),
     ]
 
-    name = models.CharField(max_length=100, choices=DAY_NAME_CHOICES, default=MONDAY)
+    name = models.CharField(max_length=100, choices=DAY_NAME_CHOICES, default='M')
 
 
 class School(models.Model):
@@ -63,14 +58,14 @@ class Course(models.Model):
     id = models.AutoField(primary_key=True, editable=False)
 
     school = models.ForeignKey(School, on_delete=models.CASCADE)
-    instructor = models.ManyToManyField(Instructor)
+    instructors = models.ManyToManyField(Instructor)
     terms = models.ManyToManyField(Term)
     days = models.ManyToManyField(Day)
 
     duration = models.IntegerField(choices=COURSE_DURATION_CHOICES, default=50)
     name = models.CharField(max_length=100, null=False, blank=True)
     start_time = models.TimeField(auto_now=True)
-    code = models.CharField(max_length=5, null=False, blank=True)
+    code = models.CharField(max_length=10, null=False, blank=True)
 
 
 class Syllabus(models.Model):

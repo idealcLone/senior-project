@@ -1,21 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import Loader from 'react-loader-spinner'
-
-import { List, ListItem, LoaderContainer } from "./styles";
-import { Link } from "react-router-dom";
+import { List, ListItem } from "./styles";
 import api from "../../utils/api";
+import { AdminContext } from "./context";
+import { Spinner } from "../../components/Spinner";
 
-export const AdminList = ({ selected }) => {
+export const AdminList = ({ selected, setOpenDialog }) => {
   const [loading, setLoading] = React.useState(false)
-  const [data, setData] = React.useState([])
+  const [data, setData] = useContext(AdminContext)
 
   const getData = () => {
     setLoading(true)
     api
       .get(`/${selected}/all/`)
       .then(res => {
-        const data = res.data
         setData(res.data)
         setLoading(false)
       })
@@ -27,14 +25,7 @@ export const AdminList = ({ selected }) => {
 
   if (loading) {
     return (
-      <LoaderContainer>
-        <Loader
-          type={'TailSpin'}
-          color={'#000000'}
-          height={100}
-          width={100}
-        />
-      </LoaderContainer>
+      <Spinner/>
     )
   }
 
@@ -43,8 +34,7 @@ export const AdminList = ({ selected }) => {
       {data.map(item => (
         <ListItem
           key={item.id}
-          as={Link}
-          to={`/admin/${selected}/${item.id}`}
+          onClick={() => setOpenDialog(item.id)}
         >
           {item.name || item.question || item.email}
         </ListItem>

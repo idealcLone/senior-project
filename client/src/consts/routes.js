@@ -5,7 +5,8 @@ import { Profile } from "../modules/user/Profile";
 import { FAQ } from "../pages/FAQ";
 import { AdminPage } from "../modules/admin/AdminPage";
 import { CoursesPage } from "../modules/courses/CoursesPage";
-import { UserPage } from "../modules/admin/pages/UserPage";
+import { UserDialog } from "../modules/admin/dialogs/UserDialog";
+import { CourseDialog } from "../modules/admin/dialogs/CourseDialog";
 
 export const routes = [
   {
@@ -45,10 +46,4 @@ export const routes = [
     name: 'Courses',
     component: CoursesPage,
   },
-  {
-    path: '/admin/users/:id',
-    name: 'User',
-    component: UserPage,
-    adminRoute: true,
-  }
 ]

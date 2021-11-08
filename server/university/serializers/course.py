@@ -3,35 +3,10 @@ from rest_framework import serializers
 from ..models import Course, Instructor, Term
 
 
-class InstructorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Instructor
-        fields = ('id', 'full_name')
-
-
-class TermSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Term
-        fields = ('id', 'name')
-
-
 class CourseListSerializer(serializers.ModelSerializer):
-    instructors = serializers.SerializerMethodField(read_only=True)
-    terms = serializers.SerializerMethodField(read_only=True)
-
     class Meta:
         model = Course
         fields = '__all__'
-
-    def get_instructors(self, obj):
-        instructors = obj.instructor_set.all()
-        serializer = InstructorSerializer(instructors, many=True)
-        return serializer.data
-
-    def get_terms(self, obj):
-        terms = obj.terms
-        serializer = TermSerializer(terms)
-        return serializer.data
 
 
 class CourseCreateSerializer(serializers.ModelSerializer):
@@ -47,6 +22,38 @@ class CourseUpdateSerializer(serializers.ModelSerializer):
 
 
 class CourseRetrieveSerializer(serializers.ModelSerializer):
+    instructors = serializers.SerializerMethodField()
+    days = serializers.SerializerMethodField()
+    terms = serializers.SerializerMethodField()
+    school = serializers.SerializerMethodField()
+    
     class Meta:
         model = Course
         fields = '__all__'
+
+    def get_instructors(self, course):
+        instructors = []
+
+        for instructor in course.instructors.all():
+            instructors.append(instructor.name)
+
+        return instructors
+
+    def get_days(self, course):
+        days = []
+
+        for day in course.days.all():
+            days.append(day.name)
+
+        return days
+
+    def get_terms(self, course):
+        terms = []
+
+        for term in course.terms.all():
+            terms.append(term.name)
+
+        return terms
+
+    def get_school(self, course):
+        return course.school.name

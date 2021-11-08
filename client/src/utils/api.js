@@ -10,7 +10,7 @@ api.interceptors.response.use(
   error => {
     const originalRequest = error.config
     const refreshToken = getToken()
-    if (error.response.status === 403) {
+    if (error.response.status === 403 && refreshToken) {
       return api
         .get('/account/refresh/', {
           params: {
