@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Form = styled.form`
   position: relative;
   z-index: 2;
-  width: 50%;
-  height: 70%;
+  width: 1000px;
+  height: 600px;
   background-color: #ffffff;
   padding: 10px;
 
@@ -12,6 +12,11 @@ export const Form = styled.form`
     width: 100%;
     text-align: center;
     padding: 10px 0;
+    font-weight: 700;
+  }
+
+  .bold {
+    font-weight: 700;
   }
 
   .dialog-body {
@@ -19,9 +24,77 @@ export const Form = styled.form`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: space-between;
+
+    .image-field {
+      flex: 1;
+
+      img {
+        display: block;
+        max-width: 400px;
+        max-height: 400px;
+      }
+    }
+
+    .form-data {
+      flex: 2;
+      display: flex;
+      flex-wrap: wrap;
+
+      .field {
+        flex: 50%;
+
+        ul {
+          list-style: none;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 2px;
+        }
+
+        input[type='text'] {
+          width: 250px;
+          height: 30px;
+          padding: 5px 8px;
+          margin-bottom: 15px;
+          flex: 0;
+        }
+
+        select {
+          width: 250px;
+          height: 30px;
+          padding: 5px 8px;
+          outline: none;
+          margin-bottom: 15px;
+          flex: 1;
+        }
+
+        Button {
+          margin-left: 10px;
+          height: 30px;
+        }
+
+        textarea {
+          padding: .5rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  width: 80%;
+  height: 600px;
+  margin: 0 auto;
+
+  .dialog-body {
+    max-height: 80%;
+    width: 100%;
+
     .field {
       width: 50%;
+      padding: 10px;
 
       label {
         display: block;
@@ -29,20 +102,16 @@ export const Form = styled.form`
       }
 
       input[type='text'] {
-        width: 250px;
-        height: 30px;
-        padding: 5px 8px;
-        margin-bottom: 15px;
-        flex: 0;
+        width: 100px;
       }
 
       select {
-        width: 250px;
+        width: 100px;
+      }
+
+      Button {
         height: 30px;
-        padding: 5px 8px;
-        outline: none;
-        margin-bottom: 15px;
-        flex: 1;
+        margin-bottom: 10px;
       }
     }
   }
@@ -100,4 +169,8 @@ export const Button = styled.button`
 
   font-size: 0.875rem;
   padding: 10px 15px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 `

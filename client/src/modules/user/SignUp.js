@@ -3,10 +3,11 @@ import React from 'react'
 import axios from 'axios'
 import { useDispatch } from "react-redux";
 import api from "../../utils/api";
-import { history } from "../../App";
+import { useHistory } from "react-router";
 
 
 export const SignUp = () => {
+  const history = useHistory()
   const [loading, setLoading] = React.useState(false)
   const [info, setInfo] = React.useState({
     email: '',

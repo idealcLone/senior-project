@@ -1,12 +1,14 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUserInfo, userLogout } from "../store/actions/UserActions";
-import { getToken } from "../utils/token";
+import { userLogout } from "../store/actions/UserActions";
 import { getUser } from "../store/selectors/UserSelectors";
 import { Link } from "react-router-dom";
+import { Nav } from "./styles";
+import { MoreIcon } from "../utils/icons";
+import { useHistory } from "react-router";
 
-const links = [
+const routes = [
   {
     link: '/courses',
     name: 'Courses',
@@ -29,41 +31,75 @@ const links = [
   },
 ]
 
+const dropdown = [
+  {
+    name: 'Edit Profile',
+    path: '/profile',
+  },
+  {
+    name: 'My Schedule',
+    path: '/schedule',
+  },
+  {
+    name: 'My Calendar',
+    path: '/calendar',
+  },
+]
+
 export const Navbar = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
-  const token = getToken()
+  const token = localStorage.getItem('token')
+
+  const user = useSelector(getUser)
+
+  const [showDropdown, setShowDropdown] = React.useState(false)
 
   const handleLogout = () => {
     dispatch(userLogout())
   }
 
   return (
-    <nav className={'navbar'}>
-      <div className={'navbar__container container'}>
-        <div className={'logo'}>
-          <Link to="/">Brand</Link>
+    <Nav>
+      <div className="container">
+        <div className={'logo'} onClick={() => history.push('/')}>
+          Brand
         </div>
         <ul>
           {
-            links.map(link =>
-              <li key={link.link}>
-                <Link to={link.link}>{link.name}</Link>
-              </li>
+            routes.map(route =>
+              <li key={route.link} onClick={() => history.push(route.link)}>{route.name}</li>
             )
           }
         </ul>
-        {token ? (
-          <div className="my-profile">
-            <Link to="/profile">My profile</Link>
-            <div onClick={handleLogout}>Logout</div>
-          </div>
-        ) : (
-          <div className="register-buttons">
-            <Link to="/login" className="btn">LOG IN</Link>
-            <Link to="/signup" className="btn btn-dark">SIGN UP</Link>
-          </div>
-        )}
+        <div className="navbar-auth">
+          {token && (
+            <>
+              <div onClick={() => setShowDropdown(!showDropdown)}>
+                <span>My profile</span>
+                <MoreIcon/>
+              </div>
+              {showDropdown && (
+                <ul className="dropdown" onClick={() => setShowDropdown(false)}>
+                  {
+                    dropdown.map(option =>
+                      <li onClick={() => history.push(option.path)}>{option.name}</li>
+                    )
+                  }
+                  {user.is_admin && <li onClick={() => history.push('/admin')}>Admin Page</li>}
+                  <li onClick={handleLogout}>Log Out</li>
+                </ul>
+              )}
+            </>
+          )}
+          {!token && (
+            <div>
+              <Link to="/login" className="btn">LOG IN</Link>
+              <Link to="/signup" className="btn btn-dark">SIGN UP</Link>
+            </div>
+          )}
+        </div>
       </div>
-    </nav>
+    </Nav>
   )
 }

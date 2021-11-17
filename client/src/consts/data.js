@@ -46,3 +46,11 @@ export const INSTRUCTORS = [
 export const DAYS = [
   'M', 'T', 'W', 'R', 'F'
 ]
+
+export const LEVELS = [
+  '1xx', '2xx', '3xx', '4xx', '5xx',
+]
+
+export const USEFUL_LINKS = [
+  'Registrar', 'UHC', 'MOODLE', 'VA'
+]

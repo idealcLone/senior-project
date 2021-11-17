@@ -21,6 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_FILE = '.env'
 DB_CREDENTIALS_ENV_PATH = '.db_credentials'
 
+MEDIA_URL = '/server/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # LOADING ENV FILES
 load_dotenv(os.path.join(BASE_DIR / ENV_FILE))
 load_dotenv(os.path.join(BASE_DIR / DB_CREDENTIALS_ENV_PATH))

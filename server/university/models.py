@@ -1,52 +1,23 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-
-class Day(models.Model):
-    DAY_NAME_CHOICES = [
-        ('M', 'MONDAY'),
-        ('T', 'TUESDAY'),
-        ('W', 'WEDNESDAY'),
-        ('R', 'THURSDAY'),
-        ('F', 'FRIDAY'),
-    ]
-
-    name = models.CharField(max_length=100, choices=DAY_NAME_CHOICES, default='M')
-
-
-class School(models.Model):
-    SEDS = 'SEDS'
-    SMG = 'SMG'
-    SSH = 'SSH'
-    NUSOM = 'NUSOM'
-    CPS = 'CPS'
-    SCHOOL_NAME_CHOICES = [
-        (SEDS, SEDS),
-        (SMG, SMG),
-        (SSH, SSH),
-        (NUSOM, NUSOM),
-        (CPS, CPS),
-    ]
-
-    name = models.CharField(max_length=100, choices=SCHOOL_NAME_CHOICES, default=SEDS)
-
-
-class Term(models.Model):
-    SPRING = 'SPRING'
-    SUMMER = 'SUMMER'
-    FALL = 'FALL'
-    TERM_NAME_CHOICES = [
-        (SPRING, SPRING),
-        (SUMMER, SUMMER),
-        (FALL, FALL),
-    ]
-
-    name = models.CharField(max_length=100, choices=TERM_NAME_CHOICES, default=FALL)
+SEDS = 'SEDS'
+SMG = 'SMG'
+SSH = 'SSH'
+NUSOM = 'NUSOM'
+CPS = 'CPS'
+SCHOOL_NAME_CHOICES = [
+    (SEDS, SEDS),
+    (SMG, SMG),
+    (SSH, SSH),
+    (NUSOM, NUSOM),
+    (CPS, CPS),
+]
 
 
 class Instructor(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    school = models.CharField(max_length=100, choices=SCHOOL_NAME_CHOICES, default=SEDS)
 
 
 class Course(models.Model):
@@ -57,14 +28,14 @@ class Course(models.Model):
 
     id = models.AutoField(primary_key=True, editable=False)
 
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    school = models.CharField(max_length=100, choices=SCHOOL_NAME_CHOICES, default=SEDS)
     instructors = models.ManyToManyField(Instructor)
-    terms = models.ManyToManyField(Term)
-    days = models.ManyToManyField(Day)
+    terms = models.CharField(max_length=100, null=False, blank=True)
+    days = models.CharField(max_length=10, null=False, blank=True)
 
     duration = models.IntegerField(choices=COURSE_DURATION_CHOICES, default=50)
     name = models.CharField(max_length=100, null=False, blank=True)
-    start_time = models.TimeField(auto_now=True)
+    start_time = models.CharField(max_length=10, null=True)
     code = models.CharField(max_length=10, null=False, blank=True)
 
 
@@ -80,16 +51,17 @@ class Club(models.Model):
     leader = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, null=True)
 
 
-class Organizer(models.Model):
-    name = models.CharField(max_length=100, null=True)
-
-    club = models.OneToOneField(Club, on_delete=models.CASCADE, null=True)
-
-
 class Event(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True)
+    description = models.CharField(max_length=255, null=True)
+    image = models.ImageField(upload_to='events/', null=True)
+    start_time = models.CharField(max_length=10, null=True)
+    start_date = models.CharField(max_length=15, null=True)
+    location = models.CharField(max_length=100, null=True)
+    registration_link = models.CharField(max_length=100, null=True)
+    additional_info = models.CharField(max_length=255, null=True)
 
-    organizer = models.OneToOneField(Organizer, on_delete=models.CASCADE)
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
 
 
 class Deadline(models.Model):

@@ -7,6 +7,8 @@ import { AdminPage } from "../modules/admin/AdminPage";
 import { CoursesPage } from "../modules/courses/CoursesPage";
 import { UserDialog } from "../modules/admin/dialogs/UserDialog";
 import { CourseDialog } from "../modules/admin/dialogs/CourseDialog";
+import { EventsPage } from "../modules/events/EventsPage";
+import { EventPage } from "../modules/events/EventPage";
 
 export const routes = [
   {
@@ -46,4 +48,14 @@ export const routes = [
     name: 'Courses',
     component: CoursesPage,
   },
+  {
+    path: '/events',
+    name: 'Events',
+    component: EventsPage,
+  },
+  {
+    path: '/events/:id',
+    name: 'Event',
+    component: EventPage,
+  }
 ]

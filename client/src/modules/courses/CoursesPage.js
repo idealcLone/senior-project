@@ -1,59 +1,66 @@
 import React from 'react'
 import api from "../../utils/api"
-import {CoursesList} from "./CoursesList";
+import { CoursesList } from "./CoursesList";
+import { SearchBar } from "../../styles";
+import { Filters, Select, ShowButton } from "./styles";
+import { LEVELS, MAJORS } from "../../consts/data";
 
 export const CoursesPage = () => {
+  const [loading, setLoading] = React.useState(false)
+  const [showCourses, setShowCourses] = React.useState(false)
   const [courses, setCourses] = React.useState([])
+  const [select, setSelect] = React.useState({
+    major: '',
+    level: ''
+  })
 
   React.useEffect(() => {
-    api
-      .get('/courses/all/')
-      .then(res => setCourses(res.data))
-  }, [])
+    if (showCourses) {
+      setLoading(true)
+      api
+        .get('/courses/all/')
+        .then(res => setCourses(res.data))
+        .catch(err => console.log(err))
+        .finally(() => setLoading(false))
+    }
+  }, [showCourses])
+
+  const onSelectChange = (e) => {
+    const { name, value } = e.target
+
+    setSelect({
+      ...select,
+      [name]: value
+    })
+  }
 
   return (
-    <div>
-      <div className="filters course-filters">
-        <div className="course-filters__container filters__container container">
-          <label htmlFor="search">
-            <input type="search" name="course-search" id="course-search" placeholder="Search Courses e.g. PLS 101"/>
-          </label>
-          <label htmlFor="schools">
-            <select name="schools" id="schools">
-              <option value="Choose school" disabled selected className="disabled">Choose school</option>
-              <option value="All-schools">All schools</option>
-              <option value="SEDS">SEDS</option>
-              <option value="SHSS">SHSS</option>
-              <option value="SMG">SMG</option>
-              <option value="SOM">SOM</option>
-              <option value="GSB">GSB</option>
-            </select>
-          </label>
-          <label htmlFor="majors">
-            <select name="majors" id="majors">
-              <option value="Choose major" disabled selected className="disabled">Choose major</option>
-              <option value="All-majors">All majors</option>
-              <option value="PSIR">PSIR</option>
-              <option value="CS">CS</option>
-              <option value="MATH">MATH</option>
-              <option value="BIO">BIO</option>
-              <option value="CHEM">CHEM</option>
-            </select>
-          </label>
-          <label htmlFor="levels">
-            <select name="levels" id="levels">
-              <option value="Choose level" disabled selected className="disabled">Choose level</option>
-              <option value="All-levels">All levels</option>
-              <option value="1xx">1xx</option>
-              <option value="2xx">2xx</option>
-              <option value="3xx">3xx</option>
-              <option value="4xx">4xx</option>
-              <option value="5xx">5xx</option>
-            </select>
-          </label>
+    <>
+      <Filters>
+        <SearchBar placeholder={'Search for a course'}/>
+        <div className="select-group">
+          <Select name={'major'} value={select.major} onChange={onSelectChange}>
+            <option value="">Choose your major</option>
+            {
+              MAJORS.map(major =>
+                <option key={major} value={major}>{major}</option>
+              )
+            }
+          </Select>
+          <Select name={'level'} value={select.level} onChange={onSelectChange}>
+            <option value="">Choose the level</option>
+            {
+              LEVELS.map(level =>
+                <option key={level} value={level}>{level}</option>
+              )
+            }
+          </Select>
         </div>
-      </div>
-      <CoursesList courses={courses}/>
-    </div>
+      </Filters>
+      {showCourses ?
+        <CoursesList courses={courses} loading={loading}/> :
+        <ShowButton onClick={() => setShowCourses(true)}>Show All Courses</ShowButton>
+      }
+    </>
   )
 }

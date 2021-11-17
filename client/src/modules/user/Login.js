@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import api from "../../utils/api";
 import { setToken } from "../../utils/token";
-import { history } from "../../App";
+import { useHistory } from "react-router";
 
 export const Login = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const [loading, setLoading] = React.useState(false)
   const [info, setInfo] = React.useState({

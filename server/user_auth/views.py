@@ -27,6 +27,17 @@ def get_user(request):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def edit_profile(request):
+    user = request.user
+    user.email = request.data['email']
+    user.major = request.data['major']
+    user.save()
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 def create_user(request):
     body = request.data

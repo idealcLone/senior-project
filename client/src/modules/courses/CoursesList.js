@@ -1,37 +1,39 @@
 import React from "react";
+import { CourseTable } from "./styles";
+import { Spinner } from "../../components/Spinner";
 
-export const CoursesList = ({ courses }) => {
+export const CoursesList = ({ courses, loading }) => {
+
+  if (loading) {
+    return <Spinner/>
+  }
 
   return (
-    <div className={'course-table'}>
-      <div className={'university-table__container container'}>
-        <table>
-          <thead>
-            <tr>
-              <th>CODE</th>
-              <th>TITLE</th>
-              <th>POSSIBLE <br/> INSTRUCTORS</th>
-              <th>POSSIBLE <br/> TERMS</th>
-              <th>SYLLABUS</th>
+    <CourseTable>
+      <thead>
+        <tr>
+          <th>Code</th>
+          <th>Name</th>
+          <th>Instructors</th>
+          <th>Terms</th>
+          <th>Week Days</th>
+          <th>Start Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          courses.map(course =>
+            <tr key={course.id}>
+              <td>{course.code}</td>
+              <td>{course.name}</td>
+              <td>{course.instructors.join(', ')}</td>
+              <td>{course.terms}</td>
+              <td>{course.days}</td>
+              <td>{course.start_time}</td>
             </tr>
-          </thead>
-          <tbody>
-            {courses.map(course =>
-              <tr key={course.id}>
-                <td>{course.code}</td>
-                <td>{course.name}</td>
-                <td>
-                  <ul
-                    style={{ listStyle: 'none' }}
-                  >{course.instructors.map(instructor => <li key={instructor.id}>{instructor.full_name}</li>)}</ul>
-                </td>
-                <td>{course.terms.name}</td>
-                <td>{course.syllabus ? 'link' : 'no'}</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          )
+        }
+      </tbody>
+    </CourseTable>
   )
 }

@@ -1,15 +1,18 @@
+import datetime
+
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 
-from university.models import Course
+from university.models import Course, Instructor
 from university.serializers.course import CourseListSerializer, CourseCreateSerializer, CourseUpdateSerializer, \
     CourseRetrieveSerializer
 
 
 class CourseListView(generics.ListAPIView):
-    serializer_class = CourseListSerializer
+    serializer_class = CourseRetrieveSerializer
     queryset = Course.objects.all()
 
 
@@ -19,6 +22,18 @@ class CourseCreateView(generics.CreateAPIView):
     permission_classes = (IsAdminUser,)
 
     def create(self, request, *args, **kwargs):
+        data = request.data
+
+        instructors = []
+        for instructor in data['instructors']:
+            try:
+                instructors.append(Instructor.objects.get(name=instructor).id)
+            except ObjectDoesNotExist:
+                new_instructor = Instructor.objects.create(name=instructor, school=request.data['school'])
+                instructors.append(new_instructor.id)
+
+        request.data['instructors'] = instructors
+
         return super().create(request, *args, **kwargs)
 
 
@@ -31,10 +46,22 @@ class CourseUpdateView(generics.UpdateAPIView):
         if pk is None:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+        data = request.data
+
+        instructors = []
+        for instructor in data['instructors']:
+            try:
+                instructors.append(Instructor.objects.get(name=instructor).id)
+            except ObjectDoesNotExist:
+                new_instructor = Instructor.objects.create(name=instructor, school=request.data['school'])
+                instructors.append(new_instructor.id)
+
+        request.data['instructors'] = instructors
+
         return super().update(request, pk, **kwargs)
 
 
-class CourseRetrieveView(generics.RetrieveAPIView):
+class CourseRetrieveDestroyView(generics.RetrieveDestroyAPIView):
     serializer_class = CourseRetrieveSerializer
     queryset = Course.objects.all()
 
@@ -43,3 +70,9 @@ class CourseRetrieveView(generics.RetrieveAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().retrieve(request, pk, **kwargs)
+
+    def destroy(self, request, pk=None, **kwargs):
+        if pk is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return super().destroy(request, pk, **kwargs)

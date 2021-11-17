@@ -82,18 +82,6 @@ export const Dialog = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  .dialog-body {
-    z-index: 2;
-    width: 50%;
-    height: 70%;
-    background-color: #ffffff;
-    padding: 10px;
-
-    .dialog-header {
-      width: 100%;
-      text-align: center;
-      padding: 10px 0;
-    }
-  }
+  overflow: hidden;
+  padding-bottom: 50px;
 `

@@ -3,14 +3,11 @@ import React from 'react'
 import { Navbar } from "./components/Navbar";
 import { Routes } from "./components/Routes";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
 import { getToken } from "./utils/token";
 import { useDispatch } from "react-redux";
 import api from "./utils/api";
 import { GET_USER_INFO } from "./store/types/UserTypes";
 import { Footer } from "./components/Footer";
-
-export const history = createBrowserHistory()
 
 function App() {
   const dispatch = useDispatch()
@@ -25,6 +22,8 @@ function App() {
           dispatch({ type: GET_USER_INFO, payload: res.data })
           setStatus(true)
         })
+        .catch(err => {
+        })
     } else {
       const refreshToken = localStorage.getItem('token')
       refreshToken ? (
@@ -38,6 +37,8 @@ function App() {
             localStorage.setItem('token', res.data)
             setStatus(true)
           })
+          .catch(err => {
+          })
       ) : (
         setStatus(true)
       )
@@ -47,10 +48,12 @@ function App() {
   return (
     <>
       {status && (
-        <Router history={history}>
+        <Router>
           <div className="App">
             <Navbar/>
-            <Routes/>
+            <main>
+              <Routes/>
+            </main>
             {/*<Footer/>*/}
           </div>
         </Router>

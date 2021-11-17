@@ -1,9 +1,7 @@
 from django.contrib import admin
 
-from .models import Course, Instructor, Term, School, Day
+from .models import Course, Instructor, Event
 
 admin.site.register(Instructor)
-admin.site.register(Term)
-admin.site.register(School)
 admin.site.register(Course)
-admin.site.register(Day)
+admin.site.register(Event)

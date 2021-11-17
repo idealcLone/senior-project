@@ -34,7 +34,7 @@ class UserUpdateView(generics.UpdateAPIView):
         return super().update(request, pk, **kwargs)
 
 
-class UserRetrieveView(generics.RetrieveDestroyAPIView):
+class UserRetrieveDestroyView(generics.RetrieveDestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
