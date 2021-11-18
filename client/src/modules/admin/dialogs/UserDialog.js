@@ -72,25 +72,27 @@ export const UserDialog = ({ userId, setOpen }) => {
     <Form>
       <p className={'dialog-header'}>Courses</p>
       <div className={'dialog-body'}>
-        <div className="field">
-          <label htmlFor="email">Email</label>
-          <input
-            id={'email'}
-            name={'email'}
-            type="text"
-            value={userInfo.email || ''}
-            onChange={handleInputChange}
-          />
-        </div>
+        <div className="form-data">
+          <div className="field">
+            <label htmlFor="email">Email</label>
+            <input
+              id={'email'}
+              name={'email'}
+              type="text"
+              value={userInfo.email || ''}
+              onChange={handleInputChange}
+            />
+          </div>
 
-        <div className="field">
-          <label htmlFor="major">Major</label>
-          <select name="major" id="major" onChange={handleInputChange}>
-            <option value={userInfo.major}>{userInfo.major || 'Not selected'}</option>
-            {
-              MAJORS.map(major => userInfo.major !== major && <option key={major} value={major}>{major}</option>)
-            }
-          </select>
+          <div className="field">
+            <label htmlFor="major">Major</label>
+            <select name="major" id="major" onChange={handleInputChange}>
+              <option value={userInfo.major}>{userInfo.major || 'Not selected'}</option>
+              {
+                MAJORS.map(major => userInfo.major !== major && <option key={major} value={major}>{major}</option>)
+              }
+            </select>
+          </div>
         </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>

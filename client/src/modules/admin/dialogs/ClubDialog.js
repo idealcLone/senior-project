@@ -71,15 +71,17 @@ export const ClubDialog = ({ clubId, setOpen }) => {
     <Form>
       <p className={'dialog-header'}>Clubs</p>
       <div className={'dialog-body'}>
-        <div className="field">
-          <label htmlFor="name">Name</label>
-          <input
-            id={'name'}
-            name={'name'}
-            type="text"
-            value={clubInfo.name || ''}
-            onChange={handleInputChange}
-          />
+        <div className="form-data">
+          <div className="field">
+            <label htmlFor="name">Name</label>
+            <input
+              id={'name'}
+              name={'name'}
+              type="text"
+              value={clubInfo.name || ''}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>

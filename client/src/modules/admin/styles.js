@@ -38,7 +38,7 @@ export const List = styled.ul`
   flex-direction: column;
   align-items: center;
   
-  margin-bottom: 75px;
+  padding-bottom: 50px;
 `
 
 export const ListItem = styled.li`

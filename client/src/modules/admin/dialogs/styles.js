@@ -81,40 +81,6 @@ export const Form = styled.form`
       }
     }
   }
-}
-
-@media (max-width: 660px) {
-  width: 80%;
-  height: 600px;
-  margin: 0 auto;
-
-  .dialog-body {
-    max-height: 80%;
-    width: 100%;
-
-    .field {
-      width: 50%;
-      padding: 10px;
-
-      label {
-        display: block;
-        margin-bottom: 2px;
-      }
-
-      input[type='text'] {
-        width: 100px;
-      }
-
-      select {
-        width: 100px;
-      }
-
-      Button {
-        height: 30px;
-        margin-bottom: 10px;
-      }
-    }
-  }
 `
 
 export const CheckboxGroup = styled.ul`
