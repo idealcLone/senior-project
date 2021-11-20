@@ -33,7 +33,7 @@ class FAQUpdateView(generics.UpdateAPIView):
         return super().update(request, pk, **kwargs)
 
 
-class FAQRetrieveView(generics.RetrieveAPIView):
+class FAQRetrieveDestroyView(generics.RetrieveDestroyAPIView):
     serializer_class = FAQSerializer
     queryset = FAQ.objects.all()
 
@@ -42,3 +42,9 @@ class FAQRetrieveView(generics.RetrieveAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().retrieve(request, pk, **kwargs)
+
+    def destroy(self, request, pk=None, **kwargs):
+        if pk is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return super().destroy(request, pk, **kwargs)

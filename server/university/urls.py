@@ -2,9 +2,9 @@ from django.urls import path
 
 from university.views.course import CourseListView, CourseCreateView, CourseUpdateView, CourseRetrieveDestroyView
 from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, ClubRetrieveView
-from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveView
+from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveDestroyView
 from university.views.user import UserListView, UserCreateView, UserUpdateView, UserRetrieveDestroyView
-from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveView
+from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveDestroyView
 
 urlpatterns = [
     path('courses/all/', CourseListView.as_view()),
@@ -20,7 +20,7 @@ urlpatterns = [
     path('events/all/', EventListView.as_view()),
     path('events/create/', EventCreateView.as_view()),
     path('events/update/<int:pk>/', EventUpdateView.as_view()),
-    path('events/<int:pk>/', EventRetrieveView.as_view()),
+    path('events/<int:pk>/', EventRetrieveDestroyView.as_view()),
 
     path('users/all/', UserListView.as_view()),
     path('users/create/', UserCreateView.as_view()),
@@ -30,5 +30,5 @@ urlpatterns = [
     path('faq/all/', FAQListView.as_view()),
     path('faq/create/', FAQCreateView.as_view()),
     path('faq/update/<int:pk>/', FAQUpdateView.as_view()),
-    path('faq/<int:pk>/', FAQRetrieveView.as_view())
+    path('faq/<int:pk>/', FAQRetrieveDestroyView.as_view())
 ]

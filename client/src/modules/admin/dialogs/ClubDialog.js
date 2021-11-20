@@ -61,7 +61,7 @@ export const ClubDialog = ({ clubId, setOpen }) => {
       api
         .post(`/clubs/create/`, { ...clubInfo })
         .then((res) => {
-          setOpen(false)
+          setClubInfo({})
           setData([...data, res.data])
         })
     }

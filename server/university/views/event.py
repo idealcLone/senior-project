@@ -51,7 +51,7 @@ class EventUpdateView(generics.UpdateAPIView):
         return super().update(request, pk, **kwargs)
 
 
-class EventRetrieveView(generics.RetrieveAPIView):
+class EventRetrieveDestroyView(generics.RetrieveDestroyAPIView):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
 
@@ -60,3 +60,9 @@ class EventRetrieveView(generics.RetrieveAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().retrieve(request, pk, **kwargs)
+
+    def destroy(self, request, pk=None, **kwargs):
+        if pk is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return super().destroy(request, pk, **kwargs)

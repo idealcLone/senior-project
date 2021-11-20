@@ -44,7 +44,7 @@ export const Select = styled.select`
 export const ShowButton = styled.div`
   width: 200px;
   margin: auto;
-  background: #b8b8b8;
+  background: #09f;
   color: #f6f6f6;
   text-align: center;
   padding: 15px 0;

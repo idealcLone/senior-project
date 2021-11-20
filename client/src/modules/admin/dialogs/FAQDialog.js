@@ -61,7 +61,7 @@ export const FAQDialog = ({ faqId, setOpen }) => {
       api
         .post(`/faq/create/`, { ...faqInfo })
         .then((res) => {
-          setOpen(false)
+          setFaqInfo({})
           setData([...data, res.data])
         })
     }

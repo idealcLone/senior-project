@@ -68,7 +68,9 @@ export const Navbar = () => {
         <ul>
           {
             routes.map(route =>
-              <li key={route.link} onClick={() => history.push(route.link)}>{route.name}</li>
+              <li key={route.link}>
+                <Link to={route.link}>{route.name}</Link>
+              </li>
             )
           }
         </ul>
@@ -83,10 +85,16 @@ export const Navbar = () => {
                 <ul className="dropdown" onClick={() => setShowDropdown(false)}>
                   {
                     dropdown.map(option =>
-                      <li onClick={() => history.push(option.path)}>{option.name}</li>
+                      <li key={option.path}>
+                        <Link to={option.path}>{option.name}</Link>
+                      </li>
                     )
                   }
-                  {user.is_admin && <li onClick={() => history.push('/admin')}>Admin Page</li>}
+                  {user.is_admin && (
+                    <li key={'/admin'}>
+                      <Link to={'/admin'}>Admin Page</Link>
+                    </li>
+                  )}
                   <li onClick={handleLogout}>Log Out</li>
                 </ul>
               )}

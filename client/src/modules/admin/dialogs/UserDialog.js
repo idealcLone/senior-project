@@ -5,8 +5,12 @@ import { MAJORS } from "../../../consts/data";
 import api from "../../../utils/api";
 import { AdminContext } from "../context";
 import { Spinner } from "../../../components/Spinner";
+import { useDispatch } from "react-redux";
+import { EDIT_USER_INFO } from "../../../store/types/UserTypes";
 
 export const UserDialog = ({ userId, setOpen }) => {
+  const dispatch = useDispatch()
+
   const [data, setData] = useContext(AdminContext)
 
   const [userInfo, setUserInfo] = React.useState({})
@@ -57,12 +61,16 @@ export const UserDialog = ({ userId, setOpen }) => {
           setOpen(false)
           const index = data.findIndex(item => item.id === userId)
           setData([...data.slice(0, index), res.data, ...data.slice(index + 1)])
+          dispatch({
+            type: EDIT_USER_INFO,
+            payload: res.data
+          })
         })
     } else {
       api
         .post(`/users/create/`, { ...userInfo })
         .then((res) => {
-          setOpen(false)
+          setUserInfo({})
           setData([...data, res.data])
         })
     }

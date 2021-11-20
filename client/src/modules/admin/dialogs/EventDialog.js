@@ -7,7 +7,9 @@ import { Spinner } from "../../../components/Spinner";
 export const EventDialog = ({ eventId, setOpen }) => {
   const [data, setData] = React.useContext(AdminContext)
 
-  const [eventInfo, setEventInfo] = React.useState({})
+  const [eventInfo, setEventInfo] = React.useState({
+    start_time: '09:00',
+  })
   const [loading, setLoading] = React.useState(false)
 
   React.useEffect(() => {
@@ -46,10 +48,12 @@ export const EventDialog = ({ eventId, setOpen }) => {
     e.preventDefault()
 
     api
-      .delete(`/events/${eventInfo.id}`)
+      .delete(`/events/${eventId}`)
       .then(() => {
         setOpen(false)
         setData(data.filter(item => item.id !== eventId))
+      })
+      .catch(err => {
       })
   }
 
@@ -77,7 +81,9 @@ export const EventDialog = ({ eventId, setOpen }) => {
       api
         .post(`/events/create/`, formData)
         .then((res) => {
-          setOpen(false)
+          setEventInfo({
+            start_time: '09:00',
+          })
           setData([...data, res.data])
         })
         .catch(() => {
@@ -133,7 +139,7 @@ export const EventDialog = ({ eventId, setOpen }) => {
             <input
               type="time"
               name={'start_time'}
-              value={eventInfo.start_time || '09:00:00'}
+              value={eventInfo.start_time}
               onChange={handleInputChange}
             />
           </div>

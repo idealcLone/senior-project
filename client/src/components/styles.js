@@ -76,13 +76,12 @@ export const Nav = styled.nav`
       height: 100%;
       list-style: none;
       display: flex;
-      padding-right: 100px;
 
       > li {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 2rem;
+        padding: 0 1.5rem;
         cursor: pointer;
 
         :hover {

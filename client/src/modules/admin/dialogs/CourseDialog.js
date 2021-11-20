@@ -6,6 +6,7 @@ import api from "../../../utils/api";
 import { AdminContext } from "../context";
 import { Spinner } from "../../../components/Spinner";
 import { Checkbox } from "../../../components/styles";
+import { sortDays } from "../../../utils/functions";
 
 export const CourseDialog = ({ courseId, setOpen }) => {
   const [data, setData] = useContext(AdminContext)
@@ -85,7 +86,7 @@ export const CourseDialog = ({ courseId, setOpen }) => {
           {
             ...courseInfo,
             terms: courseInfo.terms.join(', '),
-            days: courseInfo.days.join(''),
+            days: sortDays(courseInfo.days).join(''),
           }
         )
         .then((res) => {
@@ -101,11 +102,16 @@ export const CourseDialog = ({ courseId, setOpen }) => {
           {
             ...courseInfo,
             terms: courseInfo.terms.join(', '),
-            days: courseInfo.days.join(''),
+            days: sortDays(courseInfo.days).join(''),
           }
         )
         .then((res) => {
-          setOpen(false)
+          setCourseInfo({
+            instructors: [],
+            terms: [],
+            days: ['M', 'W', 'F'],
+            start_time: '09:00:00',
+          })
           setData([...data, res.data])
         })
         .catch(err => {
@@ -114,11 +120,11 @@ export const CourseDialog = ({ courseId, setOpen }) => {
   }
 
   const onCheckboxClick = (name, item) => {
-    console.log(courseInfo[name], item)
+    console.log(courseInfo[name], item, courseInfo[name].includes(item), courseInfo[name].filter(val => val !== item))
     if (courseInfo[name].includes(item)) {
       setCourseInfo({
         ...courseInfo,
-        [name]: courseInfo[name].filter(val => val !== item)
+        [name]: [...courseInfo[name].filter(val => val !== item)]
       })
     } else {
       setCourseInfo({
@@ -223,7 +229,7 @@ export const CourseDialog = ({ courseId, setOpen }) => {
               DAYS.map(day => (
                 <Checkbox
                   key={day}
-                  checked={Number.isInteger(courseId) ? courseInfo.days?.includes(day) : 'MWF'.includes(day)}
+                  checked={courseInfo.days?.includes(day)}
                   onClick={() => onCheckboxClick('days', day)}
                 >
                   <label htmlFor="day">{day}</label>
