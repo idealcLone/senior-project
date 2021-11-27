@@ -105,7 +105,7 @@ export const Nav = styled.nav`
       }
 
       .dropdown {
-        z-index: 2;
+        z-index: 4;
         list-style: none;
         position: absolute;
         border: 1px solid #000;

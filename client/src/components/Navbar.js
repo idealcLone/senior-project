@@ -85,7 +85,7 @@ export const Navbar = () => {
                 <ul className="dropdown" onClick={() => setShowDropdown(false)}>
                   {
                     dropdown.map(option =>
-                      <li key={option.path}>
+                      <li key={option.path} onClick={() => history.push(option.path)}>
                         <Link to={option.path}>{option.name}</Link>
                       </li>
                     )

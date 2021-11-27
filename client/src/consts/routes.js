@@ -9,6 +9,7 @@ import { UserDialog } from "../modules/admin/dialogs/UserDialog";
 import { CourseDialog } from "../modules/admin/dialogs/CourseDialog";
 import { EventsPage } from "../modules/events/EventsPage";
 import { EventPage } from "../modules/events/EventPage";
+import { MyCalendar } from "../modules/user/MyCalendar";
 
 export const routes = [
   {
@@ -30,6 +31,12 @@ export const routes = [
     path: '/profile',
     name: 'My Profile',
     component: Profile,
+    protected: true,
+  },
+  {
+    path: '/calendar',
+    name: 'My Calendar',
+    component: MyCalendar,
     protected: true,
   },
   {

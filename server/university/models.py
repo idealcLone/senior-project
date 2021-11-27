@@ -66,10 +66,8 @@ class Event(models.Model):
 
 class Deadline(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True)
-
-    start_time = models.TimeField(auto_now=True)
-    finish_time = models.TimeField(auto_now=True)
-
+    description = models.CharField(max_length=500, null=True)
+    finish_time = models.CharField(max_length=20, null=True)
     is_active = models.BooleanField(default=True)
 
     student = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

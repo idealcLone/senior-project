@@ -3,3 +3,19 @@ export const sortDays = (days) => {
 
   return weekDays.filter(day => days.includes(day))
 }
+
+export const disableBodyScroll = () => {
+  document.body.style.overflow = 'hidden';
+}
+
+export const enableBodyScroll = () => {
+  document.body.style.overflow = 'auto';
+}
+
+export const formatDate = (date) => {
+  return date && (new Date(date)).toJSON().slice(0, 10)
+}
+
+export const getToday = () => {
+  return new Date().toJSON().slice(0, 10)
+}

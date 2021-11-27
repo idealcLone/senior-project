@@ -5,6 +5,7 @@ from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, 
 from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveDestroyView
 from university.views.user import UserListView, UserCreateView, UserUpdateView, UserRetrieveDestroyView
 from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveDestroyView
+from university.views.deadline import DeadlineListView, DeadlineCreateView, DeadlineDestroyView, DeadlineUpdateView
 
 urlpatterns = [
     path('courses/all/', CourseListView.as_view()),
@@ -30,5 +31,10 @@ urlpatterns = [
     path('faq/all/', FAQListView.as_view()),
     path('faq/create/', FAQCreateView.as_view()),
     path('faq/update/<int:pk>/', FAQUpdateView.as_view()),
-    path('faq/<int:pk>/', FAQRetrieveDestroyView.as_view())
+    path('faq/<int:pk>/', FAQRetrieveDestroyView.as_view()),
+
+    path('deadline/all/', DeadlineListView.as_view()),
+    path('deadline/create/', DeadlineCreateView.as_view()),
+    path('deadline/update/<int:pk>/', DeadlineUpdateView.as_view()),
+    path('deadline/<int:pk>/', DeadlineDestroyView.as_view()),
 ]

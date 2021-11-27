@@ -22,13 +22,13 @@ export const EventsPage = () => {
   const [data, setData] = React.useState([])
 
   React.useEffect(() => {
-    localStorage.setItem('from', 'grid')
-    setLoading(true)
+    !switchOn && setLoading(true)
     api
       .get('events/all/')
       .then(res => {
         setEvents(res.data)
         setData(res.data)
+        localStorage.setItem('from', 'grid')
       })
       .catch(err => console.log(err))
       .finally(() => setLoading(false))
@@ -37,11 +37,11 @@ export const EventsPage = () => {
   React.useEffect(() => {
     let filtered = events.filter(event => event.name.toLowerCase().includes(searchText.toLowerCase()))
 
-    if(dates.start) {
+    if (dates.start) {
       filtered = filtered.filter(event => event.start_date !== 'null' && dates.start < event.start_date)
     }
 
-    if(dates.end) {
+    if (dates.end) {
       filtered = filtered.filter(event => event.start_date !== 'null' && event.start_date < dates.end)
     }
 
