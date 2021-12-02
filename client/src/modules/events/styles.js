@@ -15,6 +15,7 @@ export const GridItem = styled.div`
   text-align: center;
   padding-bottom: 50px;
   margin-right: 50px;
+  cursor: pointer;
 
   img {
     width: 300px;
@@ -60,19 +61,21 @@ export const SwitchLabel = styled.label`
   position: absolute;
   top: 0;
   left: 0;
-  width: 42px;
+  width: 100px;
   height: 26px;
   border-radius: 15px;
   background: #bebebe;
   cursor: pointer;
 
   &::after {
-    content: "";
+    content: "Grid";
     display: block;
     border-radius: 50%;
     width: 18px;
     height: 18px;
     margin: 3px;
+    text-indent: 30px;
+    color: #f4f4f4;
     background: #ffffff;
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
@@ -88,12 +91,13 @@ export const Switch = styled.input`
   &:checked + ${SwitchLabel} {
     background: #000;
     &::after {
-      content: "";
+      content: "Calendar";
       display: block;
       border-radius: 50%;
       width: 18px;
       height: 18px;
-      margin-left: 21px;
+      margin-left: 80px;
+      text-indent: -75px;
       transition: 0.2s;
     }
   }
@@ -121,10 +125,11 @@ export const EventContainer = styled.div`
       padding-bottom: 50px;
     }
     
-    .event-name {
+    .event-header {
       width: 100%;
       display: flex;
       align-items: flex-end;
+      justify-content: space-between;
 
       h2 {
         font-size: 3rem;
@@ -134,9 +139,19 @@ export const EventContainer = styled.div`
       }
       
       h3 {
+        flex: 50%;
         font-size: 1rem;
         color: #B8B8B8;
         padding-bottom: 8px;
+      }
+      
+      .add-btn {
+        padding: 1rem;
+        background-color: blueviolet;
+        color: #fff;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
       }
     }
     

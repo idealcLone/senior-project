@@ -41,7 +41,7 @@ class Course(models.Model):
 
 class Syllabus(models.Model):
     name = models.CharField(max_length=100, null=False, blank=True)
-    file = models.FileField(upload_to='syllabuses')
+    file = models.FileField(upload_to='syllabuses/')
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
@@ -62,6 +62,7 @@ class Event(models.Model):
     additional_info = models.CharField(max_length=255, null=True)
 
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    users = models.ManyToManyField(get_user_model())
 
 
 class Deadline(models.Model):

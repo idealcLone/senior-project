@@ -11,9 +11,13 @@ import { CalendarContainer, Paper } from "./styles";
 import { Deadline } from "./Deadline";
 import { disableBodyScroll, enableBodyScroll } from "../../utils/functions";
 import api from "../../utils/api";
+import { getUser } from "../../store/selectors/UserSelectors";
+import { useSelector } from "react-redux";
 
 export const MyCalendar = () => {
   const today = new Date().toJSON().slice(0, 10)
+
+  const user = useSelector(getUser)
 
   const [data, setData] = React.useState([])
   const [openDialog, setOpenDialog] = React.useState(null)
@@ -23,14 +27,25 @@ export const MyCalendar = () => {
     api
       .get('/deadline/all/')
       .then(res => {
-        setData(res.data.map(deadline => ({
+        const events = []
+        user.events.map(event => {
+          events.push({
+            type: 'event',
+            id: event.id,
+            title: event.name,
+            description: event.description,
+            startDate: `${event.start_date}T07:00`,
+            endDate: `${event.start_date}T${event.start_time}`,
+          })
+        })
+        setData([...res.data.map(deadline => ({
           id: deadline.id,
           title: deadline.name,
           description: deadline.description,
           startDate: `${deadline.finish_time.slice(0, 10)}T07:00`,
           endDate: deadline.finish_time,
           isActive: deadline.is_active,
-        })))
+        })), ...events])
       })
       .catch(err => console.log(err))
   }, [])
@@ -38,6 +53,10 @@ export const MyCalendar = () => {
   React.useEffect(() => {
     getDeadlines()
   }, [])
+
+  React.useEffect(() => {
+    console.log(data)
+  }, [data])
 
   React.useEffect(() => {
     if (openDialog) {
@@ -82,7 +101,8 @@ export const MyCalendar = () => {
 
   return (
     <CalendarContainer>
-      {openDialog && <Deadline open={openDialog} setOpen={setOpenDialog} data={dialogData} getDeadlines={getDeadlines}/>}
+      {openDialog &&
+      <Deadline open={openDialog} setOpen={setOpenDialog} data={dialogData} getDeadlines={getDeadlines}/>}
       <h2>My Deadlines</h2>
       <Paper>
         <Scheduler

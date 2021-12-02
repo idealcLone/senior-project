@@ -10,6 +10,7 @@ import { CourseDialog } from "../modules/admin/dialogs/CourseDialog";
 import { EventsPage } from "../modules/events/EventsPage";
 import { EventPage } from "../modules/events/EventPage";
 import { MyCalendar } from "../modules/user/MyCalendar";
+import { GPACalculator } from "../components/GPACalculator";
 
 export const routes = [
   {
@@ -32,6 +33,11 @@ export const routes = [
     name: 'My Profile',
     component: Profile,
     protected: true,
+  },
+  {
+    path: '/gpa-calculator',
+    name: 'GPA Calculator',
+    component: GPACalculator,
   },
   {
     path: '/calendar',

@@ -51,7 +51,7 @@ export const Radio = styled.div`
 export const Nav = styled.nav`
   width: 100%;
   background-color: #F6F6F6;
-  
+
   a {
     color: #000;
   }
@@ -81,8 +81,15 @@ export const Nav = styled.nav`
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 1.5rem;
         cursor: pointer;
+        height: 100%;
+        
+        a {
+          height: 100%;
+          padding: 0 1.5rem;
+          display: flex;
+          align-items: center;
+        }
 
         :hover {
           background-color: #c3c3c3;
@@ -124,5 +131,86 @@ export const Nav = styled.nav`
         }
       }
     }
+  }
+`
+
+export const Calculator = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+
+  table {
+    width: 50%;
+
+    tr {
+      background-color: #f6f6f6;
+
+      td {
+        width: 33%;
+        
+        input, select {
+          padding: .5rem 1rem;
+          border: none;
+          outline: none;
+        }
+        
+        input[name="name"] {
+          width: 95%;
+        }
+
+        input[name="credits"] {
+          width: 40%;
+          text-align: center;
+        }
+
+        input[name="total"] {
+          width: 40%;
+          text-align: center;
+        }
+      }
+
+      .delete-data {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .button-group {
+    margin-top: 20px;
+    display: flex;
+    width: 410px;
+    justify-content: space-between;
+  }
+  
+  .button {
+    display: inline;
+    width: 200px;
+    background-color: cornflowerblue;
+    color: #fff;
+    border-radius: 5px;
+    padding: .5rem 1rem;
+    text-align: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  .calculate-gpa {
+    background-color: lightcoral !important;
+  }
+  
+  .calculated-gpa {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: limegreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
   }
 `

@@ -25,3 +25,18 @@ export const Container = styled.div`
     line-height: 2;
   }
 `
+
+export const GPALink = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+  
+  a {
+    padding: 1rem;
+    background-color: #b1b1b1;
+    color: #f6f6f6;
+    border-radius: 5px;
+  }
+`

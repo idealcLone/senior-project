@@ -1,18 +1,27 @@
 import React from "react";
 import { useLocation } from "react-router";
 import { EventContainer } from "./styles";
+import api from "../../utils/api";
 
 export const EventPage = () => {
   const location = useLocation()
   const event = location.state.event
 
+  const onAddEventClick = () => {
+    api
+      .post('/account/add-event/', { eventId: event.id })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+  }
+
   return (
     <EventContainer>
       <img src={event.image} alt=""/>
       <div className="event-info">
-        <div className="event-name">
+        <div className="event-header">
           <h2>{event.name}</h2>
           <h3>{`by ${event.club}`}</h3>
+          <div className="add-btn" onClick={onAddEventClick}>Add to My Calendar</div>
         </div>
         <div className="event-description">
           <p>{event.description || ''}</p>

@@ -1,7 +1,7 @@
 from django.urls import path
 
 from university.views.course import CourseListView, CourseCreateView, CourseUpdateView, CourseRetrieveDestroyView
-from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, ClubRetrieveView
+from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, ClubRetrieveDestroyView
 from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveDestroyView
 from university.views.user import UserListView, UserCreateView, UserUpdateView, UserRetrieveDestroyView
 from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveDestroyView
@@ -16,7 +16,7 @@ urlpatterns = [
     path('clubs/all/', ClubListView.as_view()),
     path('clubs/create/', ClubCreateView.as_view()),
     path('clubs/update/<int:pk>/', ClubUpdateView.as_view()),
-    path('clubs/<int:pk>/', ClubRetrieveView.as_view()),
+    path('clubs/<int:pk>/', ClubRetrieveDestroyView.as_view()),
 
     path('events/all/', EventListView.as_view()),
     path('events/create/', EventCreateView.as_view()),

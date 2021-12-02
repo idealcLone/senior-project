@@ -37,16 +37,18 @@ export const EventsPage = () => {
   React.useEffect(() => {
     let filtered = events.filter(event => event.name.toLowerCase().includes(searchText.toLowerCase()))
 
-    if (dates.start) {
-      filtered = filtered.filter(event => event.start_date !== 'null' && dates.start < event.start_date)
-    }
+    if (!switchOn) {
+      if (dates.start) {
+        filtered = filtered.filter(event => event.start_date !== 'null' && dates.start < event.start_date)
+      }
 
-    if (dates.end) {
-      filtered = filtered.filter(event => event.start_date !== 'null' && event.start_date < dates.end)
+      if (dates.end) {
+        filtered = filtered.filter(event => event.start_date !== 'null' && event.start_date < dates.end)
+      }
     }
 
     setData(filtered)
-  }, [events, dates, searchText])
+  }, [events, dates, searchText, switchOn])
 
   const handleDateChange = (e) => {
     const { name, value } = e.target
@@ -61,12 +63,14 @@ export const EventsPage = () => {
     <>
       <Filters>
         <SearchBar placeholder={'Enter event name'} value={searchText} onChange={e => setSearchText(e.target.value)}/>
-        <div className="date-filters">
-          <div>Filters:</div>
-          <input type="date" id={'start-date'} name={'start'} value={dates.start} onChange={handleDateChange}/>
-          <span className="separator">&nbsp; - &nbsp;</span>
-          <input type="date" id={'end-date'} name={'end'} value={dates.end} onChange={handleDateChange}/>
-        </div>
+        {!switchOn && (
+          <div className="date-filters">
+            <div>Filters:</div>
+            <input type="date" id={'start-date'} name={'start'} value={dates.start} onChange={handleDateChange}/>
+            <span className="separator">&nbsp; - &nbsp;</span>
+            <input type="date" id={'end-date'} name={'end'} value={dates.end} onChange={handleDateChange}/>
+          </div>
+        )}
         <SwitchWrapper>
           <Switch id={'switch'} type={'checkbox'} checked={switchOn} onChange={() => setSwitch(!switchOn)}/>
           <SwitchLabel htmlFor={'switch'}/>

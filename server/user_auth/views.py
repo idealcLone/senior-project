@@ -16,7 +16,19 @@ from rest_framework.response import Response
 from .serializers import UserSerializer
 from .utils import generate_tokens
 
+from university.models import Event
+
 User = get_user_model()
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_event(request):
+    user = request.user
+    event = Event.objects.get(id=request.data['eventId'])
+    user.event_set.add(event)
+    user.save()
+    return Response(status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])

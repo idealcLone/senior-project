@@ -33,7 +33,7 @@ class ClubUpdateView(generics.UpdateAPIView):
         return super().update(request, pk, **kwargs)
 
 
-class ClubRetrieveView(generics.RetrieveAPIView):
+class ClubRetrieveDestroyView(generics.RetrieveDestroyAPIView):
     serializer_class = ClubSerializer
     queryset = Club.objects.all()
 
@@ -42,3 +42,10 @@ class ClubRetrieveView(generics.RetrieveAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().retrieve(request, pk, **kwargs)
+
+    def destroy(self, request, pk=None, **kwargs):
+        if pk is None:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return super().destroy(request, pk, **kwargs)
+

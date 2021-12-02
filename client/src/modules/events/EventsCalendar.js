@@ -16,6 +16,8 @@ export const EventsCalendar = ({ events }) => {
   const today = new Date().toJSON().slice(0, 10)
   const [data, setData] = React.useState([])
 
+  console.log(events)
+
   React.useEffect(() => {
     setData([])
     events.map(event => {
