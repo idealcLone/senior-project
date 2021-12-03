@@ -2,13 +2,23 @@ import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
 
-from university.models import Course, Instructor
+from university.models import Course, Instructor, Syllabus
 from university.serializers.course import CourseListSerializer, CourseCreateSerializer, CourseUpdateSerializer, \
     CourseRetrieveSerializer
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def upload_syllabus(request):
+    course = Course.objects.get(id=request.data['course'])
+    Syllabus.objects.create(name='Syllabus', file=request.data['syllabus'], course=course)
+
+    return Response(status.HTTP_200_OK)
 
 
 class CourseListView(generics.ListAPIView):

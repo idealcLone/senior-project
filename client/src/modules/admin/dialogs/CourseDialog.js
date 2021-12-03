@@ -19,6 +19,7 @@ export const CourseDialog = ({ courseId, setOpen }) => {
   })
   const [instructor, setInstructor] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+  const [syllabus, setSyllabus] = React.useState(null)
 
   React.useEffect(() => {
     if (Number.isInteger(courseId)) {
@@ -143,6 +144,21 @@ export const CourseDialog = ({ courseId, setOpen }) => {
     setInstructor('')
   }
 
+  const onSubmitSyllabus = e => {
+    const formData = new FormData()
+
+    formData.append('syllabus', syllabus)
+    formData.append('course', courseId)
+
+    api
+      .post('/courses/upload-syllabus/', formData)
+      .then(res => {
+        // setSyllabus(null)
+        console.log(res.data)
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <Form>
       <p className={'dialog-header'}>Courses</p>
@@ -223,37 +239,18 @@ export const CourseDialog = ({ courseId, setOpen }) => {
             </ul>
           </div>
 
-          <div className="field">
-            <label className={'bold'} htmlFor="days">Days</label>
-            {
-              DAYS.map(day => (
-                <Checkbox
-                  key={day}
-                  checked={courseInfo.days?.includes(day)}
-                  onClick={() => onCheckboxClick('days', day)}
-                >
-                  <label htmlFor="day">{day}</label>
-                  <div/>
-                </Checkbox>
-              ))
-            }
-          </div>
-
-          <div className="field">
-            <label className={'bold'} htmlFor={'start_time'}>Start time</label>
-            <input
-              type="time"
-              name={'start_time'}
-              value={courseInfo.start_time}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="field">
-            <label htmlFor="duration" className="bold">Duration</label>
-            <select name="duration" id="duration" value={courseInfo.duration || 50} onChange={handleInputChange}>
-              <option value={50}>50</option>
-              <option value={75}>75</option>
-            </select>
+          <div className="field syllabus-field">
+            <label className={'bold'} htmlFor="syllabus">Syllabus</label>
+            <input type="file" name="syllabus" id="syllabus" accept={'.pdf'}
+                   onChange={e => setSyllabus(e.target.files[0])}/>
+            <div className="submit-syllabus" onClick={onSubmitSyllabus}>Submit</div>
+            <ul>
+              {
+                courseInfo.syllabuses?.map(syllabus =>
+                  <li key={syllabus.id}>{syllabus.name}</li>
+                )
+              }
+            </ul>
           </div>
         </div>
       </div>

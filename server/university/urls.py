@@ -1,6 +1,7 @@
 from django.urls import path
 
-from university.views.course import CourseListView, CourseCreateView, CourseUpdateView, CourseRetrieveDestroyView
+from university.views.course import CourseListView, CourseCreateView, CourseUpdateView, CourseRetrieveDestroyView, \
+    upload_syllabus
 from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, ClubRetrieveDestroyView
 from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveDestroyView
 from university.views.user import UserListView, UserCreateView, UserUpdateView, UserRetrieveDestroyView
@@ -12,6 +13,7 @@ urlpatterns = [
     path('courses/create/', CourseCreateView.as_view()),
     path('courses/update/<int:pk>/', CourseUpdateView.as_view()),
     path('courses/<int:pk>/', CourseRetrieveDestroyView.as_view()),
+    path('courses/upload-syllabus/', upload_syllabus),
 
     path('clubs/all/', ClubListView.as_view()),
     path('clubs/create/', ClubCreateView.as_view()),

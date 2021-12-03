@@ -1,6 +1,9 @@
 import React from "react";
 import { GRADES } from "../consts/data";
-import { Calculator } from "./styles";
+import { Calculator, GPACalculators } from "./styles";
+import { TargetGPACalculator } from "./TargetGPACalculator";
+
+import { v4 as uuidv4 } from 'uuid';
 
 const COURSE_INIT = {
   id: 0,
@@ -20,8 +23,6 @@ export const GPACalculator = () => {
   const [courses, setCourses] = React.useState(JSON.parse(localStorage.getItem('courses')) || [COURSE_INIT])
   const [gpa, setGpa] = React.useState(0)
   const [customData, setCustomData] = React.useState(JSON.parse(localStorage.getItem('customData')) || [])
-  const [courseCount, setCourseCount] = React.useState(0)
-  const [customDataCount, setCustomDataCount] = React.useState(0)
 
   const onCalculate = () => {
     let totalPoints = 0, creditsNum = 0
@@ -76,17 +77,15 @@ export const GPACalculator = () => {
   const onAddCourse = () => {
     setCourses([...courses, {
       ...COURSE_INIT,
-      id: courseCount,
+      id: uuidv4(),
     }])
-    setCourseCount(courseCount + 1)
   }
 
   const onAddCustomData = () => {
     setCustomData([...customData, {
       ...CUSTOM_DATA_INIT,
-      id: customDataCount,
+      id: uuidv4(),
     }])
-    setCustomDataCount(customDataCount + 1)
   }
 
   const onCourseDeleteClick = (id) => {
@@ -105,89 +104,93 @@ export const GPACalculator = () => {
   }
 
   return (
-    <Calculator>
-      <table>
-        <thead>
-          <tr>
-            <th>Course Name</th>
-            <th>Credits Count</th>
-            <th>Grade</th>
-            <th/>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            courses.map(course =>
-              <tr key={course.id}>
-                <td>
-                  <input type="text" name={'name'} value={course.name} onChange={(e) => handleChange(e, course.id)}/>
-                </td>
-                <td>
-                  <input type="text" name="credits" id="credits" value={course.credits}
-                         onChange={(e) => handleChange(e, course.id)}/>
-                </td>
-                <td>
-                  <select name="grade" id="grade" value={course.grade} onChange={(e) => handleChange(e, course.id)}>
-                    {
-                      GRADES.map(grade =>
-                        <option value={grade.points}>{grade.letter}</option>
-                      )
-                    }
-                  </select>
-                </td>
-                <td className={'delete-data'} onClick={() => onCourseDeleteClick(course.id)}><i className="fa fa-trash"
-                                                                                                aria-hidden="true"/>
-                </td>
-              </tr>
-            )
-          }
-        </tbody>
-      </table>
-      {customData.length > 0 && (
+    <GPACalculators>
+      <Calculator>
         <table>
           <thead>
             <tr>
-              <th>Name</th>
+              <th>Course Name</th>
               <th>Credits Count</th>
-              <th>Total Grade</th>
+              <th>Grade</th>
               <th/>
             </tr>
           </thead>
           <tbody>
             {
-              customData.map(data =>
-                <tr key={data.id}>
+              courses.map(course =>
+                <tr key={course.id}>
                   <td>
-                    <input type="text" name={'name'} value={data.name}
-                           onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    <input type="text" name={'name'} value={course.name} onChange={(e) => handleChange(e, course.id)}/>
                   </td>
                   <td>
-                    <input type="text" name="credits" id="credits" value={data.credits}
-                           onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    <input type="text" name="credits" id="credits" value={course.credits}
+                           onChange={(e) => handleChange(e, course.id)}/>
                   </td>
                   <td>
-                    <input type="text" name={'total'} value={data.total}
-                           onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    <select name="grade" id="grade" value={course.grade} onChange={(e) => handleChange(e, course.id)}>
+                      {
+                        GRADES.map(grade =>
+                          <option value={grade.points}>{grade.letter}</option>
+                        )
+                      }
+                    </select>
                   </td>
-                  <td className={'delete-data'} onClick={() => onCustomDataDeleteClick(data.id)}><i
-                    className="fa fa-trash" aria-hidden="true"/></td>
+                  <td className={'delete-data'} onClick={() => onCourseDeleteClick(course.id)}><i
+                    className="fa fa-trash"
+                    aria-hidden="true"/>
+                  </td>
                 </tr>
               )
             }
           </tbody>
         </table>
-      )}
-      <div className="button-group">
-        <div className="add-course button" onClick={onAddCourse}>
-          Add Course
+        {customData.length > 0 && (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Credits Count</th>
+                <th>Total Grade</th>
+                <th/>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                customData.map(data =>
+                  <tr key={data.id}>
+                    <td>
+                      <input type="text" name={'name'} value={data.name}
+                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    </td>
+                    <td>
+                      <input type="text" name="credits" id="credits" value={data.credits}
+                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    </td>
+                    <td>
+                      <input type="text" name={'total'} value={data.total}
+                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
+                    </td>
+                    <td className={'delete-data'} onClick={() => onCustomDataDeleteClick(data.id)}><i
+                      className="fa fa-trash" aria-hidden="true"/></td>
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        )}
+        <div className="button-group">
+          <div className="add-course button" onClick={onAddCourse}>
+            Add Course
+          </div>
+          <div className="add-custom-data button" onClick={onAddCustomData}>
+            Add Custom Data
+          </div>
         </div>
-        <div className="add-custom-data button" onClick={onAddCustomData}>
-          Add Custom Data
+        <div className="calculated-gpa">
+          {gpa ? gpa.toFixed(2) : 'GPA'}
         </div>
-      </div>
-      <div className="calculated-gpa">
-        {gpa ? gpa.toFixed(2) : 'GPA'}
-      </div>
-    </Calculator>
+      </Calculator>
+      <TargetGPACalculator/>
+    </GPACalculators>
   )
 }

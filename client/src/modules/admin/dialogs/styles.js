@@ -79,6 +79,28 @@ export const Form = styled.form`
           padding: .5rem;
         }
       }
+      
+      .syllabus-field {
+        padding-right: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        
+        label {
+          flex: 100%;
+        }
+        
+        .submit-syllabus {
+          padding: .5rem 1rem;
+          background-color: cornflowerblue;
+          color: #fff;
+          cursor: pointer;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+        } 
+      }
     }
   }
 `

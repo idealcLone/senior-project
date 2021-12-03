@@ -2,10 +2,14 @@ import React from "react";
 import { useLocation } from "react-router";
 import { EventContainer } from "./styles";
 import api from "../../utils/api";
+import { useSelector } from "react-redux";
+import { getUser } from "../../store/selectors/UserSelectors";
 
 export const EventPage = () => {
   const location = useLocation()
   const event = location.state.event
+
+  const user = useSelector(getUser)
 
   const onAddEventClick = () => {
     api
@@ -21,7 +25,11 @@ export const EventPage = () => {
         <div className="event-header">
           <h2>{event.name}</h2>
           <h3>{`by ${event.club}`}</h3>
-          <div className="add-btn" onClick={onAddEventClick}>Add to My Calendar</div>
+          {
+            !user.events.find(e => e.id === event.id) && (
+              <div className="add-btn" onClick={onAddEventClick}>Add to My Calendar</div>
+            )
+          }
         </div>
         <div className="event-description">
           <p>{event.description || ''}</p>

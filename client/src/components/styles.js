@@ -134,16 +134,22 @@ export const Nav = styled.nav`
   }
 `
 
+export const GPACalculators = styled.div`
+  margin: 20px auto;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+`
+
+
 export const Calculator = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 
   table {
-    width: 50%;
+    width: 100%;
 
     tr {
       background-color: #f6f6f6;
@@ -212,5 +218,32 @@ export const Calculator = styled.div`
     color: #fff;
     font-weight: 600;
     font-size: 1.25rem;
+  }
+`
+
+export const TargetGPACalculatorContainer = styled.div`
+  .form {
+    background-color: lightseagreen;
+    color: #fff;
+    padding: .5rem 1rem;
+    
+    .field {
+      label {
+        display: block;
+      }
+      input {
+        border: none;
+        padding: .5rem;
+        margin: .5rem 0;
+        outline: none;
+      }
+      
+      > div {
+        padding: .5rem 0;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
   }
 `

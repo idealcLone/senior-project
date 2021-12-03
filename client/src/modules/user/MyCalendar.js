@@ -13,6 +13,7 @@ import { disableBodyScroll, enableBodyScroll } from "../../utils/functions";
 import api from "../../utils/api";
 import { getUser } from "../../store/selectors/UserSelectors";
 import { useSelector } from "react-redux";
+import { Event } from "./Event";
 
 export const MyCalendar = () => {
   const today = new Date().toJSON().slice(0, 10)
@@ -22,6 +23,8 @@ export const MyCalendar = () => {
   const [data, setData] = React.useState([])
   const [openDialog, setOpenDialog] = React.useState(null)
   const [dialogData, setDialogData] = React.useState({})
+  const [openEventDialog, setOpenEventDialog] = React.useState(null)
+  const [selectedEvent, setSelectedEvent] = React.useState({})
 
   const getDeadlines = React.useCallback(() => {
     api
@@ -39,6 +42,7 @@ export const MyCalendar = () => {
           })
         })
         setData([...res.data.map(deadline => ({
+          type: 'deadline',
           id: deadline.id,
           title: deadline.name,
           description: deadline.description,
@@ -78,8 +82,13 @@ export const MyCalendar = () => {
           color: '#fff',
         }}
         onClick={() => {
-          setOpenDialog(data.endDate)
-          setDialogData(data)
+          if (data.type === 'deadline') {
+            setOpenDialog(data.endDate)
+            setDialogData(data)
+          } else {
+            setOpenEventDialog(data.endDate)
+            setSelectedEvent(data)
+          }
         }}
       >
         {`${data.title} - ${data.endDate.slice(11, 16)}`}
@@ -101,8 +110,14 @@ export const MyCalendar = () => {
 
   return (
     <CalendarContainer>
-      {openDialog &&
-      <Deadline open={openDialog} setOpen={setOpenDialog} data={dialogData} getDeadlines={getDeadlines}/>}
+      {
+        openDialog &&
+        <Deadline open={openDialog} setOpen={setOpenDialog} data={dialogData} getDeadlines={getDeadlines}/>
+      }
+      {
+        openEventDialog &&
+        <Event open={openEventDialog} setOpen={setOpenEventDialog} data={selectedEvent} getDeadlines={getDeadlines}/>
+      }
       <h2>My Deadlines</h2>
       <Paper>
         <Scheduler

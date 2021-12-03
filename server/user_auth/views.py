@@ -21,6 +21,15 @@ from university.models import Event
 User = get_user_model()
 
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def remove_event(request):
+    user = request.user
+    event = Event.objects.get(id=request.query_params.get('eventId'))
+    user.event_set.remove(event)
+    return Response(status=status.HTTP_200_OK)
+
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def add_event(request):
