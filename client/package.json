@@ -42,7 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format && git commit -a"
+      "pre-commit": "yarn lint"
     }
   },
   "eslintConfig": {
