@@ -1,71 +1,63 @@
-import React from "react";
-import { AdminContext } from "../context";
-import { Button, ButtonGroup, Form } from "./styles";
-import api from "../../../utils/api";
-import { Spinner } from "../../../components/Spinner";
+import React from 'react';
+import { AdminContext } from '../context';
+import { Button, ButtonGroup, Form } from './styles';
+import api from '../../../utils/api';
+import { Spinner } from '../../../components/Spinner';
 
 export const ClubDialog = ({ clubId, setOpen }) => {
-  const [data, setData] = React.useContext(AdminContext)
+  const [data, setData] = React.useContext(AdminContext);
 
-  const [clubInfo, setClubInfo] = React.useState({})
-  const [loading, setLoading] = React.useState(false)
+  const [clubInfo, setClubInfo] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (Number.isInteger(clubId)) {
-      setLoading(true)
-      api
-        .get(`/clubs/${clubId}`)
-        .then(res => {
-          setLoading(false)
-          setClubInfo({ ...res.data })
-        })
+      setLoading(true);
+      api.get(`/clubs/${clubId}`).then((res) => {
+        setLoading(false);
+        setClubInfo({ ...res.data });
+      });
     }
-  }, [clubId])
+  }, [clubId]);
 
   if (loading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setClubInfo({
       ...clubInfo,
-      [name]: value,
-    })
-  }
+      [name]: value
+    });
+  };
 
   const handleDeleteButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    api
-      .delete(`/clubs/${clubInfo.id}`)
-      .then(() => {
-        setOpen(false)
-        setData(data.filter(item => item.id !== clubId))
-      })
-  }
+    api.delete(`/clubs/${clubInfo.id}`).then(() => {
+      setOpen(false);
+      setData(data.filter((item) => item.id !== clubId));
+    });
+  };
 
   const handleSaveButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (Number.isInteger(clubId)) {
-      api
-        .put(`/clubs/update/${clubInfo.id}/`, { ...clubInfo })
-        .then((res) => {
-          setOpen(false)
-          const index = data.findIndex(item => item.id === clubId)
-          setData([...data.slice(0, index), res.data, ...data.slice(index + 1)])
-        })
+      api.put(`/clubs/update/${clubInfo.id}/`, { ...clubInfo }).then((res) => {
+        setOpen(false);
+        const index = data.findIndex((item) => item.id === clubId);
+        setData([...data.slice(0, index), res.data, ...data.slice(index + 1)]);
+      });
     } else {
-      api
-        .post(`/clubs/create/`, { ...clubInfo })
-        .then((res) => {
-          setClubInfo({})
-          setData([...data, res.data])
-        })
+      api.post(`/clubs/create/`, { ...clubInfo }).then((res) => {
+        setClubInfo({});
+        setData([...data, res.data]);
+      });
     }
-  }
+  };
 
   return (
     <Form>
@@ -85,9 +77,15 @@ export const ClubDialog = ({ clubId, setOpen }) => {
         </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>
-        <Button save onClick={handleSaveButton}>Save</Button>
-        {Number.isInteger(clubId) && <Button delete onClick={handleDeleteButton}>Delete</Button>}
+        <Button save onClick={handleSaveButton}>
+          Save
+        </Button>
+        {Number.isInteger(clubId) && (
+          <Button delete onClick={handleDeleteButton}>
+            Delete
+          </Button>
+        )}
       </ButtonGroup>
     </Form>
-  )
-}
+  );
+};

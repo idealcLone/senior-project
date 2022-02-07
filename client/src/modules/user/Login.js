@@ -1,42 +1,40 @@
-import React from "react";
+import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import api from "../../utils/api";
-import { setToken } from "../../utils/token";
-import { useHistory } from "react-router";
+import api from '../../utils/api';
+import { setToken } from '../../utils/token';
+import { useHistory } from 'react-router';
 
 export const Login = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
   const [info, setInfo] = React.useState({
     email: '',
-    password: '',
-  })
+    password: ''
+  });
 
-  const onSubmit = e => {
-    setLoading(true)
+  const onSubmit = (e) => {
+    setLoading(true);
 
     api
       .post('/account/login/', { ...info })
-      .then(res => {
-        const data = res.data
-        setToken(data.access_token)
-        localStorage.setItem('token', data.refresh_token)
+      .then((res) => {
+        const data = res.data;
+        setToken(data.access_token);
+        localStorage.setItem('token', data.refresh_token);
 
-        history.push('/')
-        window.location.reload()
+        history.push('/');
+        window.location.reload();
       })
-      .catch(err => {})
-
-  }
+      .catch((err) => {});
+  };
 
   return (
     <div className="login-container form-container container">
       <div className="login-form form">
-
         <h1>Log In</h1>
         <label htmlFor="email"> Email</label>
         <input
@@ -44,7 +42,7 @@ export const Login = () => {
           id={'email'}
           type={'text'}
           value={info.email}
-          onChange={e => setInfo({ ...info, email: e.target.value })}
+          onChange={(e) => setInfo({ ...info, email: e.target.value })}
         />
 
         <label htmlFor="password"> Password</label>
@@ -52,11 +50,15 @@ export const Login = () => {
           name={'password'}
           type="password"
           value={info.password}
-          onChange={e => setInfo({ ...info, password: e.target.value })}
+          onChange={(e) => setInfo({ ...info, password: e.target.value })}
         />
-        <button className={'btn'} onClick={onSubmit}>Log In</button>
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+        <button className={'btn'} onClick={onSubmit}>
+          Log In
+        </button>
+        <p>
+          Don't have an account? <a href="/signup">Sign Up</a>
+        </p>
       </div>
     </div>
-  )
-}
+  );
+};

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const MainGrid = styled.div`
   max-width: 80%;
@@ -6,7 +6,7 @@ export const MainGrid = styled.div`
 
   display: flex;
   flex-wrap: wrap;
-`
+`;
 
 export const GridItem = styled.div`
   max-width: 350px;
@@ -20,7 +20,7 @@ export const GridItem = styled.div`
   img {
     width: 300px;
   }
-`
+`;
 
 export const Filters = styled.div`
   padding-top: 50px;
@@ -51,11 +51,11 @@ export const Filters = styled.div`
       font-weight: 700;
     }
   }
-`
+`;
 
 export const SwitchWrapper = styled.div`
   position: relative;
-`
+`;
 
 export const SwitchLabel = styled.label`
   position: absolute;
@@ -68,7 +68,7 @@ export const SwitchLabel = styled.label`
   cursor: pointer;
 
   &::after {
-    content: "Grid";
+    content: 'Grid';
     display: block;
     border-radius: 50%;
     width: 18px;
@@ -80,7 +80,7 @@ export const SwitchLabel = styled.label`
     box-shadow: 1px 3px 3px 1px rgba(0, 0, 0, 0.2);
     transition: 0.2s;
   }
-`
+`;
 
 export const Switch = styled.input`
   opacity: 0;
@@ -91,7 +91,7 @@ export const Switch = styled.input`
   &:checked + ${SwitchLabel} {
     background: #000;
     &::after {
-      content: "Calendar";
+      content: 'Calendar';
       display: block;
       border-radius: 50%;
       width: 18px;
@@ -101,7 +101,7 @@ export const Switch = styled.input`
       transition: 0.2s;
     }
   }
-`
+`;
 
 export const EventContainer = styled.div`
   padding-top: 50px;
@@ -110,21 +110,21 @@ export const EventContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  
+
   img {
     max-width: 370px;
   }
-  
+
   .event-info {
     width: calc(100% - 450px);
     display: flex;
     flex-direction: column;
-    
+
     > div {
       display: flex;
       padding-bottom: 50px;
     }
-    
+
     .event-header {
       width: 100%;
       display: flex;
@@ -137,14 +137,14 @@ export const EventContainer = styled.div`
         text-transform: uppercase;
         padding-right: 50px;
       }
-      
+
       h3 {
         flex: 50%;
         font-size: 1rem;
-        color: #B8B8B8;
+        color: #b8b8b8;
         padding-bottom: 8px;
       }
-      
+
       .add-btn {
         padding: 1rem;
         background-color: blueviolet;
@@ -154,23 +154,23 @@ export const EventContainer = styled.div`
         cursor: pointer;
       }
     }
-    
+
     .event-date {
       width: 50%;
       display: flex;
       justify-content: space-between;
     }
   }
-`
+`;
 
 export const CalendarContainer = styled.div`
   width: 80%;
   margin: 0 auto;
   padding: 0 20px 50px;
-`
+`;
 
 export const Paper = styled.div`
   width: 100%;
   height: 100%;
-  border: .5px solid rgba(0, 0, 0, .2);
-`
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+`;

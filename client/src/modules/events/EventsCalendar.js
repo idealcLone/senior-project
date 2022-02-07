@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Scheduler,
   Toolbar,
@@ -6,33 +6,35 @@ import {
   MonthView,
   DateNavigator
 } from '@devexpress/dx-react-scheduler-material-ui';
-import { ViewState } from "@devexpress/dx-react-scheduler";
-import { CalendarContainer, Paper } from "./styles";
-import { useHistory } from "react-router";
+import { ViewState } from '@devexpress/dx-react-scheduler';
+import { CalendarContainer, Paper } from './styles';
+import { useHistory } from 'react-router';
 
 export const EventsCalendar = ({ events }) => {
-  const history = useHistory()
+  const history = useHistory();
 
-  const today = new Date().toJSON().slice(0, 10)
-  const [data, setData] = React.useState([])
+  const today = new Date().toJSON().slice(0, 10);
+  const [data, setData] = React.useState([]);
 
-  console.log(events)
+  console.log(events);
 
   React.useEffect(() => {
-    setData([])
-    events.map(event => {
-      const startDate = event.start_date + 'T' + event.start_time
-      const endDate = new Date(startDate)
-      endDate.setTime(endDate.getTime() + 1000 * 60)
-      setData(data =>
-        [...data, {
+    setData([]);
+    events.map((event) => {
+      const startDate = event.start_date + 'T' + event.start_time;
+      const endDate = new Date(startDate);
+      endDate.setTime(endDate.getTime() + 1000 * 60);
+      setData((data) => [
+        ...data,
+        {
           event,
           title: event.name,
           startDate: startDate,
-          endDate: endDate,
-        }])
-    })
-  }, [events])
+          endDate: endDate
+        }
+      ]);
+    });
+  }, [events]);
 
   const CustomAppointment = ({ style, ...restProps }) => {
     return (
@@ -46,14 +48,14 @@ export const EventsCalendar = ({ events }) => {
           alignItems: 'center'
         }}
         onClick={() => {
-          const event = restProps.data.event
-          localStorage.setItem('from', 'calendar')
+          const event = restProps.data.event;
+          localStorage.setItem('from', 'calendar');
           history.push({
             pathname: `/events/${event.id}`,
             state: {
               event
             }
-          })
+          });
         }}
       />
     );
@@ -62,18 +64,14 @@ export const EventsCalendar = ({ events }) => {
   return (
     <CalendarContainer>
       <Paper>
-        <Scheduler
-          data={data}
-        >
-          <ViewState
-            defaultCurrentDate={today}
-          />
-          <MonthView/>
-          <Toolbar/>
-          <DateNavigator/>
-          <Appointments appointmentComponent={CustomAppointment}/>
+        <Scheduler data={data}>
+          <ViewState defaultCurrentDate={today} />
+          <MonthView />
+          <Toolbar />
+          <DateNavigator />
+          <Appointments appointmentComponent={CustomAppointment} />
         </Scheduler>
       </Paper>
     </CalendarContainer>
-  )
-}
+  );
+};

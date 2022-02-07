@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FooterDiv = styled.footer`
   min-height: 125px;
@@ -6,7 +6,7 @@ export const FooterDiv = styled.footer`
   position: absolute;
   bottom: 0;
   border-top: 1px solid #000000;
-`
+`;
 
 export const LoaderContainer = styled.div`
   width: 100%;
@@ -14,7 +14,7 @@ export const LoaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const Checkbox = styled.div`
   max-width: 100px;
@@ -27,11 +27,11 @@ export const Checkbox = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${props => props.checked ? '#1A5DAB' : '#fff'};
+    background-color: ${(props) => (props.checked ? '#1A5DAB' : '#fff')};
     border-radius: 3px;
     border: 1px solid #000000;
   }
-`
+`;
 
 export const Radio = styled.div`
   display: flex;
@@ -42,15 +42,15 @@ export const Radio = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${props => props.clicked ? '#1A5DAB' : '#fff'};
+    background-color: ${(props) => (props.clicked ? '#1A5DAB' : '#fff')};
     border-radius: 50px;
     border: 1px solid #000000;
   }
-`
+`;
 
 export const Nav = styled.nav`
   width: 100%;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 
   a {
     color: #000;
@@ -83,12 +83,13 @@ export const Nav = styled.nav`
         align-items: center;
         cursor: pointer;
         height: 100%;
-        
+
         a {
           height: 100%;
           padding: 0 1.5rem;
           display: flex;
           align-items: center;
+          outline: none;
         }
 
         :hover {
@@ -108,7 +109,7 @@ export const Nav = styled.nav`
       }
 
       a {
-        padding-right: .2rem;
+        padding-right: 0.2rem;
       }
 
       .dropdown {
@@ -132,15 +133,14 @@ export const Nav = styled.nav`
       }
     }
   }
-`
+`;
 
 export const GPACalculators = styled.div`
   margin: 20px auto;
   width: 80%;
   display: flex;
   justify-content: space-between;
-`
-
+`;
 
 export const Calculator = styled.div`
   display: flex;
@@ -156,23 +156,24 @@ export const Calculator = styled.div`
 
       td {
         width: 33%;
-        
-        input, select {
-          padding: .5rem 1rem;
+
+        input,
+        select {
+          padding: 0.5rem 1rem;
           border: none;
           outline: none;
         }
-        
-        input[name="name"] {
+
+        input[name='name'] {
           width: 95%;
         }
 
-        input[name="credits"] {
+        input[name='credits'] {
           width: 40%;
           text-align: center;
         }
 
-        input[name="total"] {
+        input[name='total'] {
           width: 40%;
           text-align: center;
         }
@@ -183,30 +184,30 @@ export const Calculator = styled.div`
       }
     }
   }
-  
+
   .button-group {
     margin-top: 20px;
     display: flex;
     width: 410px;
     justify-content: space-between;
   }
-  
+
   .button {
     display: inline;
     width: 200px;
     background-color: cornflowerblue;
     color: #fff;
     border-radius: 5px;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     text-align: center;
     margin-bottom: 20px;
     cursor: pointer;
   }
-  
+
   .calculate-gpa {
     background-color: lightcoral !important;
   }
-  
+
   .calculated-gpa {
     width: 100px;
     height: 100px;
@@ -219,31 +220,31 @@ export const Calculator = styled.div`
     font-weight: 600;
     font-size: 1.25rem;
   }
-`
+`;
 
 export const TargetGPACalculatorContainer = styled.div`
   .form {
     background-color: lightseagreen;
     color: #fff;
-    padding: .5rem 1rem;
-    
+    padding: 0.5rem 1rem;
+
     .field {
       label {
         display: block;
       }
       input {
         border: none;
-        padding: .5rem;
-        margin: .5rem 0;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
         outline: none;
       }
-      
+
       > div {
-        padding: .5rem 0;
+        padding: 0.5rem 0;
         text-align: center;
         font-size: 1.5rem;
         font-weight: 600;
       }
     }
   }
-`
+`;

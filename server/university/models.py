@@ -62,7 +62,6 @@ class Event(models.Model):
     additional_info = models.CharField(max_length=255, null=True)
 
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
-    users = models.ManyToManyField(get_user_model())
 
 
 class Deadline(models.Model):

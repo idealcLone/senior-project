@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RadioGroup = styled.ul`
   margin: 75px 0 35px 250px;
@@ -6,7 +6,7 @@ export const RadioGroup = styled.ul`
 
   display: inline-flex;
   flex-direction: row;
-`
+`;
 
 export const RadioItem = styled.li`
   width: 200px;
@@ -17,8 +17,8 @@ export const RadioItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  color: ${props => props.selected ? '#fff' : '#000'};
-  background-color: ${props => props.selected ? '#1A5DAB' : '#fff'};
+  color: ${(props) => (props.selected ? '#fff' : '#000')};
+  background-color: ${(props) => (props.selected ? '#1A5DAB' : '#fff')};
 
   border-right: none;
 
@@ -29,7 +29,7 @@ export const RadioItem = styled.li`
   :hover {
     cursor: pointer;
   }
-`
+`;
 
 export const List = styled.ul`
   list-style: none;
@@ -37,20 +37,20 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   padding-bottom: 50px;
-`
+`;
 
 export const ListItem = styled.li`
   width: 30%;
   height: 80px;
-  
+
   cursor: pointer;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   color: #000000;
 
   border: 1px solid #000000;
@@ -59,7 +59,7 @@ export const ListItem = styled.li`
   :last-child {
     border-bottom: 1px solid #000000;
   }
-`
+`;
 
 export const NewButton = styled.div`
   padding: 10px 15px;
@@ -69,7 +69,7 @@ export const NewButton = styled.div`
   cursor: pointer;
   background-color: green;
   color: #ffffff;
-`
+`;
 
 export const Dialog = styled.div`
   position: absolute;
@@ -84,4 +84,4 @@ export const Dialog = styled.div`
   align-items: center;
   overflow: hidden;
   padding-bottom: 50px;
-`
+`;

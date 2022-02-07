@@ -1,7 +1,7 @@
-import React from "react";
-import { GRADES } from "../consts/data";
-import { Calculator, GPACalculators } from "./styles";
-import { TargetGPACalculator } from "./TargetGPACalculator";
+import React from 'react';
+import { GRADES } from '../consts/data';
+import { Calculator, GPACalculators } from './styles';
+import { TargetGPACalculator } from './TargetGPACalculator';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -9,99 +9,104 @@ const COURSE_INIT = {
   id: 0,
   name: '',
   credits: 0,
-  grade: 4,
-}
+  grade: 4
+};
 
 const CUSTOM_DATA_INIT = {
   id: 0,
   name: '',
   credits: 0,
-  total: 0,
-}
+  total: 0
+};
 
 export const GPACalculator = () => {
-  const [courses, setCourses] = React.useState(JSON.parse(localStorage.getItem('courses')) || [COURSE_INIT])
-  const [gpa, setGpa] = React.useState(0)
-  const [customData, setCustomData] = React.useState(JSON.parse(localStorage.getItem('customData')) || [])
+  const [courses, setCourses] = React.useState(
+    JSON.parse(localStorage.getItem('courses')) || [COURSE_INIT]
+  );
+  const [gpa, setGpa] = React.useState(0);
+  const [customData, setCustomData] = React.useState(
+    JSON.parse(localStorage.getItem('customData')) || []
+  );
 
   const onCalculate = () => {
-    let totalPoints = 0, creditsNum = 0
+    let totalPoints = 0,
+      creditsNum = 0;
     courses.map((course) => {
-      creditsNum += +course.credits
-      totalPoints += (+course.credits * +course.grade)
-    })
-    customData.map(data => {
-      creditsNum += +data.credits
-      totalPoints += (+data.total * +data.credits)
-    })
-    setGpa(totalPoints / creditsNum)
+      creditsNum += +course.credits;
+      totalPoints += +course.credits * +course.grade;
+    });
+    customData.map((data) => {
+      creditsNum += +data.credits;
+      totalPoints += +data.total * +data.credits;
+    });
+    setGpa(totalPoints / creditsNum);
 
-    localStorage.setItem('courses', JSON.stringify(courses))
-    localStorage.setItem('customData', JSON.stringify(customData))
-  }
+    localStorage.setItem('courses', JSON.stringify(courses));
+    localStorage.setItem('customData', JSON.stringify(customData));
+  };
 
   React.useEffect(() => {
-    onCalculate()
-  }, [courses, customData])
+    onCalculate();
+  }, [courses, customData]);
 
   const handleChange = (e, id) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    const index = courses.findIndex(course => course.id === id)
+    const index = courses.findIndex((course) => course.id === id);
 
     setCourses([
       ...courses.slice(0, index),
       {
         ...courses[index],
-        [name]: value,
+        [name]: value
       },
       ...courses.slice(index + 1)
-    ])
-  }
+    ]);
+  };
 
   const handleCustomDataChange = (e, id) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
-    const index = courses.findIndex(course => course.id === id)
+    const index = courses.findIndex((course) => course.id === id);
 
     setCustomData([
       ...customData.slice(0, index),
       {
         ...customData[index],
-        [name]: value,
+        [name]: value
       },
       ...customData.slice(index + 1)
-    ])
-  }
+    ]);
+  };
 
   const onAddCourse = () => {
-    setCourses([...courses, {
-      ...COURSE_INIT,
-      id: uuidv4(),
-    }])
-  }
+    setCourses([
+      ...courses,
+      {
+        ...COURSE_INIT,
+        id: uuidv4()
+      }
+    ]);
+  };
 
   const onAddCustomData = () => {
-    setCustomData([...customData, {
-      ...CUSTOM_DATA_INIT,
-      id: uuidv4(),
-    }])
-  }
+    setCustomData([
+      ...customData,
+      {
+        ...CUSTOM_DATA_INIT,
+        id: uuidv4()
+      }
+    ]);
+  };
 
   const onCourseDeleteClick = (id) => {
-    const index = courses.findIndex(course => course.id === id)
-    setCourses([
-      ...courses.slice(0, index),
-      ...courses.slice(index + 1),
-    ])
-  }
+    const index = courses.findIndex((course) => course.id === id);
+    setCourses([...courses.slice(0, index), ...courses.slice(index + 1)]);
+  };
 
   const onCustomDataDeleteClick = (id) => {
-    setCustomData([
-      ...customData.slice(0, id),
-      ...customData.slice(id + 1)
-    ])
-  }
+    setCustomData([...customData.slice(0, id), ...customData.slice(id + 1)]);
+  };
 
   return (
     <GPACalculators>
@@ -112,36 +117,46 @@ export const GPACalculator = () => {
               <th>Course Name</th>
               <th>Credits Count</th>
               <th>Grade</th>
-              <th/>
+              <th />
             </tr>
           </thead>
           <tbody>
-            {
-              courses.map(course =>
-                <tr key={course.id}>
-                  <td>
-                    <input type="text" name={'name'} value={course.name} onChange={(e) => handleChange(e, course.id)}/>
-                  </td>
-                  <td>
-                    <input type="text" name="credits" id="credits" value={course.credits}
-                           onChange={(e) => handleChange(e, course.id)}/>
-                  </td>
-                  <td>
-                    <select name="grade" id="grade" value={course.grade} onChange={(e) => handleChange(e, course.id)}>
-                      {
-                        GRADES.map(grade =>
-                          <option value={grade.points}>{grade.letter}</option>
-                        )
-                      }
-                    </select>
-                  </td>
-                  <td className={'delete-data'} onClick={() => onCourseDeleteClick(course.id)}><i
-                    className="fa fa-trash"
-                    aria-hidden="true"/>
-                  </td>
-                </tr>
-              )
-            }
+            {courses.map((course) => (
+              <tr key={course.id}>
+                <td>
+                  <input
+                    type="text"
+                    name={'name'}
+                    value={course.name}
+                    onChange={(e) => handleChange(e, course.id)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    name="credits"
+                    id="credits"
+                    value={course.credits}
+                    onChange={(e) => handleChange(e, course.id)}
+                  />
+                </td>
+                <td>
+                  <select
+                    name="grade"
+                    id="grade"
+                    value={course.grade}
+                    onChange={(e) => handleChange(e, course.id)}
+                  >
+                    {GRADES.map((grade) => (
+                      <option value={grade.points}>{grade.letter}</option>
+                    ))}
+                  </select>
+                </td>
+                <td className={'delete-data'} onClick={() => onCourseDeleteClick(course.id)}>
+                  <i className="fa fa-trash" aria-hidden="true" />
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
         {customData.length > 0 && (
@@ -151,30 +166,42 @@ export const GPACalculator = () => {
                 <th>Name</th>
                 <th>Credits Count</th>
                 <th>Total Grade</th>
-                <th/>
+                <th />
               </tr>
             </thead>
             <tbody>
-              {
-                customData.map(data =>
-                  <tr key={data.id}>
-                    <td>
-                      <input type="text" name={'name'} value={data.name}
-                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
-                    </td>
-                    <td>
-                      <input type="text" name="credits" id="credits" value={data.credits}
-                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
-                    </td>
-                    <td>
-                      <input type="text" name={'total'} value={data.total}
-                             onChange={(e) => handleCustomDataChange(e, data.id)}/>
-                    </td>
-                    <td className={'delete-data'} onClick={() => onCustomDataDeleteClick(data.id)}><i
-                      className="fa fa-trash" aria-hidden="true"/></td>
-                  </tr>
-                )
-              }
+              {customData.map((data) => (
+                <tr key={data.id}>
+                  <td>
+                    <input
+                      type="text"
+                      name={'name'}
+                      value={data.name}
+                      onChange={(e) => handleCustomDataChange(e, data.id)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="credits"
+                      id="credits"
+                      value={data.credits}
+                      onChange={(e) => handleCustomDataChange(e, data.id)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name={'total'}
+                      value={data.total}
+                      onChange={(e) => handleCustomDataChange(e, data.id)}
+                    />
+                  </td>
+                  <td className={'delete-data'} onClick={() => onCustomDataDeleteClick(data.id)}>
+                    <i className="fa fa-trash" aria-hidden="true" />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         )}
@@ -186,11 +213,9 @@ export const GPACalculator = () => {
             Add Custom Data
           </div>
         </div>
-        <div className="calculated-gpa">
-          {gpa ? gpa.toFixed(2) : 'GPA'}
-        </div>
+        <div className="calculated-gpa">{gpa ? gpa.toFixed(2) : 'GPA'}</div>
       </Calculator>
-      <TargetGPACalculator/>
+      <TargetGPACalculator />
     </GPACalculators>
-  )
-}
+  );
+};

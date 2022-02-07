@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Mask = styled.div`
   z-index: 1;
@@ -8,7 +8,7 @@ export const Mask = styled.div`
   width: 100%;
   height: 100vh;
   background-color: inherit;
-`
+`;
 
 export const SearchBar = styled.input`
   display: flex;
@@ -17,4 +17,4 @@ export const SearchBar = styled.input`
   align-items: center;
   border-radius: 25px;
   border: 1px solid #000;
-`
+`;

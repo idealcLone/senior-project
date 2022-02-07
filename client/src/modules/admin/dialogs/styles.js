@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Form = styled.form`
   position: relative;
@@ -76,41 +76,41 @@ export const Form = styled.form`
         }
 
         textarea {
-          padding: .5rem;
+          padding: 0.5rem;
         }
       }
-      
+
       .syllabus-field {
         padding-right: 40px;
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        
+
         label {
           flex: 100%;
         }
-        
+
         .submit-syllabus {
-          padding: .5rem 1rem;
+          padding: 0.5rem 1rem;
           background-color: cornflowerblue;
           color: #fff;
           cursor: pointer;
           border-radius: 5px;
           display: flex;
           align-items: center;
-        } 
+        }
       }
     }
   }
-`
+`;
 
 export const CheckboxGroup = styled.ul`
   list-style: none;
 
   display: inline-flex;
   flex-direction: row;
-`
+`;
 
 export const CheckboxItem = styled.li`
   width: 100px;
@@ -121,8 +121,8 @@ export const CheckboxItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  color: ${props => props.checked ? '#fff' : '#000'};
-  background-color: ${props => props.checked ? '#1A5DAB' : '#fff'};
+  color: ${(props) => (props.checked ? '#fff' : '#000')};
+  background-color: ${(props) => (props.checked ? '#1A5DAB' : '#fff')};
 
   border-right: none;
 
@@ -133,7 +133,7 @@ export const CheckboxItem = styled.li`
   :hover {
     cursor: pointer;
   }
-`
+`;
 
 export const ButtonGroup = styled.div`
   position: absolute;
@@ -145,12 +145,12 @@ export const ButtonGroup = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 210px;
-`
+`;
 
 export const Button = styled.button`
   width: 100px;
-  color: ${props => props.delete ? '#ffffff' : '#000000'};
-  background-color: ${props => props.delete ? 'red' : '#F6F6F6'};
+  color: ${(props) => (props.delete ? '#ffffff' : '#000000')};
+  background-color: ${(props) => (props.delete ? 'red' : '#F6F6F6')};
 
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.5);
@@ -161,4 +161,4 @@ export const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-`
+`;

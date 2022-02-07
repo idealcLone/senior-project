@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import Image1 from '../media/img/1.png'
-import Image2 from '../media/img/2.png'
-import Image3 from '../media/img/3.png'
-import { Link } from "react-router-dom";
-import { GPALink } from "./styles";
+import Image1 from '../media/img/1.png';
+import Image2 from '../media/img/2.png';
+import Image3 from '../media/img/3.png';
+import { Link } from 'react-router-dom';
+import { GPALink } from './styles';
 
 export const Home = () => {
   return (
@@ -20,23 +20,39 @@ export const Home = () => {
       <div className="features">
         <div className="features__container container">
           <div className="features__item">
-            <div className="item-icon"><i className="fas fa-search fa-2x"/></div>
-            <div className="item-name">Browse <br/> Courses</div>
+            <div className="item-icon">
+              <i className="fas fa-search fa-2x" />
+            </div>
+            <div className="item-name">
+              Browse <br /> Courses
+            </div>
           </div>
           <div className="features__item">
-            <div className="item-icon"><img src={Image1} alt=""/></div>
-            <div className="item-name">Practice <br/> Registration</div>
+            <div className="item-icon">
+              <img src={Image1} alt="" />
+            </div>
+            <div className="item-name">
+              Practice <br /> Registration
+            </div>
           </div>
           <div className="features__item">
-            <div className="item-icon"><img src={Image2} alt=""/></div>
-            <div className="item-name">Make your own <br/> Schedule</div>
+            <div className="item-icon">
+              <img src={Image2} alt="" />
+            </div>
+            <div className="item-name">
+              Make your own <br /> Schedule
+            </div>
           </div>
           <div className="features__item">
-            <div className="item-icon"><img src={Image3} alt=""/></div>
-            <div className="item-name">Plan <br/> Events</div>
+            <div className="item-icon">
+              <img src={Image3} alt="" />
+            </div>
+            <div className="item-name">
+              Plan <br /> Events
+            </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

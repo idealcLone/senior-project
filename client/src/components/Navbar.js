@@ -1,63 +1,63 @@
-import React from 'react'
+import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../store/actions/UserActions";
-import { getUser } from "../store/selectors/UserSelectors";
-import { Link } from "react-router-dom";
-import { Nav } from "./styles";
-import { MoreIcon } from "../utils/icons";
-import { useHistory } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../store/actions/UserActions';
+import { getUser } from '../store/selectors/UserSelectors';
+import { Link } from 'react-router-dom';
+import { Nav } from './styles';
+import { MoreIcon } from '../utils/icons';
+import { useHistory } from 'react-router';
 
 const routes = [
   {
     link: '/courses',
-    name: 'Courses',
+    name: 'Courses'
   },
   {
     link: '/events',
-    name: 'Events',
+    name: 'Events'
   },
   {
     link: '/schedule',
-    name: 'Schedule Maker',
+    name: 'Schedule Maker'
   },
   {
     link: '/registration',
-    name: 'Registration Training',
+    name: 'Registration Training'
   },
   {
     link: '/faq',
-    name: 'FAQ',
-  },
-]
+    name: 'FAQ'
+  }
+];
 
 const dropdown = [
   {
     name: 'Edit Profile',
-    path: '/profile',
+    path: '/profile'
   },
   {
     name: 'My Schedule',
-    path: '/schedule',
+    path: '/schedule'
   },
   {
     name: 'My Calendar',
-    path: '/calendar',
-  },
-]
+    path: '/calendar'
+  }
+];
 
 export const Navbar = () => {
-  const history = useHistory()
-  const dispatch = useDispatch()
-  const token = localStorage.getItem('token')
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('token');
 
-  const user = useSelector(getUser)
+  const user = useSelector(getUser);
 
-  const [showDropdown, setShowDropdown] = React.useState(false)
+  const [showDropdown, setShowDropdown] = React.useState(false);
 
   const handleLogout = () => {
-    dispatch(userLogout())
-  }
+    dispatch(userLogout());
+  };
 
   return (
     <Nav>
@@ -66,30 +66,26 @@ export const Navbar = () => {
           Brand
         </div>
         <ul>
-          {
-            routes.map(route =>
-              <li key={route.link}>
-                <Link to={route.link}>{route.name}</Link>
-              </li>
-            )
-          }
+          {routes.map((route) => (
+            <li key={route.link}>
+              <Link to={route.link}>{route.name}</Link>
+            </li>
+          ))}
         </ul>
         <div className="navbar-auth">
           {token && (
             <>
               <div onClick={() => setShowDropdown(!showDropdown)}>
                 <span>My profile</span>
-                <MoreIcon/>
+                <MoreIcon />
               </div>
               {showDropdown && (
                 <ul className="dropdown" onClick={() => setShowDropdown(false)}>
-                  {
-                    dropdown.map(option =>
-                      <li key={option.path} onClick={() => history.push(option.path)}>
-                        <Link to={option.path}>{option.name}</Link>
-                      </li>
-                    )
-                  }
+                  {dropdown.map((option) => (
+                    <li key={option.path} onClick={() => history.push(option.path)}>
+                      <Link to={option.path}>{option.name}</Link>
+                    </li>
+                  ))}
                   {user.is_admin && (
                     <li key={'/admin'}>
                       <Link to={'/admin'}>Admin Page</Link>
@@ -102,12 +98,16 @@ export const Navbar = () => {
           )}
           {!token && (
             <div>
-              <Link to="/login" className="btn">LOG IN</Link>
-              <Link to="/signup" className="btn btn-dark">SIGN UP</Link>
+              <Link to="/login" className="btn">
+                LOG IN
+              </Link>
+              <Link to="/signup" className="btn btn-dark">
+                SIGN UP
+              </Link>
             </div>
           )}
         </div>
       </div>
     </Nav>
-  )
-}
+  );
+};

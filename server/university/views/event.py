@@ -26,6 +26,8 @@ class EventCreateView(generics.CreateAPIView):
         except ObjectDoesNotExist:
             club = Club.objects.create(name=data['club'])
 
+        request.data._mutable = True
+
         request.data['club'] = club.id
 
         return super().create(request, *args, **kwargs)

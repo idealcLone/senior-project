@@ -1,11 +1,10 @@
-import React from "react";
-import { CourseTable } from "./styles";
-import { Spinner } from "../../components/Spinner";
+import React from 'react';
+import { CourseTable } from './styles';
+import { Spinner } from '../../components/Spinner';
 
 export const CoursesList = ({ courses, loading }) => {
-
   if (loading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   return (
@@ -19,17 +18,15 @@ export const CoursesList = ({ courses, loading }) => {
         </tr>
       </thead>
       <tbody>
-        {
-          courses.map(course =>
-            <tr key={course.id}>
-              <td>{course.code}</td>
-              <td>{course.name}</td>
-              <td>{course.instructors.join(', ')}</td>
-              <td>{course.terms}</td>
-            </tr>
-          )
-        }
+        {courses.map((course) => (
+          <tr key={course.id}>
+            <td>{course.code}</td>
+            <td>{course.name}</td>
+            <td>{course.instructors.join(', ')}</td>
+            <td>{course.terms}</td>
+          </tr>
+        ))}
       </tbody>
     </CourseTable>
-  )
-}
+  );
+};

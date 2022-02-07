@@ -1,71 +1,63 @@
-import React from "react";
-import { AdminContext } from "../context";
-import { Button, ButtonGroup, Form } from "./styles";
-import api from "../../../utils/api";
-import { Spinner } from "../../../components/Spinner";
+import React from 'react';
+import { AdminContext } from '../context';
+import { Button, ButtonGroup, Form } from './styles';
+import api from '../../../utils/api';
+import { Spinner } from '../../../components/Spinner';
 
 export const FAQDialog = ({ faqId, setOpen }) => {
-  const [data, setData] = React.useContext(AdminContext)
+  const [data, setData] = React.useContext(AdminContext);
 
-  const [faqInfo, setFaqInfo] = React.useState({})
-  const [loading, setLoading] = React.useState(false)
+  const [faqInfo, setFaqInfo] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (Number.isInteger(faqId)) {
-      setLoading(true)
-      api
-        .get(`/faq/${faqId}`)
-        .then(res => {
-          setLoading(false)
-          setFaqInfo({ ...res.data })
-        })
+      setLoading(true);
+      api.get(`/faq/${faqId}`).then((res) => {
+        setLoading(false);
+        setFaqInfo({ ...res.data });
+      });
     }
-  }, [faqId])
+  }, [faqId]);
 
   if (loading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     setFaqInfo({
       ...faqInfo,
-      [name]: value,
-    })
-  }
+      [name]: value
+    });
+  };
 
   const handleDeleteButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    api
-      .delete(`/faq/${faqInfo.id}`)
-      .then(() => {
-        setOpen(false)
-        setData(data.filter(item => item.id !== faqId))
-      })
-  }
+    api.delete(`/faq/${faqInfo.id}`).then(() => {
+      setOpen(false);
+      setData(data.filter((item) => item.id !== faqId));
+    });
+  };
 
   const handleSaveButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (Number.isInteger(faqId)) {
-      api
-        .put(`/faq/update/${faqInfo.id}/`, { ...faqInfo })
-        .then((res) => {
-          setOpen(false)
-          const index = data.findIndex(item => item.id === faqId)
-          setData([...data.slice(0, index), res.data, ...data.slice(index + 1)])
-        })
+      api.put(`/faq/update/${faqInfo.id}/`, { ...faqInfo }).then((res) => {
+        setOpen(false);
+        const index = data.findIndex((item) => item.id === faqId);
+        setData([...data.slice(0, index), res.data, ...data.slice(index + 1)]);
+      });
     } else {
-      api
-        .post(`/faq/create/`, { ...faqInfo })
-        .then((res) => {
-          setFaqInfo({})
-          setData([...data, res.data])
-        })
+      api.post(`/faq/create/`, { ...faqInfo }).then((res) => {
+        setFaqInfo({});
+        setData([...data, res.data]);
+      });
     }
-  }
+  };
 
   return (
     <Form>
@@ -97,9 +89,15 @@ export const FAQDialog = ({ faqId, setOpen }) => {
         </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>
-        <Button save onClick={handleSaveButton}>Save</Button>
-        {Number.isInteger(faqId) && <Button delete onClick={handleDeleteButton}>Delete</Button>}
+        <Button save onClick={handleSaveButton}>
+          Save
+        </Button>
+        {Number.isInteger(faqId) && (
+          <Button delete onClick={handleDeleteButton}>
+            Delete
+          </Button>
+        )}
       </ButtonGroup>
     </Form>
-  )
-}
+  );
+};

@@ -1,18 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CourseTable = styled.table`
   width: 80%;
   margin: 0 auto;
-  
+
   th {
-    border: .5px solid #000;
+    border: 0.5px solid #000;
   }
-  
+
   td {
-    border: .5px solid #000;
+    border: 0.5px solid #000;
     border-top: none;
   }
-`
+`;
 
 export const Filters = styled.div`
   padding-top: 50px;
@@ -30,7 +30,7 @@ export const Filters = styled.div`
     display: flex;
     justify-content: space-between;
   }
-`
+`;
 
 export const Select = styled.select`
   width: 200px;
@@ -39,7 +39,7 @@ export const Select = styled.select`
   option {
     height: 30px;
   }
-`
+`;
 
 export const ShowButton = styled.div`
   width: 200px;
@@ -50,4 +50,4 @@ export const ShowButton = styled.div`
   padding: 15px 0;
   border-radius: 5px;
   cursor: pointer;
-`
+`;

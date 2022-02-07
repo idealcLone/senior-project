@@ -1,95 +1,90 @@
-import React from "react";
-import { AdminContext } from "../context";
-import { Button, ButtonGroup, Form } from "./styles";
-import api from "../../../utils/api";
-import { Spinner } from "../../../components/Spinner";
+import React from 'react';
+import { AdminContext } from '../context';
+import { Button, ButtonGroup, Form } from './styles';
+import api from '../../../utils/api';
+import { Spinner } from '../../../components/Spinner';
 
 export const EventDialog = ({ eventId, setOpen }) => {
-  const [data, setData] = React.useContext(AdminContext)
+  const [data, setData] = React.useContext(AdminContext);
 
   const [eventInfo, setEventInfo] = React.useState({
-    start_time: '09:00',
-  })
-  const [loading, setLoading] = React.useState(false)
+    start_time: '09:00'
+  });
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (Number.isInteger(eventId)) {
-      setLoading(true)
-      api
-        .get(`/events/${eventId}`)
-        .then(res => {
-          setLoading(false)
-          setEventInfo({ ...res.data })
-        })
+      setLoading(true);
+      api.get(`/events/${eventId}`).then((res) => {
+        setLoading(false);
+        setEventInfo({ ...res.data });
+      });
     }
-  }, [eventId])
+  }, [eventId]);
 
   if (loading) {
-    return <Spinner/>
+    return <Spinner />;
   }
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
 
     if (e.target.files && e.target.files[0]) {
       setEventInfo({
         ...eventInfo,
         image: e.target.files[0]
-      })
+      });
     } else {
       setEventInfo({
         ...eventInfo,
-        [name]: value,
-      })
+        [name]: value
+      });
     }
-  }
+  };
 
   const handleDeleteButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     api
       .delete(`/events/${eventId}`)
       .then(() => {
-        setOpen(false)
-        setData(data.filter(item => item.id !== eventId))
+        setOpen(false);
+        setData(data.filter((item) => item.id !== eventId));
       })
-      .catch(err => {
-      })
-  }
+      .catch((err) => {});
+  };
 
   const handleSaveButton = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const formData = new FormData()
+    const formData = new FormData();
 
-    Object.keys(eventInfo).map(key => {
-      const value = eventInfo[key]
-      formData.append(key, value)
-    })
+    Object.keys(eventInfo).map((key) => {
+      const value = eventInfo[key];
+      formData.append(key, value);
+    });
 
     if (Number.isInteger(eventId)) {
       api
         .put(`/events/update/${eventInfo.id}/`, formData)
         .then((res) => {
-          setOpen(false)
-          const index = data.findIndex(item => item.id === eventId)
-          setData([...data.slice(0, index), res.data, ...data.slice(index + 1)])
+          setOpen(false);
+          const index = data.findIndex((item) => item.id === eventId);
+          setData([...data.slice(0, index), res.data, ...data.slice(index + 1)]);
         })
-        .catch(() => {
-        })
+        .catch(() => {});
     } else {
       api
         .post(`/events/create/`, formData)
         .then((res) => {
           setEventInfo({
-            start_time: '09:00',
-          })
-          setData([...data, res.data])
+            start_time: '09:00'
+          });
+          setData([...data, res.data]);
         })
-        .catch(() => {
-        })
+        .catch(() => {});
     }
-  }
+  };
 
   return (
     <Form>
@@ -97,9 +92,15 @@ export const EventDialog = ({ eventId, setOpen }) => {
       <div className={'dialog-body'}>
         <div className={'image-field'}>
           {eventInfo.image ? (
-            <img src={eventInfo.image} alt=""/>
+            <img src={eventInfo.image} alt="" />
           ) : (
-            <input type="file" id="image" name="image" accept="image/*" onChange={handleInputChange}/>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleInputChange}
+            />
           )}
         </div>
         <div className="form-data">
@@ -135,7 +136,9 @@ export const EventDialog = ({ eventId, setOpen }) => {
             />
           </div>
           <div className="field">
-            <label className={'bold'} htmlFor={'start_time'}>Start time</label>
+            <label className={'bold'} htmlFor={'start_time'}>
+              Start time
+            </label>
             <input
               type="time"
               name={'start_time'}
@@ -144,7 +147,9 @@ export const EventDialog = ({ eventId, setOpen }) => {
             />
           </div>
           <div className="field">
-            <label className={'bold'} htmlFor={'start_date'}>Start date</label>
+            <label className={'bold'} htmlFor={'start_date'}>
+              Start date
+            </label>
             <input
               type="date"
               name={'start_date'}
@@ -176,9 +181,15 @@ export const EventDialog = ({ eventId, setOpen }) => {
         </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>
-        <Button save onClick={handleSaveButton}>Save</Button>
-        {Number.isInteger(eventId) && <Button delete onClick={handleDeleteButton}>Delete</Button>}
+        <Button save onClick={handleSaveButton}>
+          Save
+        </Button>
+        {Number.isInteger(eventId) && (
+          <Button delete onClick={handleDeleteButton}>
+            Delete
+          </Button>
+        )}
       </ButtonGroup>
     </Form>
-  )
-}
+  );
+};
