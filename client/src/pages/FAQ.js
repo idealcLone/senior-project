@@ -10,10 +10,13 @@ export const FAQ = () => {
   const [searchText, setSearchText] = React.useState("");
 
   React.useEffect(() => {
-    api.get("faq/all/").then((res) => {
-      setFaqs(res.data);
-      setData(res.data);
-    });
+    api
+      .get("faq/all/")
+      .then((res) => {
+        setFaqs(res.data);
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   React.useEffect(() => {

@@ -8,6 +8,8 @@ class Food(models.Model):
     price = models.IntegerField()
     image = models.ImageField(upload_to='foods/')
 
+    restaurant =
+
     is_available = models.BooleanField(default=True)
 
 

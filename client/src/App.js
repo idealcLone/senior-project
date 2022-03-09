@@ -41,7 +41,7 @@ function App() {
             })
         : setStatus(true);
     }
-  }, [token]);
+  }, [dispatch, token]);
 
   return (
     <>
