@@ -532,3 +532,11 @@ footer .footer__container .links a {
   margin-bottom: 25px;
   font-size: 24px;
 }
+
+.imgContainer {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}

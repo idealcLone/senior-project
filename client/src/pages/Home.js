@@ -12,6 +12,9 @@ export const Home = () => {
       <GPALink>
         <Link to={"/gpa-calculator"}>GPA Calculator</Link>
       </GPALink>
+      <GPALink>
+        <Link to={"/delivery"}>Delivery</Link>
+      </GPALink>
       <div className="quote">
         <div className="quote__container container">
           <h1>SAVE UP YOUR TIME USING ALL NU SERVICES ON ONE WEBSITE</h1>

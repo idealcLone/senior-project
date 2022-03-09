@@ -18,3 +18,55 @@ export const SearchBar = styled.input`
   border-radius: 25px;
   border: 1px solid #000;
 `;
+export const MainGrid = styled.div`
+  max-width: 80%;
+  margin: 50px auto;
+
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const GridItem = styled.div`
+  max-width: 350px;
+  flex: 33%;
+  background: #fff;
+  text-align: center;
+  padding-bottom: 50px;
+  margin-right: 50px;
+  cursor: pointer;
+
+  img {
+    width: 300px;
+  }
+`;
+
+export const Filters = styled.div`
+  padding-top: 50px;
+  padding-bottom: 30px;
+
+  width: 80%;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .date-filters {
+    display: flex;
+    align-items: center;
+
+    > div {
+      padding-right: 10px;
+    }
+
+    input[type="date"] {
+      width: 200px;
+      height: 30px;
+      padding: 15px 10px;
+    }
+
+    .separator {
+      font-weight: 700;
+    }
+  }
+`;

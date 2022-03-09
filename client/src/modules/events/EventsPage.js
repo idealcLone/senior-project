@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../utils/api";
-import { Filters, Switch, SwitchLabel, SwitchWrapper } from "./styles";
-import { SearchBar } from "../../styles";
+import { Switch, SwitchLabel, SwitchWrapper } from "./styles";
+import { Filters, SearchBar } from "../../styles";
 import { EventsGrid } from "./EventsGrid";
 import { Spinner } from "../../components/Spinner";
 import { EventsCalendar } from "./EventsCalendar";

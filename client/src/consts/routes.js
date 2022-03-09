@@ -11,6 +11,7 @@ import { EventsPage } from "../modules/events/EventsPage";
 import { EventPage } from "../modules/events/EventPage";
 import { MyCalendar } from "../modules/user/MyCalendar";
 import { GPACalculator } from "../components/GPACalculator";
+import DeliveryPage from "../modules/delivery/DeliveryPage";
 
 export const routes = [
   {
@@ -70,5 +71,10 @@ export const routes = [
     path: "/events/:id",
     name: "Event",
     component: EventPage,
+  },
+  {
+    path: "/delivery",
+    name: "Delivery",
+    component: DeliveryPage,
   },
 ];
