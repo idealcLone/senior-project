@@ -1,0 +1,36 @@
+.container {
+  margin: 0 auto;
+  padding: 100px 200px;
+  text-align: center;
+  flex: 1;
+
+  h1 {
+    color: #515953F5;
+    font-size: 96px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+.features {
+  margin-top: 200px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+
+  li {
+    width: 200px;
+    text-align: center;
+
+    h2 {
+      margin-top: 55px;
+      font-size: 40px;
+      font-weight: 500;
+    }
+  }
+
+  img {
+    width: 110px;
+    height: 110px;
+  }
+}

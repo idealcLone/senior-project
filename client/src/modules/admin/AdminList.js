@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { List, ListItem } from './styles';
-import api from '../../utils/api';
-import { AdminContext } from './context';
-import { Spinner } from '../../components/Spinner';
+import { List, ListItem } from "./styles";
+import api from "../../utils/api";
+import { AdminContext } from "./context";
+import { Spinner } from "../../components/Spinner";
 
 export const AdminList = ({ selected, setOpenDialog }) => {
   const [loading, setLoading] = React.useState(false);

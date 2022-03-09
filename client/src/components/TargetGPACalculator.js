@@ -1,12 +1,12 @@
-import React from 'react';
-import { TargetGPACalculatorContainer } from './styles';
+import React from "react";
+import { TargetGPACalculatorContainer } from "./styles";
 
 export const TargetGPACalculator = () => {
   const [data, setData] = React.useState({
     currentGpa: 0,
     targetGpa: 0,
     currentCredits: 0,
-    additionalCredits: 0
+    additionalCredits: 0,
   });
   const [resultGpa, setResultGpa] = React.useState(0);
 
@@ -24,7 +24,7 @@ export const TargetGPACalculator = () => {
 
     setData({
       ...data,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -74,7 +74,7 @@ export const TargetGPACalculator = () => {
         {!isNaN(resultGpa) && (
           <div className="field">
             <label htmlFor="result-gpa">Needed GPA</label>
-            <div>{resultGpa > 4.0 ? 'Impossible' : resultGpa.toFixed(2)}</div>
+            <div>{resultGpa > 4.0 ? "Impossible" : resultGpa.toFixed(2)}</div>
           </div>
         )}
       </div>

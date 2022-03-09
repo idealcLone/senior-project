@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
   width: 30%;
@@ -99,7 +99,7 @@ export const DeadlineDialog = styled.div`
     }
 
     textarea,
-    input[type='text'] {
+    input[type="text"] {
       width: 350px;
     }
 

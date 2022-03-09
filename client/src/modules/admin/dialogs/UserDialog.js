@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import { Button, ButtonGroup, Form } from './styles';
-import { MAJORS } from '../../../consts/data';
-import api from '../../../utils/api';
-import { AdminContext } from '../context';
-import { Spinner } from '../../../components/Spinner';
-import { useDispatch } from 'react-redux';
-import { EDIT_USER_INFO } from '../../../store/types/UserTypes';
+import { Button, ButtonGroup, Form } from "./styles";
+import { MAJORS } from "../../../consts/data";
+import api from "../../../utils/api";
+import { AdminContext } from "../context";
+import { Spinner } from "../../../components/Spinner";
+import { useDispatch } from "react-redux";
+import { EDIT_USER_INFO } from "../../../store/types/UserTypes";
 
 export const UserDialog = ({ userId, setOpen }) => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export const UserDialog = ({ userId, setOpen }) => {
     const { name, value } = e.target;
     setUserInfo({
       ...userInfo,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -57,7 +57,7 @@ export const UserDialog = ({ userId, setOpen }) => {
         setData([...data.slice(0, index), res.data, ...data.slice(index + 1)]);
         dispatch({
           type: EDIT_USER_INFO,
-          payload: res.data
+          payload: res.data,
         });
       });
     } else {
@@ -70,16 +70,16 @@ export const UserDialog = ({ userId, setOpen }) => {
 
   return (
     <Form>
-      <p className={'dialog-header'}>Courses</p>
-      <div className={'dialog-body'}>
+      <p className={"dialog-header"}>Courses</p>
+      <div className={"dialog-body"}>
         <div className="form-data">
           <div className="field">
             <label htmlFor="email">Email</label>
             <input
-              id={'email'}
-              name={'email'}
+              id={"email"}
+              name={"email"}
               type="text"
-              value={userInfo.email || ''}
+              value={userInfo.email || ""}
               onChange={handleInputChange}
             />
           </div>
@@ -87,7 +87,9 @@ export const UserDialog = ({ userId, setOpen }) => {
           <div className="field">
             <label htmlFor="major">Major</label>
             <select name="major" id="major" onChange={handleInputChange}>
-              <option value={userInfo.major}>{userInfo.major || 'Not selected'}</option>
+              <option value={userInfo.major}>
+                {userInfo.major || "Not selected"}
+              </option>
               {MAJORS.map(
                 (major) =>
                   userInfo.major !== major && (
@@ -100,7 +102,7 @@ export const UserDialog = ({ userId, setOpen }) => {
           </div>
         </div>
       </div>
-      <ButtonGroup className={'dialog-footer'}>
+      <ButtonGroup className={"dialog-footer"}>
         <Button save onClick={handleSaveButton}>
           Save
         </Button>

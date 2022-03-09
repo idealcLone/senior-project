@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FooterDiv = styled.footer`
   min-height: 125px;
@@ -27,7 +27,7 @@ export const Checkbox = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${(props) => (props.checked ? '#1A5DAB' : '#fff')};
+    background-color: ${(props) => (props.checked ? "#1A5DAB" : "#fff")};
     border-radius: 3px;
     border: 1px solid #000000;
   }
@@ -42,7 +42,7 @@ export const Radio = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${(props) => (props.clicked ? '#1A5DAB' : '#fff')};
+    background-color: ${(props) => (props.clicked ? "#1A5DAB" : "#fff")};
     border-radius: 50px;
     border: 1px solid #000000;
   }
@@ -164,16 +164,16 @@ export const Calculator = styled.div`
           outline: none;
         }
 
-        input[name='name'] {
+        input[name="name"] {
           width: 95%;
         }
 
-        input[name='credits'] {
+        input[name="credits"] {
           width: 40%;
           text-align: center;
         }
 
-        input[name='total'] {
+        input[name="total"] {
           width: 40%;
           text-align: center;
         }
@@ -189,7 +189,7 @@ export const Calculator = styled.div`
     margin-top: 20px;
     display: flex;
     width: 410px;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .button {

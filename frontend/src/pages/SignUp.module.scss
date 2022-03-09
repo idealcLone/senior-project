@@ -1,0 +1,74 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 150px 0;
+
+  font-size: 30px;
+}
+
+.form {
+  width: 670px;
+  padding: 70px 60px;
+  border: 1px solid #000000;
+  background-color: #F6F6F6;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h2 {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 70px;
+  }
+
+  button {
+    width: 280px;
+    padding: 20px 0;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background-color: #ffffff;
+    font-size: 30px;
+    margin: 20px auto 30px;
+    cursor: pointer;
+  }
+}
+
+.field {
+  label {
+    display: block;
+  }
+
+  input {
+    width: 100%;
+    height: 72px;
+    border-radius: 25px;
+    margin: 28px 0;
+    padding: 0 20px;
+    background-color: #fff;
+    font-size: 1.8rem;
+  }
+}
+
+.login {
+  text-align: center;
+
+  a {
+    color: #3EA2FF;
+    text-decoration: none;
+  }
+}
+
+.error {
+  color: red;
+}
+
+.errorBorder {
+  border: 2px solid red;
+}
+
+.defaultBorder {
+  border: 1px solid #000;
+}

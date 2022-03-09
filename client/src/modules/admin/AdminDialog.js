@@ -1,24 +1,24 @@
-import React from 'react';
-import { Dialog } from './styles';
-import { UserDialog } from './dialogs/UserDialog';
-import { Mask } from '../../styles';
-import { CourseDialog } from './dialogs/CourseDialog';
-import { ClubDialog } from './dialogs/ClubDialog';
-import { EventDialog } from './dialogs/EventDialog';
-import { FAQDialog } from './dialogs/FAQDialog';
+import React from "react";
+import { Dialog } from "./styles";
+import { UserDialog } from "./dialogs/UserDialog";
+import { Mask } from "../../styles";
+import { CourseDialog } from "./dialogs/CourseDialog";
+import { ClubDialog } from "./dialogs/ClubDialog";
+import { EventDialog } from "./dialogs/EventDialog";
+import { FAQDialog } from "./dialogs/FAQDialog";
 
 export const AdminDialog = ({ open, setOpen, selected }) => {
   const getDialog = () => {
     switch (selected) {
-      case 'Users':
+      case "Users":
         return <UserDialog userId={open} setOpen={setOpen} />;
-      case 'Courses':
+      case "Courses":
         return <CourseDialog courseId={open} setOpen={setOpen} />;
-      case 'Clubs':
+      case "Clubs":
         return <ClubDialog clubId={open} setOpen={setOpen} />;
-      case 'Events':
+      case "Events":
         return <EventDialog eventId={open} setOpen={setOpen} />;
-      case 'FAQ':
+      case "FAQ":
         return <FAQDialog faqId={open} setOpen={setOpen} />;
     }
   };
@@ -28,10 +28,10 @@ export const AdminDialog = ({ open, setOpen, selected }) => {
   };
 
   React.useEffect(() => {
-    document.addEventListener('keydown', escCloseDialog, false);
+    document.addEventListener("keydown", escCloseDialog, false);
 
     return () => {
-      document.removeEventListener('keydown', escCloseDialog, false);
+      document.removeEventListener("keydown", escCloseDialog, false);
     };
   }, []);
 

@@ -1,0 +1,71 @@
+.filters {
+  width: calc(100% - 350px);
+  margin: 60px auto 0;
+  display: flex;
+  justify-content: flex-end;
+
+  input, select, button {
+    padding: 13px;
+    outline: none;
+  }
+
+  input, select {
+    color: #797777;
+  }
+
+  > div {
+    flex: 1;
+  }
+
+  input {
+    width: 350px;
+    border-radius: 25px;
+    border: 1px solid #000;
+  }
+
+  select {
+    width: 250px;
+    margin-right: 70px;
+  }
+
+  button {
+    background-color: #B1B1B1;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+  }
+}
+
+.table {
+  width: calc(100% - 350px);
+  margin: 60px auto 0;
+  border: 1px solid #000;
+  border-spacing: 0;
+
+  td, th {
+    padding: 20px 45px;
+    text-align: center;
+  }
+
+  thead {
+    background-color: #B1B1B1;
+  }
+
+  thead, tbody {
+    > :not(:last-child) {
+      border-bottom: 1px solid #000;
+    }
+  }
+
+  tr {
+    > :not(:last-child) {
+      border-right: 1px solid #000;
+    }
+  }
+
+  th {
+    color: #fff;
+    border: none;
+    text-transform: uppercase;
+  }
+}

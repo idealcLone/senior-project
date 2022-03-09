@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const MainGrid = styled.div`
   max-width: 80%;
@@ -41,7 +41,7 @@ export const Filters = styled.div`
       padding-right: 10px;
     }
 
-    input[type='date'] {
+    input[type="date"] {
       width: 200px;
       height: 30px;
       padding: 15px 10px;
@@ -68,7 +68,7 @@ export const SwitchLabel = styled.label`
   cursor: pointer;
 
   &::after {
-    content: 'Grid';
+    content: "Grid";
     display: block;
     border-radius: 50%;
     width: 18px;
@@ -91,7 +91,7 @@ export const Switch = styled.input`
   &:checked + ${SwitchLabel} {
     background: #000;
     &::after {
-      content: 'Calendar';
+      content: "Calendar";
       display: block;
       border-radius: 50%;
       width: 18px;

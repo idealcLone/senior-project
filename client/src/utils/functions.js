@@ -1,15 +1,15 @@
 export const sortDays = (days) => {
-  const weekDays = ['M', 'T', 'W', 'R', 'F'];
+  const weekDays = ["M", "T", "W", "R", "F"];
 
   return weekDays.filter((day) => days.includes(day));
 };
 
 export const disableBodyScroll = () => {
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 };
 
 export const enableBodyScroll = () => {
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = "auto";
 };
 
 export const formatDate = (date) => {

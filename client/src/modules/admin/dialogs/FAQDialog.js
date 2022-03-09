@@ -1,8 +1,8 @@
-import React from 'react';
-import { AdminContext } from '../context';
-import { Button, ButtonGroup, Form } from './styles';
-import api from '../../../utils/api';
-import { Spinner } from '../../../components/Spinner';
+import React from "react";
+import { AdminContext } from "../context";
+import { Button, ButtonGroup, Form } from "./styles";
+import api from "../../../utils/api";
+import { Spinner } from "../../../components/Spinner";
 
 export const FAQDialog = ({ faqId, setOpen }) => {
   const [data, setData] = React.useContext(AdminContext);
@@ -29,7 +29,7 @@ export const FAQDialog = ({ faqId, setOpen }) => {
 
     setFaqInfo({
       ...faqInfo,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -61,34 +61,34 @@ export const FAQDialog = ({ faqId, setOpen }) => {
 
   return (
     <Form>
-      <p className={'dialog-header'}>FAQ</p>
-      <div className={'dialog-body'}>
+      <p className={"dialog-header"}>FAQ</p>
+      <div className={"dialog-body"}>
         <div className="form-data">
           <div className="field">
             <label htmlFor="question">Question</label>
             <textarea
-              id={'question'}
-              name={'question'}
+              id={"question"}
+              name={"question"}
               cols={40}
               rows={5}
-              value={faqInfo.question || ''}
+              value={faqInfo.question || ""}
               onChange={handleInputChange}
             />
           </div>
           <div className="field">
             <label htmlFor="answer">Answer</label>
             <textarea
-              id={'answer'}
-              name={'answer'}
+              id={"answer"}
+              name={"answer"}
               cols={40}
               rows={5}
-              value={faqInfo.answer || ''}
+              value={faqInfo.answer || ""}
               onChange={handleInputChange}
             />
           </div>
         </div>
       </div>
-      <ButtonGroup className={'dialog-footer'}>
+      <ButtonGroup className={"dialog-footer"}>
         <Button save onClick={handleSaveButton}>
           Save
         </Button>

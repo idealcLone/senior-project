@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const RadioGroup = styled.ul`
   margin: 75px 0 35px 250px;
@@ -17,8 +17,8 @@ export const RadioItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  color: ${(props) => (props.selected ? '#fff' : '#000')};
-  background-color: ${(props) => (props.selected ? '#1A5DAB' : '#fff')};
+  color: ${(props) => (props.selected ? "#fff" : "#000")};
+  background-color: ${(props) => (props.selected ? "#1A5DAB" : "#fff")};
 
   border-right: none;
 

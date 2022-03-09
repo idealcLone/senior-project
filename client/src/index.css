@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 /* Utility */
 * {
   position: relative;
@@ -6,7 +6,7 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif;
 }
 
 html,

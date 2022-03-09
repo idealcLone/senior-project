@@ -1,17 +1,17 @@
-import React from 'react';
-import { GridItem, MainGrid } from './styles';
-import { useHistory } from 'react-router';
+import React from "react";
+import { GridItem, MainGrid } from "./styles";
+import { useHistory } from "react-router";
 
 export const EventsGrid = ({ events }) => {
   const history = useHistory();
 
   const onEventClick = (event) => {
-    localStorage.setItem('from', 'grid');
+    localStorage.setItem("from", "grid");
     history.push({
       pathname: `/events/${event.id}`,
       state: {
-        event
-      }
+        event,
+      },
     });
   };
 

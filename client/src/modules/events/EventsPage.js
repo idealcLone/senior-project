@@ -1,10 +1,10 @@
-import React from 'react';
-import api from '../../utils/api';
-import { Filters, Switch, SwitchLabel, SwitchWrapper } from './styles';
-import { SearchBar } from '../../styles';
-import { EventsGrid } from './EventsGrid';
-import { Spinner } from '../../components/Spinner';
-import { EventsCalendar } from './EventsCalendar';
+import React from "react";
+import api from "../../utils/api";
+import { Filters, Switch, SwitchLabel, SwitchWrapper } from "./styles";
+import { SearchBar } from "../../styles";
+import { EventsGrid } from "./EventsGrid";
+import { Spinner } from "../../components/Spinner";
+import { EventsCalendar } from "./EventsCalendar";
 
 export const EventsPage = () => {
   const today = new Date();
@@ -12,23 +12,27 @@ export const EventsPage = () => {
   const [loading, setLoading] = React.useState(false);
   const [events, setEvents] = React.useState([]);
   const [switchOn, setSwitch] = React.useState(
-    localStorage.getItem('from') && localStorage.getItem('from') === 'calendar'
+    localStorage.getItem("from") && localStorage.getItem("from") === "calendar"
   );
   const [dates, setDates] = React.useState({
-    start: new Date(today.getFullYear(), today.getMonth(), 1).toJSON().slice(0, 10),
-    end: new Date(today.getFullYear(), (today.getMonth() % 12) + 1, 1).toJSON().slice(0, 10)
+    start: new Date(today.getFullYear(), today.getMonth(), 1)
+      .toJSON()
+      .slice(0, 10),
+    end: new Date(today.getFullYear(), (today.getMonth() % 12) + 1, 1)
+      .toJSON()
+      .slice(0, 10),
   });
-  const [searchText, setSearchText] = React.useState('');
+  const [searchText, setSearchText] = React.useState("");
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
     !switchOn && setLoading(true);
     api
-      .get('events/all/')
+      .get("events/all/")
       .then((res) => {
         setEvents(res.data);
         setData(res.data);
-        localStorage.setItem('from', 'grid');
+        localStorage.setItem("from", "grid");
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -42,13 +46,14 @@ export const EventsPage = () => {
     if (!switchOn) {
       if (dates.start) {
         filtered = filtered.filter(
-          (event) => event.start_date !== 'null' && dates.start < event.start_date
+          (event) =>
+            event.start_date !== "null" && dates.start < event.start_date
         );
       }
 
       if (dates.end) {
         filtered = filtered.filter(
-          (event) => event.start_date !== 'null' && event.start_date < dates.end
+          (event) => event.start_date !== "null" && event.start_date < dates.end
         );
       }
     }
@@ -61,7 +66,7 @@ export const EventsPage = () => {
 
     setDates({
       ...dates,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -69,7 +74,7 @@ export const EventsPage = () => {
     <>
       <Filters>
         <SearchBar
-          placeholder={'Enter event name'}
+          placeholder={"Enter event name"}
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
@@ -78,16 +83,16 @@ export const EventsPage = () => {
             <div>Filters:</div>
             <input
               type="date"
-              id={'start-date'}
-              name={'start'}
+              id={"start-date"}
+              name={"start"}
               value={dates.start}
               onChange={handleDateChange}
             />
             <span className="separator">&nbsp; - &nbsp;</span>
             <input
               type="date"
-              id={'end-date'}
-              name={'end'}
+              id={"end-date"}
+              name={"end"}
               value={dates.end}
               onChange={handleDateChange}
             />
@@ -95,16 +100,20 @@ export const EventsPage = () => {
         )}
         <SwitchWrapper>
           <Switch
-            id={'switch'}
-            type={'checkbox'}
+            id={"switch"}
+            type={"checkbox"}
             checked={switchOn}
             onChange={() => setSwitch(!switchOn)}
           />
-          <SwitchLabel htmlFor={'switch'} />
+          <SwitchLabel htmlFor={"switch"} />
         </SwitchWrapper>
       </Filters>
       {loading && <Spinner />}
-      {switchOn ? <EventsCalendar events={data} /> : <EventsGrid events={data} />}
+      {switchOn ? (
+        <EventsCalendar events={data} />
+      ) : (
+        <EventsGrid events={data} />
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { CourseTable } from './styles';
-import { Spinner } from '../../components/Spinner';
+import React from "react";
+import { CourseTable } from "./styles";
+import { Spinner } from "../../components/Spinner";
 
 export const CoursesList = ({ courses, loading }) => {
   if (loading) {
@@ -22,7 +22,7 @@ export const CoursesList = ({ courses, loading }) => {
           <tr key={course.id}>
             <td>{course.code}</td>
             <td>{course.name}</td>
-            <td>{course.instructors.join(', ')}</td>
+            <td>{course.instructors.join(", ")}</td>
             <td>{course.terms}</td>
           </tr>
         ))}

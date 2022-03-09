@@ -1,29 +1,33 @@
-import React from 'react';
-import { SearchBar } from '../styles';
-import { Container } from './styles';
-import api from '../utils/api';
-import { USEFUL_LINKS } from '../consts/data';
+import React from "react";
+import { SearchBar } from "../styles";
+import { Container } from "./styles";
+import api from "../utils/api";
+import { USEFUL_LINKS } from "../consts/data";
 
 export const FAQ = () => {
   const [faqs, setFaqs] = React.useState([]);
   const [data, setData] = React.useState([]);
-  const [searchText, setSearchText] = React.useState('');
+  const [searchText, setSearchText] = React.useState("");
 
   React.useEffect(() => {
-    api.get('faq/all/').then((res) => {
+    api.get("faq/all/").then((res) => {
       setFaqs(res.data);
       setData(res.data);
     });
   }, []);
 
   React.useEffect(() => {
-    setData(faqs.filter((faq) => faq.question.toLowerCase().includes(searchText.toLowerCase())));
+    setData(
+      faqs.filter((faq) =>
+        faq.question.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
   }, [searchText]);
 
   return (
     <Container>
       <SearchBar
-        placeholder={'Search for a question'}
+        placeholder={"Search for a question"}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />

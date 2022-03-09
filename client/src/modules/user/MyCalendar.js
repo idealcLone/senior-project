@@ -1,19 +1,19 @@
-import React from 'react';
-import { ViewState } from '@devexpress/dx-react-scheduler';
+import React from "react";
+import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
   Appointments,
   DateNavigator,
   MonthView,
   Scheduler,
-  Toolbar
-} from '@devexpress/dx-react-scheduler-material-ui';
-import { CalendarContainer, Paper } from './styles';
-import { Deadline } from './Deadline';
-import { disableBodyScroll, enableBodyScroll } from '../../utils/functions';
-import api from '../../utils/api';
-import { getUser } from '../../store/selectors/UserSelectors';
-import { useSelector } from 'react-redux';
-import { Event } from './Event';
+  Toolbar,
+} from "@devexpress/dx-react-scheduler-material-ui";
+import { CalendarContainer, Paper } from "./styles";
+import { Deadline } from "./Deadline";
+import { disableBodyScroll, enableBodyScroll } from "../../utils/functions";
+import api from "../../utils/api";
+import { getUser } from "../../store/selectors/UserSelectors";
+import { useSelector } from "react-redux";
+import { Event } from "./Event";
 
 export const MyCalendar = () => {
   const today = new Date().toJSON().slice(0, 10);
@@ -28,30 +28,30 @@ export const MyCalendar = () => {
 
   const getDeadlines = React.useCallback(() => {
     api
-      .get('/deadline/all/')
+      .get("/deadline/all/")
       .then((res) => {
         const events = [];
         user.events.map((event) => {
           events.push({
-            type: 'event',
+            type: "event",
             id: event.id,
             title: event.name,
             description: event.description,
             startDate: `${event.start_date}T07:00`,
-            endDate: `${event.start_date}T${event.start_time}`
+            endDate: `${event.start_date}T${event.start_time}`,
           });
         });
         setData([
           ...res.data.map((deadline) => ({
-            type: 'deadline',
+            type: "deadline",
             id: deadline.id,
             title: deadline.name,
             description: deadline.description,
             startDate: `${deadline.finish_time.slice(0, 10)}T07:00`,
             endDate: deadline.finish_time,
-            isActive: deadline.is_active
+            isActive: deadline.is_active,
           })),
-          ...events
+          ...events,
         ]);
       })
       .catch((err) => console.log(err));
@@ -78,14 +78,14 @@ export const MyCalendar = () => {
       <Appointments.Appointment
         {...props}
         style={{
-          background: data.isActive ? 'rgb(100, 181, 246)' : 'red',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: '#fff'
+          background: data.isActive ? "rgb(100, 181, 246)" : "red",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          color: "#fff",
         }}
         onClick={() => {
-          if (data.type === 'deadline') {
+          if (data.type === "deadline") {
             setOpenDialog(data.endDate);
             setDialogData(data);
           } else {

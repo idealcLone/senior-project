@@ -1,8 +1,8 @@
-import React from 'react';
-import { AdminContext } from '../context';
-import { Button, ButtonGroup, Form } from './styles';
-import api from '../../../utils/api';
-import { Spinner } from '../../../components/Spinner';
+import React from "react";
+import { AdminContext } from "../context";
+import { Button, ButtonGroup, Form } from "./styles";
+import api from "../../../utils/api";
+import { Spinner } from "../../../components/Spinner";
 
 export const ClubDialog = ({ clubId, setOpen }) => {
   const [data, setData] = React.useContext(AdminContext);
@@ -29,7 +29,7 @@ export const ClubDialog = ({ clubId, setOpen }) => {
 
     setClubInfo({
       ...clubInfo,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -61,22 +61,22 @@ export const ClubDialog = ({ clubId, setOpen }) => {
 
   return (
     <Form>
-      <p className={'dialog-header'}>Clubs</p>
-      <div className={'dialog-body'}>
+      <p className={"dialog-header"}>Clubs</p>
+      <div className={"dialog-body"}>
         <div className="form-data">
           <div className="field">
             <label htmlFor="name">Name</label>
             <input
-              id={'name'}
-              name={'name'}
+              id={"name"}
+              name={"name"}
               type="text"
-              value={clubInfo.name || ''}
+              value={clubInfo.name || ""}
               onChange={handleInputChange}
             />
           </div>
         </div>
       </div>
-      <ButtonGroup className={'dialog-footer'}>
+      <ButtonGroup className={"dialog-footer"}>
         <Button save onClick={handleSaveButton}>
           Save
         </Button>
