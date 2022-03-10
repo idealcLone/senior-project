@@ -7,6 +7,7 @@ import freeflowLogo from "../../media/img/freeflow.png";
 import magnumLogo from "../../media/img/magnum.png";
 import vesnaLogo from "../../media/img/vesna.png";
 import a4Logo from "../../media/img/a4.png";
+import { useHistory } from "react-router";
 
 const cafes = [
   {
@@ -42,6 +43,17 @@ const cafes = [
 ];
 
 const DeliveryPage = () => {
+  const history = useHistory();
+
+  const onCafeClick = (cafe) => {
+    history.push({
+      pathname: `/delivery/${cafe.id}`,
+      state: {
+        cafe,
+      },
+    });
+  };
+
   const [searchText, setSearchText] = useState("");
   const [data, setData] = useState([]);
 
@@ -70,7 +82,7 @@ const DeliveryPage = () => {
 
       <MainGrid>
         {data.map((cafe) => (
-          <GridItem key={cafe.id}>
+          <GridItem key={cafe.id} onClick={() => onCafeClick(cafe)}>
             <div className="imgContainer">
               <img src={cafe.img} alt="" />
             </div>
