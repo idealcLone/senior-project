@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     'user_auth',
     'university',
+    'delivery'
 ]
 
 MIDDLEWARE = [
