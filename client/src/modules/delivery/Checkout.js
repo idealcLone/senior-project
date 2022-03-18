@@ -59,7 +59,7 @@ const Checkout = () => {
         <div className="order">
           <div>Order Information:</div>
           {items.map((cartItem) => (
-            <div className="order__item">
+            <div key={cartItem.name} className="order__item">
               <div>{`${cartItem.name} - ${cartItem.count}`}</div>
               <div>{`${cartItem.count * cartItem.price} KZT`}</div>
             </div>

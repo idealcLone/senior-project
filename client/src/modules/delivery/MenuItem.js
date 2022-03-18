@@ -7,8 +7,6 @@ const MenuItem = () => {
   const [getCartItems, addToCart] = React.useContext(CartContext);
   const cart = getCartItems();
 
-  console.log(cart);
-
   const handleAddClick = () => {
     addToCart({
       name: "Hamburger",

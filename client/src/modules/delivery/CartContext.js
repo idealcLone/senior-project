@@ -3,7 +3,9 @@ import React from "react";
 export const CartContext = React.createContext(undefined);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = React.useState([]);
+  const [cart, setCart] = React.useState(
+    JSON.parse(localStorage.getItem("cart")).items || []
+  );
 
   const getCartTotalPrice = () => {
     return cart.reduce((prev, cur) => prev + cur.count * cur.price, 0);
@@ -26,8 +28,16 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (item) => {
     const position = cart.findIndex((cartItem) => cartItem.name === item.name);
 
-    if (position) {
-      setCart([...cart.slice(0, position), ...cart.slice(position + 1)]);
+    if (position >= 0) {
+      if (item.count === 1) {
+        setCart([...cart.slice(0, position), ...cart.slice(position + 1)]);
+      } else {
+        setCart([
+          ...cart.slice(0, position),
+          { ...item, count: item.count - 1 },
+          ...cart.slice(position + 1),
+        ]);
+      }
     }
   };
 
