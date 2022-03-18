@@ -7,6 +7,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  outline: none;
 }
 
 html,
@@ -15,6 +16,26 @@ body {
 }
 
 main {
+}
+
+textarea {
+  resize: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#error {
+  color: red;
 }
 
 .dl-flex {
@@ -71,7 +92,8 @@ main {
 }
 
 .form-container .form label,
-.form-container .form input {
+.form-container .form input,
+.form-container .form textarea {
   margin: 0.5rem;
   padding: 0.75rem;
   border-radius: 15px;

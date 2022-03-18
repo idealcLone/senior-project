@@ -120,10 +120,10 @@ export const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 78vh;
+
   .total-price {
     width: 150px;
     height: 40px;
-    border: 1px solid black;
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -135,7 +135,6 @@ export const CartContainer = styled.div`
 
   .cart__body {
     width: 300px;
-    border: 1px solid black;
     background: rgba(43, 103, 119, 0.6);
     flex: 1;
     border-radius: 25px;
@@ -168,13 +167,16 @@ export const CartContainer = styled.div`
   .cart__button {
     width: 300px;
     height: 40px;
-    border: 1px solid black;
     background: rgba(43, 103, 119, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
     cursor: pointer;
+
+    a {
+      color: #000;
+    }
   }
 `;
 
@@ -182,12 +184,17 @@ export const CheckoutContainer = styled.div`
   display: flex;
   margin-top: 90px;
   justify-content: space-between;
+
   .order {
     width: 320px;
     background: rgba(43, 103, 119, 0.6);
     padding: 15px 10px;
     border-radius: 20px;
     align-self: flex-start;
+
+    > div:first-child {
+      margin-bottom: 20px;
+    }
   }
 
   .order__item {
@@ -195,9 +202,13 @@ export const CheckoutContainer = styled.div`
     justify-content: space-between;
   }
 
+  hr {
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
   .order__list {
     margin-top: 16px;
-    border-bottom: 1px solid #000;
     margin-bottom: 10px;
   }
 
@@ -226,19 +237,18 @@ export const CheckoutContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     width: 80%;
+
     input,
-    textarea {
+    textarea,
+    select {
       margin: 10px 0px;
       width: 100%;
-      height: 30px;
       border-radius: 25px;
-      border: 1px solid #000;
+      padding: 10px;
+      border: none;
     }
     textarea {
       height: 90px;
-    }
-    input {
-      text-indent: 10px;
     }
   }
 
@@ -247,7 +257,7 @@ export const CheckoutContainer = styled.div`
     height: 40px;
     background: #fff;
     border-radius: 25px;
-    border: 1px solid #000;
     cursor: pointer;
+    border: 1px solid #000;
   }
 `;

@@ -38,7 +38,8 @@ export interface IEvent {
   location: string;
   registration_link: string;
   additional_info: string;
-  club: IClub | number;
+  club: IClub;
+  image: string;
 }
 
 export interface IDeadline {

@@ -24,7 +24,7 @@
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.0",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.1.1",
@@ -33,7 +33,9 @@
     "web-vitals": "^1.0.1"
   },
   "resolutions": {
-    "styled-components": "^5"
+    "styled-components": "^5",
+    "//": "See https://github.com/facebook/create-react-app/issues/11773",
+    "react-error-overlay": "6.0.9"
   },
   "proxy": "http://localhost:8000",
   "scripts": {
@@ -64,5 +66,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-error-overlay": "6.0.9"
   }
 }

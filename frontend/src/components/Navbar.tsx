@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
       </ul>
       <div className={styles.authButtons}>
         <button onClick={() => handleNavigate("/login")}>Log in</button>
-        <button>Sign up</button>
+        <button onClick={() => handleNavigate("/sign-up")}>Sign up</button>
       </div>
     </nav>
   );

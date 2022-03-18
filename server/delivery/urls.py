@@ -5,6 +5,7 @@ from delivery.views import OrderCreateView, RestaurantListCreateView, Restaurant
 
 urlpatterns = [
     path('restaurants/', RestaurantListCreateView.as_view()),
+    path('restaurants/all/', RestaurantListCreateView.as_view()),
     path('restaurant/<int:pk>/', RestaurantRetrieveUpdateDestroyView.as_view()),
 
     path('foods/', FoodListCreateView.as_view()),
