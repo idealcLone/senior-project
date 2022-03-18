@@ -50,10 +50,10 @@ export const Radio = styled.div`
 
 export const Nav = styled.nav`
   width: 100%;
-  background-color: #f6f6f6;
+  background: rgba(43, 103, 119, 0.6);
 
   a {
-    color: #000;
+    color: #fff;
   }
 
   .container {
@@ -70,6 +70,7 @@ export const Nav = styled.nav`
       font-size: 2.5rem;
       font-weight: 700;
       cursor: pointer;
+      color: #fff;
     }
 
     > ul {

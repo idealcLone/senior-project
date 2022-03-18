@@ -35,8 +35,10 @@ export const GPALink = styled.div`
 
   a {
     padding: 1rem;
-    background-color: #b1b1b1;
     color: #f6f6f6;
-    border-radius: 5px;
+    border-radius: 50px;
+    background: rgba(43, 103, 119, 0.6);
+    min-width: 225px;
+    text-align: center;
   }
 `;

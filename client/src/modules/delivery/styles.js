@@ -136,7 +136,7 @@ export const CartContainer = styled.div`
   .cart__body {
     width: 300px;
     border: 1px solid black;
-    background: #e9e7e7;
+    background: rgba(43, 103, 119, 0.6);
     flex: 1;
     border-radius: 25px;
     padding: 30px 15px;
@@ -169,7 +169,7 @@ export const CartContainer = styled.div`
     width: 300px;
     height: 40px;
     border: 1px solid black;
-    background: #e9e7e7;
+    background: rgba(43, 103, 119, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -184,7 +184,7 @@ export const CheckoutContainer = styled.div`
   justify-content: space-between;
   .order {
     width: 320px;
-    background: #e9e7e7;
+    background: rgba(43, 103, 119, 0.6);
     padding: 15px 10px;
     border-radius: 20px;
     align-self: flex-start;
@@ -203,7 +203,7 @@ export const CheckoutContainer = styled.div`
 
   .address {
     width: 400px;
-    background: #e9e7e7;
+    background: rgba(43, 103, 119, 0.6);
     padding: 15px 10px;
     border-radius: 20px;
     display: flex;

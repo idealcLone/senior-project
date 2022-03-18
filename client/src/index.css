@@ -240,7 +240,7 @@ th {
 .quote__container h1 {
   font-size: 4.5rem;
   text-align: center;
-  color: #515953;
+  color: rgba(43, 103, 119, 0.6);
   font-weight: 600;
   opacity: 0.96;
   text-align: center;
@@ -313,9 +313,21 @@ footer .footer__container .links a {
   padding: 5rem 0;
 }
 
+.login-container .btn {
+  background: #fff;
+}
+
+.login-form.form {
+  background: rgba(43, 103, 119, 0.6);
+}
+
 /*Signup Form*/
 .signup-container {
   padding: 4rem 0;
+}
+
+.signup-form.form {
+  background: rgba(43, 103, 119, 0.6);
 }
 
 /*Filters*/
