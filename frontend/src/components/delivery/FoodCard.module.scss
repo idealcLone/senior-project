@@ -1,0 +1,49 @@
+.container {
+  width: 375px;
+  margin-bottom: 70px;
+
+  > :first-child {
+    border: 1px solid #2B677799;
+  }
+
+  .image {
+    height: 300px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.foodInfo {
+  padding: 25px 40px;
+  font-size: 20px;
+
+  .foodDescription {
+    color: #857F7F;
+  }
+
+  > :first-child {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  > :last-child {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.addBtn {
+  background: #2B677799;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}

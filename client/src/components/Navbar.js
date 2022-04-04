@@ -55,6 +55,15 @@ export const Navbar = () => {
 
   const [showDropdown, setShowDropdown] = React.useState(false);
 
+  const dropdownToggle = () => setShowDropdown(false);
+
+  React.useEffect(() => {
+    if (showDropdown) {
+      window.addEventListener("click", dropdownToggle);
+    }
+    return () => window.removeEventListener("click", dropdownToggle);
+  }, [showDropdown]);
+
   const handleLogout = () => {
     dispatch(userLogout());
   };
@@ -63,7 +72,7 @@ export const Navbar = () => {
     <Nav>
       <div className="container">
         <div className={"logo"} onClick={() => history.push("/")}>
-          Brand
+          NUSH
         </div>
         <ul>
           {routes.map((route) => (

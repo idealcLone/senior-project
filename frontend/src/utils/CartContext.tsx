@@ -1,19 +1,23 @@
-import React from "react";
+import React from 'react';
+import { IFood } from '../types';
 
 export const CartContext = React.createContext(undefined);
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = React.useState(
-    JSON.parse(localStorage.getItem("cart"))?.items || []
-  );
+type PropsType = {
+  children: React.ReactElement;
+};
 
-  const getCartTotalPrice = () => {
-    return cart.reduce((prev, cur) => prev + cur.count * cur.price, 0);
+export const CartProvider: React.FC<PropsType> = ({ children }) => {
+  const cartItems = localStorage.getItem('cart');
+  const [cart, setCart] = React.useState<IFood[]>(cartItems ? JSON.parse(cartItems).items : []);
+
+  const getCartTotalPrice = (): number => {
+    return cart.reduce((prev, cur) => prev + cur.count! * cur.price, 0);
   };
 
   React.useEffect(() => {
     localStorage.setItem(
-      "cart",
+      'cart',
       JSON.stringify({
         items: cart,
         totalPrice: getCartTotalPrice(),
@@ -25,8 +29,8 @@ export const CartProvider = ({ children }) => {
     return cart;
   };
 
-  const removeFromCart = (item) => {
-    const position = cart.findIndex((cartItem) => cartItem.name === item.name);
+  const removeFromCart = (item: IFood) => {
+    const position = cart.findIndex(cartItem => cartItem.name === item.name);
 
     if (position >= 0) {
       if (item.count === 1) {
@@ -34,22 +38,22 @@ export const CartProvider = ({ children }) => {
       } else {
         setCart([
           ...cart.slice(0, position),
-          { ...item, count: item.count - 1 },
+          { ...item, count: item.count! - 1 },
           ...cart.slice(position + 1),
         ]);
       }
     }
   };
 
-  const addToCart = (toAddItem) => {
-    const item = cart.find((cartItem) => cartItem.name === "Hamburger");
+  const addToCart = (toAddItem: IFood) => {
+    const item = cart.find(cartItem => cartItem.name === 'Hamburger');
 
     if (item) {
       removeFromCart(item);
       setCart([
         {
           ...item,
-          count: item.count + 1,
+          count: item.count ? item.count + 1 : 1,
         },
       ]);
     } else {
@@ -63,13 +67,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={[
-        getCartItems,
-        addToCart,
-        removeFromCart,
-        getCartTotalPrice,
-        clearCart,
-      ]}
+      value={[getCartItems, addToCart, removeFromCart, getCartTotalPrice, clearCart]}
     >
       {children}
     </CartContext.Provider>

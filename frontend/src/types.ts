@@ -56,3 +56,19 @@ export interface IFAQ {
   question: string;
   answer: string;
 }
+
+export interface IRestaurant {
+  id: number;
+  name: string;
+  image: string;
+}
+
+export interface IFood {
+  id: number;
+  name: string;
+  image: string;
+  type: string;
+  restaurant: number;
+  price: number;
+  count?: number;
+}

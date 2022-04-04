@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./SignUp.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
+import styles from './SignUp.module.scss';
+import { Link, useNavigate } from 'react-router-dom';
 
 type StateType = {
   email: string;
@@ -14,12 +14,16 @@ export const SignUp: React.FC = () => {
   const navigate = useNavigate();
 
   const [state, setState] = React.useState<StateType>({
-    email: "",
-    password: "",
-    repeatPassword: "",
-    emailError: "",
-    passwordError: "",
+    email: '',
+    password: '',
+    repeatPassword: '',
+    emailError: '',
+    passwordError: '',
   });
+
+  React.useEffect(() => {
+    document.title = 'Sign Up';
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,16 +35,16 @@ export const SignUp: React.FC = () => {
   };
 
   const validateEmail = () => {
-    if (state.email && !state.email.endsWith("@nu.edu.kz")) {
+    if (state.email && !state.email.endsWith('@nu.edu.kz')) {
       setState({
         ...state,
-        emailError: "Email is not valid, it should be NU-based",
+        emailError: 'Email is not valid, it should be NU-based',
       });
       return false;
     } else {
       setState({
         ...state,
-        emailError: "",
+        emailError: '',
       });
       return true;
     }
@@ -50,13 +54,13 @@ export const SignUp: React.FC = () => {
     if (!state.repeatPassword || state.password !== state.repeatPassword) {
       setState({
         ...state,
-        passwordError: "Passwords do not match",
+        passwordError: 'Passwords do not match',
       });
       return false;
     } else {
       setState({
         ...state,
-        passwordError: "",
+        passwordError: '',
       });
       return true;
     }
@@ -69,7 +73,7 @@ export const SignUp: React.FC = () => {
       passwordsValidation = validatePasswords();
     }
     if (emailValidation && passwordsValidation) {
-      navigate("/login");
+      navigate('/login');
     }
   };
 
@@ -83,10 +87,8 @@ export const SignUp: React.FC = () => {
             type="text"
             id="email"
             name="email"
-            className={
-              state.emailError ? styles.errorBorder : styles.defaultBorder
-            }
-            value={state.email || ""}
+            className={state.emailError ? styles.errorBorder : styles.defaultBorder}
+            value={state.email || ''}
             onChange={handleChange}
             onBlur={validateEmail}
           />
@@ -97,7 +99,7 @@ export const SignUp: React.FC = () => {
             type="password"
             id="password"
             name="password"
-            value={state.password || ""}
+            value={state.password || ''}
             onChange={handleChange}
           />
         </div>
@@ -107,21 +109,17 @@ export const SignUp: React.FC = () => {
             type="password"
             id="repeat-password"
             name="repeatPassword"
-            className={
-              state.passwordError ? styles.errorBorder : styles.defaultBorder
-            }
-            value={state?.repeatPassword || ""}
+            className={state.passwordError ? styles.errorBorder : styles.defaultBorder}
+            value={state?.repeatPassword || ''}
             onChange={handleChange}
             onBlur={validatePasswords}
           />
         </div>
         {state.emailError && <p className={styles.error}>{state.emailError}</p>}
-        {state.passwordError && (
-          <p className={styles.error}>{state.passwordError}</p>
-        )}
+        {state.passwordError && <p className={styles.error}>{state.passwordError}</p>}
         <button onClick={handleLogIn}>Sign Up</button>
         <p className={styles.login}>
-          Already registered?{" "}
+          Already registered?{' '}
           <Link to="/login">
             <a>Log In</a>
           </Link>

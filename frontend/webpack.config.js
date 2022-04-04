@@ -1,30 +1,30 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const pluginsList = [
   new HtmlWebpackPlugin({
-    template: "./src/index.html",
+    template: './src/index.html',
   }),
 ];
 
 module.exports = {
-  devtool: "source-map",
+  devtool: 'source-map',
   plugins: pluginsList,
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(__dirname, "build"),
+    path: path.resolve(__dirname, 'build'),
     clean: true,
-    publicPath: "/",
+    publicPath: '/',
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx", ".json", ".css", ".scss"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss'],
   },
   devServer: {
     historyApiFallback: true,
     hot: true,
 
     proxy: {
-      "/api": "http://localhost:8000",
+      '/api': 'http://localhost:8000',
     },
   },
   module: {
@@ -33,37 +33,30 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: [
-              "@babel/typescript",
-              "@babel/preset-env",
-              "@babel/preset-react",
-            ],
-            plugins: [
-              "@babel/proposal-class-properties",
-              "@babel/proposal-object-rest-spread",
-            ],
+            presets: ['@babel/typescript', '@babel/preset-env', '@babel/preset-react'],
+            plugins: ['@babel/proposal-class-properties', '@babel/proposal-object-rest-spread'],
           },
         },
       },
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
+          'style-loader',
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: true,
             },
           },
-          "sass-loader",
+          'sass-loader',
         ],
       },
       {
         test: /\.(jpg|png|svg)$/,
         use: {
-          loader: "url-loader",
+          loader: 'url-loader',
           options: {
             limit: 8192,
           },

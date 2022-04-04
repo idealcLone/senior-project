@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./Navbar.modules.scss";
-import { useNavigate } from "react-router-dom";
+import styles from './Navbar.modules.scss';
+import { useNavigate } from 'react-router-dom';
 
 type navLinkType = {
   name: string;
@@ -10,24 +10,24 @@ type navLinkType = {
 
 const navLinks: navLinkType[] = [
   {
-    name: "Courses",
-    route: "/courses",
+    name: 'Courses',
+    route: '/courses',
   },
   {
-    name: "Events",
-    route: "/events",
+    name: 'Events',
+    route: '/events',
   },
   {
-    name: "Schedule Maker",
-    route: "/schedule-maker",
+    name: 'Schedule Maker',
+    route: '/schedule-maker',
   },
   {
-    name: "Registration Training",
-    route: "/registration-training",
+    name: 'Registration Training',
+    route: '/registration-training',
   },
   {
-    name: "FAQ",
-    route: "faq",
+    name: 'FAQ',
+    route: 'faq',
   },
 ];
 
@@ -40,19 +40,19 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={styles.navbar}>
-      <span className={styles.logo} onClick={() => handleNavigate("/")}>
-        NUts
+      <span className={styles.logo} onClick={() => handleNavigate('/')}>
+        NUSH
       </span>
       <ul className={styles.links}>
-        {navLinks.map((navLink) => (
+        {navLinks.map(navLink => (
           <li key={navLink.name} onClick={() => handleNavigate(navLink.route)}>
             {navLink.name}
           </li>
         ))}
       </ul>
       <div className={styles.authButtons}>
-        <button onClick={() => handleNavigate("/login")}>Log in</button>
-        <button onClick={() => handleNavigate("/sign-up")}>Sign up</button>
+        <button onClick={() => handleNavigate('/login')}>Log in</button>
+        <button onClick={() => handleNavigate('/sign-up')}>Sign up</button>
       </div>
     </nav>
   );

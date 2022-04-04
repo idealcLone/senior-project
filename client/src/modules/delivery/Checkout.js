@@ -5,6 +5,7 @@ const initialState = {
   block: "",
   room: "",
   comment: "",
+  phoneNumber: "",
   error: "",
 };
 
@@ -33,6 +34,7 @@ const Checkout = () => {
     } else {
       setInfo(initialState);
       localStorage.removeItem("cart");
+      alert("You order is processing...");
     }
   };
 
@@ -94,6 +96,16 @@ const Checkout = () => {
               name="room"
               id="room"
               value={info.room}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-control">
+            <label htmlFor="phone-number">Phone number</label>
+            <input
+              type="text"
+              name="phoneNumber"
+              id="phone-number"
+              value={info.phoneNumber}
               onChange={handleInputChange}
             />
           </div>

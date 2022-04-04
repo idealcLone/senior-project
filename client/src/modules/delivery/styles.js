@@ -145,6 +145,7 @@ export const CartContainer = styled.div`
   .cart-item__info {
     display: flex;
     gap: 40px;
+    color: #fff;
   }
 
   .cart-item__controls {
@@ -173,9 +174,10 @@ export const CartContainer = styled.div`
     align-items: center;
     border-radius: 15px;
     cursor: pointer;
+    color: #fff;
 
     a {
-      color: #000;
+      color: #fff;
     }
   }
 `;
@@ -191,6 +193,7 @@ export const CheckoutContainer = styled.div`
     padding: 15px 10px;
     border-radius: 20px;
     align-self: flex-start;
+    color: #fff;
 
     > div:first-child {
       margin-bottom: 20px;
@@ -222,6 +225,7 @@ export const CheckoutContainer = styled.div`
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    color: #fff;
   }
 
   .address__heading {

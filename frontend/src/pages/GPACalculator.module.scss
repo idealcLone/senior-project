@@ -1,0 +1,125 @@
+.container {
+  margin: 100px;
+  display: flex;
+  justify-content: space-between;
+
+  > div {
+    max-width: 600px;
+  }
+}
+
+.courses {
+  width: 100%;
+  border: 1px solid #2B6777CC;
+  border-radius: 5px;
+  border-spacing: 0;
+
+  th, td {
+    width: 192px;
+    padding: 10px;
+    text-align: center;
+    color: #2B6777CC;
+  }
+
+  th:nth-child(3n), td:nth-child(3n) {
+    max-width: 150px;
+  }
+
+  th:nth-child(4n), td:nth-child(4n) {
+    width: 50px;
+  }
+
+  input, select {
+    border: 1px solid #2B6777CC;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+  }
+
+  img {
+    width: 20px;
+    cursor: pointer;
+  }
+}
+
+.actions {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  button {
+    width: 150px;
+    cursor: pointer;
+    border: none;
+    background-color: #2B6777CC;
+    border-radius: 15px;
+    padding: 10px 0;
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
+.totalGrade {
+  margin: 0 auto;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #2B6777CC;
+  color: #fff;
+  font-weight: 600;
+}
+
+.targetCalculator {
+  width: 300px;
+  padding: 15px;
+  border: 1px solid #2B6777CC;
+  border-radius: 5px;
+  color: #2B6777CC;
+
+
+  > div:first-child {
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  label {
+    display: block;
+    padding-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid #2B6777CC;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    margin-bottom: 15px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    background-color: #2B6777CC;
+    border-radius: 15px;
+    padding: 10px 0;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .impossible {
+    color: red;
+  }
+}

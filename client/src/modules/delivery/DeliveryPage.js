@@ -9,7 +9,7 @@ const DeliveryPage = () => {
 
   const onCafeClick = (cafe) => {
     history.push({
-      pathname: `/delivery/${cafe.id}`,
+      pathname: `/delivery/${cafe.id - 1}`,
       state: {
         cafe,
       },

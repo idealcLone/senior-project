@@ -1,5 +1,46 @@
 .container {
-  margin: 100px auto 0;
-  width: calc(100% - 350px);
-  height: 100%;
+  margin: 100px auto;
+  width: calc(100% - 200px);
+  display: flex;
+  gap: 90px;
+
+  img {
+    height: 700px;
+  }
+}
+
+.eventInfo {
+  h1 {
+    font-size: 64px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+  }
+
+  p {
+    font-size: 32px;
+    line-height: 39px;
+    margin-bottom: 70px;
+  }
+
+  .location {
+    display: flex;
+    gap: 70px;
+    margin-bottom: 100px;
+
+    span {
+      font-size: 36px;
+      font-weight: 700;
+    }
+  }
+
+  .linkContainer {
+    margin-bottom: 90px;
+
+    a {
+      text-decoration: none;
+      color: #173CFF;
+      font-size: 36px;
+    }
+  }
 }

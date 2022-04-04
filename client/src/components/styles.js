@@ -102,6 +102,7 @@ export const Nav = styled.nav`
     .navbar-auth {
       height: 100%;
       cursor: pointer;
+      color: #fff;
 
       > div {
         height: 100%;
@@ -120,7 +121,7 @@ export const Nav = styled.nav`
         border: 1px solid #000;
         padding: 20px 0;
         width: 150px;
-        background-color: #fff;
+        background: #2b677799;
 
         li {
           width: 100%;

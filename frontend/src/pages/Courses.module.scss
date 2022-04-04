@@ -4,12 +4,19 @@
   display: flex;
   justify-content: flex-end;
 
-  input, select, button {
+  :nth-child(2) {
+    margin-left: 70px;
+  }
+
+  input,
+  select,
+  button {
     padding: 13px;
     outline: none;
   }
 
-  input, select {
+  input,
+  select {
     color: #797777;
   }
 
@@ -29,7 +36,7 @@
   }
 
   button {
-    background-color: #B1B1B1;
+    background: #2b677799;
     border: none;
     cursor: pointer;
     color: #fff;
@@ -42,16 +49,18 @@
   border: 1px solid #000;
   border-spacing: 0;
 
-  td, th {
+  td,
+  th {
     padding: 20px 45px;
     text-align: center;
   }
 
   thead {
-    background-color: #B1B1B1;
+    background: #2b677799;
   }
 
-  thead, tbody {
+  thead,
+  tbody {
     > :not(:last-child) {
       border-bottom: 1px solid #000;
     }
