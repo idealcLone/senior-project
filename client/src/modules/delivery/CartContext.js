@@ -1,11 +1,9 @@
-import React from "react";
+import React from 'react';
 
 export const CartContext = React.createContext(undefined);
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = React.useState(
-    JSON.parse(localStorage.getItem("cart"))?.items || []
-  );
+  const [cart, setCart] = React.useState(JSON.parse(localStorage.getItem('cart'))?.items || []);
 
   const getCartTotalPrice = () => {
     return cart.reduce((prev, cur) => prev + cur.count * cur.price, 0);
@@ -13,7 +11,7 @@ export const CartProvider = ({ children }) => {
 
   React.useEffect(() => {
     localStorage.setItem(
-      "cart",
+      'cart',
       JSON.stringify({
         items: cart,
         totalPrice: getCartTotalPrice(),
@@ -25,8 +23,8 @@ export const CartProvider = ({ children }) => {
     return cart;
   };
 
-  const removeFromCart = (item) => {
-    const position = cart.findIndex((cartItem) => cartItem.name === item.name);
+  const removeFromCart = item => {
+    const position = cart.findIndex(cartItem => cartItem.name === item.name);
 
     if (position >= 0) {
       if (item.count === 1) {
@@ -41,8 +39,8 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const addToCart = (toAddItem) => {
-    const item = cart.find((cartItem) => cartItem.name === "Hamburger");
+  const addToCart = toAddItem => {
+    const item = cart.find(cartItem => cartItem.name === 'Hamburger');
 
     if (item) {
       removeFromCart(item);
@@ -63,13 +61,7 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={[
-        getCartItems,
-        addToCart,
-        removeFromCart,
-        getCartTotalPrice,
-        clearCart,
-      ]}
+      value={[getCartItems, addToCart, removeFromCart, getCartTotalPrice, clearCart]}
     >
       {children}
     </CartContext.Provider>

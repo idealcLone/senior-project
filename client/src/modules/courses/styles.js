@@ -1,15 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CourseTable = styled.table`
   width: 80%;
   margin: 0 auto;
 
   th {
-    border: 0.5px solid #000;
+    border: 0.5px solid #2b6777;
+    background: #2b677799;
+    color: #fff;
   }
 
   td {
-    border: 0.5px solid #000;
+    border: 0.5px solid #2b6777;
     border-top: none;
   }
 `;

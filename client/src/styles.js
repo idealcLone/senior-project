@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Mask = styled.div`
   z-index: 1;
@@ -6,7 +6,7 @@ export const Mask = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: inherit;
 `;
 
@@ -18,25 +18,31 @@ export const SearchBar = styled.input`
   border-radius: 25px;
   border: 1px solid #000;
 `;
+
 export const MainGrid = styled.div`
-  max-width: 80%;
+  width: 80%;
   margin: 50px auto;
 
   display: flex;
   flex-wrap: wrap;
+  gap: 70px;
+  align-items: center;
 `;
 
 export const GridItem = styled.div`
   max-width: 350px;
-  flex: 33%;
   background: #fff;
   text-align: center;
-  padding-bottom: 50px;
-  margin-right: 50px;
   cursor: pointer;
 
   img {
-    width: 300px;
+    width: 350px;
+    height: 430px;
+    object-fit: cover;
+  }
+
+  :last-child {
+    margin-bottom: 50px;
   }
 `;
 
@@ -59,7 +65,7 @@ export const Filters = styled.div`
       padding-right: 10px;
     }
 
-    input[type="date"] {
+    input[type='date'] {
       width: 200px;
       height: 30px;
       padding: 15px 10px;

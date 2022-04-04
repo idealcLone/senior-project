@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SwitchWrapper = styled.div`
   position: relative;
@@ -15,7 +15,7 @@ export const SwitchLabel = styled.label`
   cursor: pointer;
 
   &::after {
-    content: "Grid";
+    content: 'Grid';
     display: block;
     border-radius: 50%;
     width: 18px;
@@ -38,7 +38,7 @@ export const Switch = styled.input`
   &:checked + ${SwitchLabel} {
     background: #000;
     &::after {
-      content: "Calendar";
+      content: 'Calendar';
       display: block;
       border-radius: 50%;
       width: 18px;

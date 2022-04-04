@@ -1,18 +1,18 @@
-export const sortDays = (days) => {
-  const weekDays = ["M", "T", "W", "R", "F"];
+export const sortDays = days => {
+  const weekDays = ['M', 'T', 'W', 'R', 'F'];
 
-  return weekDays.filter((day) => days.includes(day));
+  return weekDays.filter(day => days.includes(day));
 };
 
 export const disableBodyScroll = () => {
-  document.body.style.overflow = "hidden";
+  document.body.style.overflow = 'hidden';
 };
 
 export const enableBodyScroll = () => {
-  document.body.style.overflow = "auto";
+  document.body.style.overflow = 'auto';
 };
 
-export const formatDate = (date) => {
+export const formatDate = date => {
   return date && new Date(date).toJSON().slice(0, 10);
 };
 

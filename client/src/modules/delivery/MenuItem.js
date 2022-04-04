@@ -1,16 +1,15 @@
-import React from "react";
-import burger from "../../media/img/burger.png";
-import { MenuItemContainer, MenuItemHeader, MenuItemInfo } from "./styles";
-import { CartContext } from "./CartContext";
+import React from 'react';
 
-const MenuItem = () => {
-  const [getCartItems, addToCart] = React.useContext(CartContext);
-  const cart = getCartItems();
+import { MenuItemContainer, MenuItemHeader, MenuItemInfo } from './styles';
+import { CartContext } from './CartContext';
+
+const MenuItem = ({ food }) => {
+  const [, addToCart] = React.useContext(CartContext);
 
   const handleAddClick = () => {
     addToCart({
-      name: "Hamburger",
-      price: 1800,
+      name: food.name,
+      price: food.price,
       count: 1,
     });
   };
@@ -19,19 +18,16 @@ const MenuItem = () => {
     <MenuItemContainer>
       <MenuItemInfo>
         <MenuItemHeader>
-          <div className="menu-item__title">Hamburger</div>
-          <div className="menu-item__price">1800 KZT</div>
+          <div className="menu-item__title">{food.name}</div>
+          <div className="menu-item__price">{food.price} KZT</div>
         </MenuItemHeader>
-        <div className="menu-item__desc">
-          Medium beef burger with 100% charcoal beef, fresh vegetables with new
-          teriyaki sauce.
-        </div>
+        <div className="menu-item__desc">{food.description}</div>
         <div className="menu-item__btn" onClick={handleAddClick}>
           +
         </div>
       </MenuItemInfo>
       <div className="menu-item__img">
-        <img src={burger} alt="burger" />
+        <img src={food.image} alt="" />
       </div>
     </MenuItemContainer>
   );

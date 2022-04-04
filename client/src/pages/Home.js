@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 
-import Image1 from "../media/img/1.png";
-import Image2 from "../media/img/2.png";
-import Image3 from "../media/img/3.png";
-import { Link } from "react-router-dom";
-import { GPALink } from "./styles";
+import Image1 from '../media/img/1.png';
+import Image2 from '../media/img/2.png';
+import Image3 from '../media/img/3.png';
+import { Link } from 'react-router-dom';
+import { GPALink } from './styles';
 
 export const Home = () => {
   return (
     <div>
       <GPALink>
-        <Link to={"/gpa-calculator"}>GPA Calculator</Link>
+        <Link to={'/gpa-calculator'}>GPA Calculator</Link>
       </GPALink>
       <GPALink>
-        <Link to={"/delivery"}>Delivery</Link>
+        <Link to={'/delivery'}>Delivery</Link>
       </GPALink>
       <div className="quote">
         <div className="quote__container container">

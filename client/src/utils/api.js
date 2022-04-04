@@ -1,29 +1,29 @@
-import axios from "axios";
-import { getToken, setToken } from "./token";
+import axios from 'axios';
+import { getToken, setToken } from './token';
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: '/api',
 });
 
 api.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     const originalRequest = error.config;
     const refreshToken = getToken();
     if (error.response.status === 403 && refreshToken) {
       return api
-        .get("/account/refresh/", {
+        .get('/account/refresh/', {
           params: {
             token: refreshToken,
           },
         })
-        .then((res) => {
+        .then(res => {
           if (res.status === 200) {
-            localStorage.setItem("token", res.data);
+            localStorage.setItem('token', res.data);
 
             return api(originalRequest);
           } else {
-            window.location.href = "/login";
+            window.location.href = '/login';
           }
         });
     }

@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import {
   Scheduler,
   Toolbar,
   Appointments,
   MonthView,
   DateNavigator,
-} from "@devexpress/dx-react-scheduler-material-ui";
-import { ViewState } from "@devexpress/dx-react-scheduler";
-import { CalendarContainer, Paper } from "./styles";
-import { useHistory } from "react-router";
+} from '@devexpress/dx-react-scheduler-material-ui';
+import { ViewState } from '@devexpress/dx-react-scheduler';
+import { CalendarContainer, Paper } from './styles';
+import { useHistory } from 'react-router';
 
 export const EventsCalendar = ({ events }) => {
   const history = useHistory();
@@ -20,11 +20,11 @@ export const EventsCalendar = ({ events }) => {
 
   React.useEffect(() => {
     setData([]);
-    events.map((event) => {
-      const startDate = event.start_date + "T" + event.start_time;
+    events.map(event => {
+      const startDate = event.start_date + 'T' + event.start_time;
       const endDate = new Date(startDate);
       endDate.setTime(endDate.getTime() + 1000 * 60);
-      setData((data) => [
+      setData(data => [
         ...data,
         {
           event,
@@ -42,14 +42,14 @@ export const EventsCalendar = ({ events }) => {
         {...restProps}
         style={{
           ...style,
-          display: "flex",
-          justifyContent: "center",
-          textAlign: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          textAlign: 'center',
+          alignItems: 'center',
         }}
         onClick={() => {
           const event = restProps.data.event;
-          localStorage.setItem("from", "calendar");
+          localStorage.setItem('from', 'calendar');
           history.push({
             pathname: `/events/${event.id}`,
             state: {

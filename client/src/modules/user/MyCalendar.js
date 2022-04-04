@@ -1,19 +1,19 @@
-import React from "react";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import React from 'react';
+import { ViewState } from '@devexpress/dx-react-scheduler';
 import {
   Appointments,
   DateNavigator,
   MonthView,
   Scheduler,
   Toolbar,
-} from "@devexpress/dx-react-scheduler-material-ui";
-import { CalendarContainer, Paper } from "./styles";
-import { Deadline } from "./Deadline";
-import { disableBodyScroll, enableBodyScroll } from "../../utils/functions";
-import api from "../../utils/api";
-import { getUser } from "../../store/selectors/UserSelectors";
-import { useSelector } from "react-redux";
-import { Event } from "./Event";
+} from '@devexpress/dx-react-scheduler-material-ui';
+import { CalendarContainer, Paper } from './styles';
+import { Deadline } from './Deadline';
+import { disableBodyScroll, enableBodyScroll } from '../../utils/functions';
+import api from '../../utils/api';
+import { getUser } from '../../store/selectors/UserSelectors';
+import { useSelector } from 'react-redux';
+import { Event } from './Event';
 
 export const MyCalendar = () => {
   const today = new Date().toJSON().slice(0, 10);
@@ -28,12 +28,12 @@ export const MyCalendar = () => {
 
   const getDeadlines = React.useCallback(() => {
     api
-      .get("/deadline/all/")
-      .then((res) => {
+      .get('/deadline/all/')
+      .then(res => {
         const events = [];
-        user.events.map((event) => {
+        user.events.map(event => {
           events.push({
-            type: "event",
+            type: 'event',
             id: event.id,
             title: event.name,
             description: event.description,
@@ -42,8 +42,8 @@ export const MyCalendar = () => {
           });
         });
         setData([
-          ...res.data.map((deadline) => ({
-            type: "deadline",
+          ...res.data.map(deadline => ({
+            type: 'deadline',
             id: deadline.id,
             title: deadline.name,
             description: deadline.description,
@@ -54,7 +54,7 @@ export const MyCalendar = () => {
           ...events,
         ]);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   }, []);
 
   React.useEffect(() => {
@@ -78,14 +78,14 @@ export const MyCalendar = () => {
       <Appointments.Appointment
         {...props}
         style={{
-          background: data.isActive ? "rgb(100, 181, 246)" : "red",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "#fff",
+          background: data.isActive ? 'rgb(100, 181, 246)' : 'red',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: '#fff',
         }}
         onClick={() => {
-          if (data.type === "deadline") {
+          if (data.type === 'deadline') {
             setOpenDialog(data.endDate);
             setDialogData(data);
           } else {

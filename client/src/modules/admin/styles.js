@@ -1,15 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RadioGroup = styled.ul`
-  margin: 75px 0 35px 250px;
+  width: calc(100% - 200px);
+  padding: 75px 0 35px;
+  margin: 0 auto;
   list-style: none;
 
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
 `;
 
 export const RadioItem = styled.li`
-  width: 200px;
+  max-width: 200px;
+  flex: 1;
   height: 70px;
   border: 1px solid #000000;
 
@@ -17,8 +20,8 @@ export const RadioItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  color: ${(props) => (props.selected ? "#fff" : "#000")};
-  background-color: ${(props) => (props.selected ? "#1A5DAB" : "#fff")};
+  color: ${props => (props.selected ? '#fff' : '#000')};
+  background-color: ${props => (props.selected ? '#1A5DAB' : '#fff')};
 
   border-right: none;
 
@@ -62,13 +65,18 @@ export const ListItem = styled.li`
 `;
 
 export const NewButton = styled.div`
-  padding: 10px 15px;
-  margin-left: 60px;
-  display: inline-flex;
-  border: 1px solid #000000;
-  cursor: pointer;
-  background-color: green;
-  color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 100px;
+
+  div {
+    padding: 10px 15px;
+    width: 100px;
+    border: 1px solid #000000;
+    cursor: pointer;
+    background-color: green;
+    color: #ffffff;
+  }
 `;
 
 export const Dialog = styled.div`

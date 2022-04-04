@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef } from 'react';
 
 export const RegistrationPage = () => {
   const [courses, setCourses] = React.useState([]);
 
-  const func = (a) => {
+  const func = a => {
     return a;
   };
 

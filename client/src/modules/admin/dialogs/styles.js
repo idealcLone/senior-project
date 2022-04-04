@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Form = styled.form`
   position: relative;
@@ -53,7 +53,8 @@ export const Form = styled.form`
           margin-bottom: 2px;
         }
 
-        input[type="text"] {
+        input[type='text'],
+        input[type='number'] {
           width: 250px;
           height: 30px;
           padding: 5px 8px;
@@ -121,8 +122,8 @@ export const CheckboxItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  color: ${(props) => (props.checked ? "#fff" : "#000")};
-  background-color: ${(props) => (props.checked ? "#1A5DAB" : "#fff")};
+  color: ${props => (props.checked ? '#fff' : '#000')};
+  background-color: ${props => (props.checked ? '#1A5DAB' : '#fff')};
 
   border-right: none;
 
@@ -149,8 +150,8 @@ export const ButtonGroup = styled.div`
 
 export const Button = styled.button`
   width: 100px;
-  color: ${(props) => (props.delete ? "#ffffff" : "#000000")};
-  background-color: ${(props) => (props.delete ? "red" : "#F6F6F6")};
+  color: ${props => (props.delete ? '#ffffff' : '#000000')};
+  background-color: ${props => (props.delete ? 'red' : '#F6F6F6')};
 
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.5);

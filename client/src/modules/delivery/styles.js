@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CafeContainer = styled.div`
   padding-top: 90px;
@@ -9,6 +9,7 @@ export const CafeContainer = styled.div`
   align-items: flex-start;
 
   .cafe__menu {
+    margin-bottom: 50px;
     display: flex;
     gap: 50px;
   }
@@ -59,8 +60,6 @@ export const CafeFilter = styled.div`
 
 export const MenuItemContainer = styled.div`
   width: 350px;
-  height: 450px;
-  border: 1px solid #000000;
   background: white;
 
   .menu-item__img {
@@ -68,20 +67,26 @@ export const MenuItemContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 350px;
+
     img {
-      width: 320px;
+      width: 100%;
+      height: 460px;
+      border: 1px solid #000000;
+      border-top: none;
+      object-fit: cover;
     }
   }
 `;
 
 export const MenuItemInfo = styled.div`
-  border-bottom: 1px solid #000000;
+  border: 1px solid #000000;
   height: 192px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
+
   .menu-item__desc {
     font-style: normal;
     font-weight: 400;
@@ -184,7 +189,7 @@ export const CartContainer = styled.div`
 
 export const CheckoutContainer = styled.div`
   display: flex;
-  margin-top: 90px;
+  margin: 90px 200px;
   justify-content: space-between;
 
   .order {
@@ -226,6 +231,7 @@ export const CheckoutContainer = styled.div`
     flex-direction: column;
     gap: 20px;
     color: #fff;
+    margin-bottom: 50px;
   }
 
   .address__heading {
@@ -262,6 +268,6 @@ export const CheckoutContainer = styled.div`
     background: #fff;
     border-radius: 25px;
     cursor: pointer;
-    border: 1px solid #000;
+    border: none;
   }
 `;

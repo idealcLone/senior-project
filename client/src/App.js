@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Navbar } from "./components/Navbar";
-import { Routes } from "./components/Routes";
-import { BrowserRouter as Router } from "react-router-dom";
-import { getToken } from "./utils/token";
-import { useDispatch } from "react-redux";
-import api from "./utils/api";
-import { GET_USER_INFO } from "./store/types/UserTypes";
-import { Footer } from "./components/Footer";
+import { Navbar } from './components/Navbar';
+import { Routes } from './components/Routes';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { getToken } from './utils/token';
+import { useDispatch } from 'react-redux';
+import api from './utils/api';
+import { GET_USER_INFO } from './store/types/UserTypes';
+import { Footer } from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,26 +17,26 @@ function App() {
   React.useEffect(() => {
     if (token) {
       api
-        .get("/account/profile/")
-        .then((res) => {
+        .get('/account/profile/')
+        .then(res => {
           dispatch({ type: GET_USER_INFO, payload: res.data });
           setStatus(true);
         })
-        .catch((err) => {});
+        .catch(err => {});
     } else {
-      const refreshToken = localStorage.getItem("token");
+      const refreshToken = localStorage.getItem('token');
       refreshToken
         ? api
-            .get("/account/refresh/", {
+            .get('/account/refresh/', {
               params: {
                 token: refreshToken,
               },
             })
-            .then((res) => {
-              localStorage.setItem("token", res.data);
+            .then(res => {
+              localStorage.setItem('token', res.data);
               setStatus(true);
             })
-            .catch((err) => {
+            .catch(err => {
               console.log(err);
             })
         : setStatus(true);
@@ -52,7 +52,7 @@ function App() {
             <main>
               <Routes />
             </main>
-            {/*<Footer/>*/}
+            {/*<Footer />*/}
           </div>
         </Router>
       )}

@@ -1,4 +1,4 @@
-import { GET_USER_INFO, EDIT_USER_INFO, USER_LOGOUT } from "../types/UserTypes";
+import { GET_USER_INFO, EDIT_USER_INFO, USER_LOGOUT } from '../types/UserTypes';
 
 export const userReducer = (state = {}, action) => {
   switch (action.type) {

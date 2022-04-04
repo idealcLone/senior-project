@@ -1,25 +1,24 @@
-import React from "react";
-import { DeadlineContainer, DeadlineDialog } from "./styles";
-import { Mask } from "../../styles";
-import { formatDate, getToday } from "../../utils/functions";
-import api from "../../utils/api";
+import React from 'react';
+import { DeadlineContainer, DeadlineDialog } from './styles';
+import { Mask } from '../../styles';
+import { formatDate, getToday } from '../../utils/functions';
+import api from '../../utils/api';
 
 export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
   const [deadline, setDeadline] = React.useState({
-    id: data?.id || "",
-    name: data?.title || "",
-    description: data?.description || "",
+    id: data?.id || '',
+    name: data?.title || '',
+    description: data?.description || '',
     endDate: formatDate(open),
-    endTime: data?.endDate?.slice(11, 16) || "09:00",
+    endTime: data?.endDate?.slice(11, 16) || '09:00',
     isActive:
-      (data?.hasOwnProperty("isActive") && data.isActive) ||
-      !data?.hasOwnProperty("isActive"),
+      (data?.hasOwnProperty('isActive') && data.isActive) || !data?.hasOwnProperty('isActive'),
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
-    if (name === "isActive") {
+    if (name === 'isActive') {
       setDeadline({
         ...deadline,
         [name]: !deadline[name],
@@ -34,15 +33,15 @@ export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
 
   const onSaveClick = () => {
     api
-      .post("/deadline/create/", {
+      .post('/deadline/create/', {
         ...deadline,
         endDate: `${formatDate(deadline.endDate)}T${deadline.endTime}`,
       })
-      .then((res) => {
+      .then(res => {
         setOpen(null);
         getDeadlines();
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   const onUpdateClick = () => {
@@ -51,21 +50,21 @@ export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
         ...deadline,
         endDate: `${formatDate(deadline.endDate)}T${deadline.endTime}`,
       })
-      .then((res) => {
+      .then(res => {
         setOpen(null);
         getDeadlines();
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   const onDeleteClick = () => {
     api
       .delete(`/deadline/${deadline.id}`)
-      .then((res) => {
+      .then(res => {
         setOpen(null);
         getDeadlines();
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   return (
@@ -78,17 +77,17 @@ export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
             type="text"
             name="name"
             id="name"
-            placeholder={"Name"}
-            value={deadline.name || ""}
+            placeholder={'Name'}
+            value={deadline.name || ''}
             onChange={handleInputChange}
           />
           <textarea
             name="description"
             id="description"
-            placeholder={"Description"}
+            placeholder={'Description'}
             cols="30"
             rows="5"
-            value={deadline?.description || ""}
+            value={deadline?.description || ''}
             onChange={handleInputChange}
           />
           <div className="is-active-checkbox">
@@ -120,16 +119,16 @@ export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
         </div>
         <div className="footer">
           {deadline.id ? (
-            <div className={"button-update"} onClick={onUpdateClick}>
+            <div className={'button-update'} onClick={onUpdateClick}>
               Update
             </div>
           ) : (
-            <div className={"button-save"} onClick={onSaveClick}>
+            <div className={'button-save'} onClick={onSaveClick}>
               Save
             </div>
           )}
           {deadline.id && (
-            <div className={"button-delete"} onClick={onDeleteClick}>
+            <div className={'button-delete'} onClick={onDeleteClick}>
               Delete
             </div>
           )}

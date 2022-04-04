@@ -1,24 +1,12 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef } from 'react';
 
-import {
-  DAYS,
-  INSTRUCTORS,
-  MAJORS,
-  SCHOOLS,
-  TERMS,
-} from "../../../consts/data";
-import {
-  Button,
-  ButtonGroup,
-  CheckboxGroup,
-  CheckboxItem,
-  Form,
-} from "./styles";
-import api from "../../../utils/api";
-import { AdminContext } from "../context";
-import { Spinner } from "../../../components/Spinner";
-import { Checkbox } from "../../../components/styles";
-import { sortDays } from "../../../utils/functions";
+import { DAYS, INSTRUCTORS, MAJORS, SCHOOLS, TERMS } from '../../../consts/data';
+import { Button, ButtonGroup, CheckboxGroup, CheckboxItem, Form } from './styles';
+import api from '../../../utils/api';
+import { AdminContext } from '../context';
+import { Spinner } from '../../../components/Spinner';
+import { Checkbox } from '../../../components/styles';
+import { sortDays } from '../../../utils/functions';
 
 export const CourseDialog = ({ courseId, setOpen }) => {
   const [data, setData] = useContext(AdminContext);
@@ -26,10 +14,10 @@ export const CourseDialog = ({ courseId, setOpen }) => {
   const [courseInfo, setCourseInfo] = React.useState({
     instructors: [],
     terms: [],
-    days: ["M", "W", "F"],
-    start_time: "09:00:00",
+    days: ['M', 'W', 'F'],
+    start_time: '09:00:00',
   });
-  const [instructor, setInstructor] = React.useState("");
+  const [instructor, setInstructor] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [syllabus, setSyllabus] = React.useState(null);
 
@@ -38,15 +26,15 @@ export const CourseDialog = ({ courseId, setOpen }) => {
       setLoading(true);
       api
         .get(`/courses/${courseId}`)
-        .then((res) => {
+        .then(res => {
           setLoading(false);
           setCourseInfo({
             ...res.data,
-            days: res.data.days.split(""),
-            terms: res.data.terms.split(", "),
+            days: res.data.days.split(''),
+            terms: res.data.terms.split(', '),
           });
         })
-        .catch((err) => {});
+        .catch(err => {});
     }
   }, [courseId]);
 
@@ -58,7 +46,7 @@ export const CourseDialog = ({ courseId, setOpen }) => {
     );
   }
 
-  const handleInputChange = (e) => {
+  const handleInputChange = e => {
     const { name, value } = e.target;
 
     if (Array.isArray(courseInfo[name])) {
@@ -74,55 +62,51 @@ export const CourseDialog = ({ courseId, setOpen }) => {
     }
   };
 
-  const handleDeleteButton = (e) => {
+  const handleDeleteButton = e => {
     e.preventDefault();
 
     api
       .delete(`/courses/${courseId}`)
       .then(() => {
         setOpen(false);
-        setData(data.filter((item) => item.id !== courseId));
+        setData(data.filter(item => item.id !== courseId));
       })
-      .catch((err) => {});
+      .catch(err => {});
   };
 
-  const handleSaveButton = (e) => {
+  const handleSaveButton = e => {
     e.preventDefault();
 
     if (Number.isInteger(courseId)) {
       api
         .put(`/courses/update/${courseId}/`, {
           ...courseInfo,
-          terms: courseInfo.terms.join(", "),
-          days: sortDays(courseInfo.days).join(""),
+          terms: courseInfo.terms.join(', '),
+          days: sortDays(courseInfo.days).join(''),
         })
-        .then((res) => {
+        .then(res => {
           setOpen(false);
-          const index = data.findIndex((item) => item.id === courseId);
-          setData([
-            ...data.slice(0, index),
-            res.data,
-            ...data.slice(index + 1),
-          ]);
+          const index = data.findIndex(item => item.id === courseId);
+          setData([...data.slice(0, index), res.data, ...data.slice(index + 1)]);
         })
-        .catch((err) => {});
+        .catch(err => {});
     } else {
       api
         .post(`/courses/create/`, {
           ...courseInfo,
-          terms: courseInfo.terms.join(", "),
-          days: sortDays(courseInfo.days).join(""),
+          terms: courseInfo.terms.join(', '),
+          days: sortDays(courseInfo.days).join(''),
         })
-        .then((res) => {
+        .then(res => {
           setCourseInfo({
             instructors: [],
             terms: [],
-            days: ["M", "W", "F"],
-            start_time: "09:00:00",
+            days: ['M', 'W', 'F'],
+            start_time: '09:00:00',
           });
           setData([...data, res.data]);
         })
-        .catch((err) => {});
+        .catch(err => {});
     }
   };
 
@@ -131,12 +115,12 @@ export const CourseDialog = ({ courseId, setOpen }) => {
       courseInfo[name],
       item,
       courseInfo[name].includes(item),
-      courseInfo[name].filter((val) => val !== item)
+      courseInfo[name].filter(val => val !== item)
     );
     if (courseInfo[name].includes(item)) {
       setCourseInfo({
         ...courseInfo,
-        [name]: [...courseInfo[name].filter((val) => val !== item)],
+        [name]: [...courseInfo[name].filter(val => val !== item)],
       });
     } else {
       setCourseInfo({
@@ -146,63 +130,63 @@ export const CourseDialog = ({ courseId, setOpen }) => {
     }
   };
 
-  const onAddButton = (e) => {
+  const onAddButton = e => {
     e.preventDefault();
     setCourseInfo({
       ...courseInfo,
       instructors: [...courseInfo.instructors, instructor],
     });
-    setInstructor("");
+    setInstructor('');
   };
 
-  const onSubmitSyllabus = (e) => {
+  const onSubmitSyllabus = e => {
     const formData = new FormData();
 
-    formData.append("syllabus", syllabus);
-    formData.append("course", courseId);
+    formData.append('syllabus', syllabus);
+    formData.append('course', courseId);
 
     api
-      .post("/courses/upload-syllabus/", formData)
-      .then((res) => {
+      .post('/courses/upload-syllabus/', formData)
+      .then(res => {
         // setSyllabus(null)
         console.log(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err => console.log(err));
   };
 
   return (
     <Form>
-      <p className={"dialog-header"}>Courses</p>
-      <div className={"dialog-body"}>
+      <p className={'dialog-header'}>Courses</p>
+      <div className={'dialog-body'}>
         <div className="form-data">
           <div className="field">
-            <label className={"bold"} htmlFor="name">
+            <label className={'bold'} htmlFor="name">
               Name
             </label>
             <input
-              id={"name"}
-              name={"name"}
+              id={'name'}
+              name={'name'}
               type="text"
-              value={courseInfo?.name || ""}
+              value={courseInfo?.name || ''}
               onChange={handleInputChange}
             />
           </div>
 
           <div className="field">
-            <label className={"bold"} htmlFor="code">
+            <label className={'bold'} htmlFor="code">
               Code
             </label>
             <input
-              id={"code"}
-              name={"code"}
+              id={'code'}
+              name={'code'}
               type="text"
-              value={courseInfo?.code || ""}
+              value={courseInfo?.code || ''}
               onChange={handleInputChange}
             />
           </div>
 
           <div className="field">
-            <label className={"bold"} htmlFor="school">
+            <label className={'bold'} htmlFor="school">
               School
             </label>
             <select
@@ -212,7 +196,7 @@ export const CourseDialog = ({ courseId, setOpen }) => {
               onChange={handleInputChange}
             >
               <option value="">Choose the school</option>
-              {SCHOOLS.map((school) => (
+              {SCHOOLS.map(school => (
                 <option key={school} value={school}>
                   {school}
                 </option>
@@ -221,14 +205,14 @@ export const CourseDialog = ({ courseId, setOpen }) => {
           </div>
 
           <div className="field field__checkbox">
-            <label className={"bold"} htmlFor="terms">
+            <label className={'bold'} htmlFor="terms">
               Terms
             </label>
-            {TERMS.map((term) => (
+            {TERMS.map(term => (
               <Checkbox
                 key={term}
                 checked={courseInfo.terms?.includes(term)}
-                onClick={() => onCheckboxClick("terms", term)}
+                onClick={() => onCheckboxClick('terms', term)}
               >
                 <label htmlFor="term">{term}</label>
                 <div />
@@ -237,26 +221,26 @@ export const CourseDialog = ({ courseId, setOpen }) => {
           </div>
 
           <div className="field">
-            <label className={"bold"} htmlFor="instructors">
+            <label className={'bold'} htmlFor="instructors">
               Instructors
             </label>
             <input
-              id={"instructors"}
-              name={"instructors"}
+              id={'instructors'}
+              name={'instructors'}
               type="text"
-              value={instructor || ""}
-              onChange={(e) => setInstructor(e.target.value)}
+              value={instructor || ''}
+              onChange={e => setInstructor(e.target.value)}
             />
             <Button onClick={onAddButton}>Add</Button>
             <ul>
-              {courseInfo.instructors?.map((instructor) => (
+              {courseInfo.instructors?.map(instructor => (
                 <li
                   key={instructor}
                   onClick={() =>
                     setCourseInfo({
                       ...courseInfo,
                       instructors: courseInfo.instructors.filter(
-                        (instructorName) => instructorName !== instructor
+                        instructorName => instructorName !== instructor
                       ),
                     })
                   }
@@ -268,28 +252,28 @@ export const CourseDialog = ({ courseId, setOpen }) => {
           </div>
 
           <div className="field syllabus-field">
-            <label className={"bold"} htmlFor="syllabus">
+            <label className={'bold'} htmlFor="syllabus">
               Syllabus
             </label>
             <input
               type="file"
               name="syllabus"
               id="syllabus"
-              accept={".pdf"}
-              onChange={(e) => setSyllabus(e.target.files[0])}
+              accept={'.pdf'}
+              onChange={e => setSyllabus(e.target.files[0])}
             />
             <div className="submit-syllabus" onClick={onSubmitSyllabus}>
               Submit
             </div>
             <ul>
-              {courseInfo.syllabuses?.map((syllabus) => (
+              {courseInfo.syllabuses?.map(syllabus => (
                 <li key={syllabus.id}>{syllabus.name}</li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-      <ButtonGroup className={"dialog-footer"}>
+      <ButtonGroup className={'dialog-footer'}>
         <Button save onClick={handleSaveButton}>
           Save
         </Button>

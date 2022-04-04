@@ -1,55 +1,55 @@
-import React from "react";
+import React from 'react';
 
-import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../store/actions/UserActions";
-import { getUser } from "../store/selectors/UserSelectors";
-import { Link } from "react-router-dom";
-import { Nav } from "./styles";
-import { MoreIcon } from "../utils/icons";
-import { useHistory } from "react-router";
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../store/actions/UserActions';
+import { getUser } from '../store/selectors/UserSelectors';
+import { Link } from 'react-router-dom';
+import { Nav } from './styles';
+import { MoreIcon } from '../utils/icons';
+import { useHistory } from 'react-router';
 
 const routes = [
   {
-    link: "/courses",
-    name: "Courses",
+    link: '/courses',
+    name: 'Courses',
   },
   {
-    link: "/events",
-    name: "Events",
+    link: '/events',
+    name: 'Events',
   },
   {
-    link: "/schedule",
-    name: "Schedule Maker",
+    link: '/schedule',
+    name: 'Schedule Maker',
   },
   {
-    link: "/registration",
-    name: "Registration Training",
+    link: '/registration',
+    name: 'Registration Training',
   },
   {
-    link: "/faq",
-    name: "FAQ",
+    link: '/faq',
+    name: 'FAQ',
   },
 ];
 
 const dropdown = [
   {
-    name: "Edit Profile",
-    path: "/profile",
+    name: 'Edit Profile',
+    path: '/profile',
   },
   {
-    name: "My Schedule",
-    path: "/schedule",
+    name: 'My Schedule',
+    path: '/schedule',
   },
   {
-    name: "My Calendar",
-    path: "/calendar",
+    name: 'My Calendar',
+    path: '/calendar',
   },
 ];
 
 export const Navbar = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
 
   const user = useSelector(getUser);
 
@@ -59,9 +59,9 @@ export const Navbar = () => {
 
   React.useEffect(() => {
     if (showDropdown) {
-      window.addEventListener("click", dropdownToggle);
+      window.addEventListener('click', dropdownToggle);
     }
-    return () => window.removeEventListener("click", dropdownToggle);
+    return () => window.removeEventListener('click', dropdownToggle);
   }, [showDropdown]);
 
   const handleLogout = () => {
@@ -71,11 +71,11 @@ export const Navbar = () => {
   return (
     <Nav>
       <div className="container">
-        <div className={"logo"} onClick={() => history.push("/")}>
-          NUSH
+        <div className={'logo'}>
+          <Link to="/">NUSH</Link>
         </div>
         <ul>
-          {routes.map((route) => (
+          {routes.map(route => (
             <li key={route.link}>
               <Link to={route.link}>{route.name}</Link>
             </li>
@@ -90,17 +90,14 @@ export const Navbar = () => {
               </div>
               {showDropdown && (
                 <ul className="dropdown" onClick={() => setShowDropdown(false)}>
-                  {dropdown.map((option) => (
-                    <li
-                      key={option.path}
-                      onClick={() => history.push(option.path)}
-                    >
+                  {dropdown.map(option => (
+                    <li key={option.path} onClick={() => history.push(option.path)}>
                       <Link to={option.path}>{option.name}</Link>
                     </li>
                   ))}
                   {user.is_admin && (
-                    <li key={"/admin"}>
-                      <Link to={"/admin"}>Admin Page</Link>
+                    <li key={'/admin'}>
+                      <Link to={'/admin'}>Admin Page</Link>
                     </li>
                   )}
                   <li onClick={handleLogout}>Log Out</li>

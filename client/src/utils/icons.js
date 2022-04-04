@@ -1,13 +1,7 @@
 export const MoreIcon = () => {
   return (
-    <svg
-      width="21"
-      height="18"
-      viewBox="0 0 21 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M19.5 1H1L9.5 16.5L19.5 1Z" fill="black" stroke="black" />
+    <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9 16L0.339743 0.250002L17.6603 0.25L9 16Z" fill="white" />
     </svg>
   );
 };

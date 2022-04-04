@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FooterDiv = styled.footer`
   min-height: 125px;
@@ -27,7 +27,7 @@ export const Checkbox = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${(props) => (props.checked ? "#1A5DAB" : "#fff")};
+    background-color: ${props => (props.checked ? '#1A5DAB' : '#fff')};
     border-radius: 3px;
     border: 1px solid #000000;
   }
@@ -42,7 +42,7 @@ export const Radio = styled.div`
   div {
     width: 15px;
     height: 15px;
-    background-color: ${(props) => (props.clicked ? "#1A5DAB" : "#fff")};
+    background-color: ${props => (props.clicked ? '#1A5DAB' : '#fff')};
     border-radius: 50px;
     border: 1px solid #000000;
   }
@@ -94,7 +94,7 @@ export const Nav = styled.nav`
         }
 
         :hover {
-          background-color: #c3c3c3;
+          background-color: #2b6777;
         }
       }
     }
@@ -108,6 +108,10 @@ export const Nav = styled.nav`
         height: 100%;
         display: flex;
         align-items: center;
+
+        span {
+          margin-right: 5px;
+        }
       }
 
       a {
@@ -118,7 +122,7 @@ export const Nav = styled.nav`
         z-index: 4;
         list-style: none;
         position: absolute;
-        border: 1px solid #000;
+        left: -20%;
         padding: 20px 0;
         width: 150px;
         background: #2b677799;
@@ -129,7 +133,7 @@ export const Nav = styled.nav`
           line-height: 2;
 
           :hover {
-            background-color: #c3c3c3;
+            background-color: #2b6777;
           }
         }
       }
@@ -166,16 +170,16 @@ export const Calculator = styled.div`
           outline: none;
         }
 
-        input[name="name"] {
+        input[name='name'] {
           width: 95%;
         }
 
-        input[name="credits"] {
+        input[name='credits'] {
           width: 40%;
           text-align: center;
         }
 
-        input[name="total"] {
+        input[name='total'] {
           width: 40%;
           text-align: center;
         }

@@ -1,6 +1,6 @@
-import React from "react";
-import { useLocation } from "react-router";
-import { EventContainer } from "./styles";
+import React from 'react';
+import { useLocation } from 'react-router';
+import { EventContainer } from './styles';
 
 export const EventPage = () => {
   const location = useLocation();
@@ -15,7 +15,7 @@ export const EventPage = () => {
           <h3>{`by ${event.club}`}</h3>
         </div>
         <div className="event-description">
-          <p>{event.description || ""}</p>
+          <p>{event.description || ''}</p>
         </div>
         <div className="event-date">
           <h4>{event.start_date}</h4>
