@@ -30,7 +30,7 @@ export const MainGrid = styled.div`
 `;
 
 export const GridItem = styled.div`
-  max-width: 350px;
+  width: 350px;
   background: #fff;
   text-align: center;
   cursor: pointer;
@@ -39,10 +39,6 @@ export const GridItem = styled.div`
     width: 350px;
     height: 430px;
     object-fit: cover;
-  }
-
-  :last-child {
-    margin-bottom: 50px;
   }
 `;
 

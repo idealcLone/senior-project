@@ -14,6 +14,7 @@ import { GPACalculator } from '../components/GPACalculator';
 import DeliveryPage from '../modules/delivery/DeliveryPage';
 import CafePage from '../modules/delivery/CafePage';
 import Checkout from '../modules/delivery/Checkout';
+import { RegistrationPage } from '../modules/registration/RegistrationPage';
 
 export const routes = [
   {
@@ -47,6 +48,11 @@ export const routes = [
     name: 'My Calendar',
     component: MyCalendar,
     protected: true,
+  },
+  {
+    path: '/registration',
+    name: 'Registration Training',
+    component: RegistrationPage,
   },
   {
     path: '/faq',

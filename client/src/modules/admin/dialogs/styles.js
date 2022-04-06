@@ -20,11 +20,29 @@ export const Form = styled.form`
   }
 
   .dialog-body {
-    max-height: 80%;
+    height: 80%;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    overflow-y: auto;
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #fff;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
 
     .image-field {
       flex: 1;
@@ -36,13 +54,36 @@ export const Form = styled.form`
       }
     }
 
+    hr {
+      margin: 10px 0;
+    }
+
+    .lectures {
+      h2 {
+        text-align: center;
+        margin-bottom: 5px;
+      }
+      ul {
+        list-style: none;
+
+        li {
+          padding: 5px 0;
+        }
+      }
+    }
+
     .form-data {
-      flex: 2;
       display: flex;
       flex-wrap: wrap;
 
+      .centered {
+        display: flex;
+        align-items: center;
+      }
+
       .field {
         flex: 50%;
+        align-items: center;
 
         ul {
           list-style: none;
@@ -54,7 +95,8 @@ export const Form = styled.form`
         }
 
         input[type='text'],
-        input[type='number'] {
+        input[type='number'],
+        input[type='time'] {
           width: 250px;
           height: 30px;
           padding: 5px 8px;
@@ -162,4 +204,5 @@ export const Button = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;

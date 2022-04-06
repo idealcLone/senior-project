@@ -72,7 +72,7 @@ export const NewButton = styled.div`
   div {
     padding: 10px 15px;
     width: 100px;
-    border: 1px solid #000000;
+    border: none;
     cursor: pointer;
     background-color: green;
     color: #ffffff;
