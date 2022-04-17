@@ -7,6 +7,8 @@ export const CoursesList = ({ courses, loading }) => {
     return <Spinner />;
   }
 
+  console.log(courses);
+
   return (
     <CourseTable>
       <thead>
@@ -22,7 +24,7 @@ export const CoursesList = ({ courses, loading }) => {
           <tr key={course.id}>
             <td>{course.code}</td>
             <td>{course.name}</td>
-            <td>{course.instructors.join(', ')}</td>
+            <td>{course.lectures?.map(section => section.instructors.join(', ')).join(', ')}</td>
             <td>{course.terms}</td>
           </tr>
         ))}

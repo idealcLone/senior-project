@@ -46,9 +46,9 @@ export const CalendarContainer = styled.div`
   width: 90%;
   margin: 0 auto;
   padding: 20px 0;
-  text-align: center;
 
   h2 {
+    text-align: center;
     padding-bottom: 20px;
   }
 `;
@@ -63,13 +63,66 @@ export const DeadlineContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.2);
   z-index: 4;
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const EventDialog = styled.div`
+  width: 70%;
+  min-width: 350px;
+  height: 80%;
+  min-height: 600px;
+  background: #fff;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 1.5rem;
+
+  .image-container {
+    width: 330px;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .body {
+    width: 100%;
+    height: 80%;
+    flex: 1;
+    display: flex;
+    gap: 30px;
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .field {
+        > :first-child {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  button {
+    width: 150px;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    background: red;
+  }
 `;
 
 export const DeadlineDialog = styled.div`
@@ -142,8 +195,10 @@ export const DeadlineDialog = styled.div`
       width: 100px;
       padding: 1rem;
       color: #fff;
+      font-weight: 600;
       border-radius: 5px;
       cursor: pointer;
+      text-align: center;
     }
 
     div:last-child {

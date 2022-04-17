@@ -7,7 +7,6 @@ import { LEVELS, MAJORS } from '../../consts/data';
 
 export const CoursesPage = () => {
   const [loading, setLoading] = React.useState(false);
-  const [showCourses, setShowCourses] = React.useState(false);
   const [courses, setCourses] = React.useState([]);
   const [filtered, setFiltered] = React.useState([]);
   const [select, setSelect] = React.useState({
@@ -17,18 +16,16 @@ export const CoursesPage = () => {
   const [searchText, setSearchText] = React.useState('');
 
   React.useEffect(() => {
-    if (showCourses) {
-      setLoading(true);
-      api
-        .get('/courses/all/')
-        .then(res => {
-          setCourses(res.data);
-          setFiltered(res.data);
-        })
-        .catch(err => console.log(err))
-        .finally(() => setLoading(false));
-    }
-  }, [showCourses]);
+    setLoading(true);
+    api
+      .get('/courses/all/')
+      .then(res => {
+        setCourses(res.data);
+        setFiltered(res.data);
+      })
+      .catch(err => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   React.useEffect(() => {
     let filtered = courses.filter(
@@ -79,11 +76,7 @@ export const CoursesPage = () => {
           </Select>
         </div>
       </Filters>
-      {showCourses ? (
-        <CoursesList courses={filtered} loading={loading} />
-      ) : (
-        <ShowButton onClick={() => setShowCourses(true)}>Show All Courses</ShowButton>
-      )}
+      <CoursesList courses={filtered} loading={loading} />
     </>
   );
 };

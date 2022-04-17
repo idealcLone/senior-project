@@ -5,51 +5,7 @@ import { RegistrationCourseList } from './RegistrationCourseList';
 import { SelectedCourse } from './SelectedCourse';
 import { useHistory } from 'react-router';
 import api from '../../utils/api';
-
-const coursesData = [
-  {
-    id: 1,
-    code: 'CSCI151',
-    name: 'Introduction to Programming',
-    credits: 8,
-    note: 'Registration for this course is not available',
-  },
-  {
-    id: 2,
-    code: 'CSCI152',
-    name: 'Data Structures',
-    credits: 8,
-    note: 'Registration for this course is not available',
-  },
-  {
-    id: 3,
-    code: 'CSCI231',
-    name: 'Computer Systems and Organization',
-    credits: 6,
-    note: 'Registration for this course is not available',
-  },
-  {
-    id: 4,
-    code: 'CSCI235',
-    name: 'Programming Languages',
-    credits: 6,
-    note: 'Registration for this course is not available',
-  },
-  {
-    id: 5,
-    code: 'CSCI270',
-    name: 'Algorithms',
-    credits: 6,
-    note: 'Registration for this course is not available',
-  },
-  {
-    id: 6,
-    code: 'CSCI245',
-    name: 'System Analysis and Design',
-    credits: 6,
-    note: 'Registration for this course is not available',
-  },
-];
+import { getDayLetter } from '../../utils/functions';
 
 export const RegistrationPage = () => {
   const history = useHistory();
@@ -61,19 +17,34 @@ export const RegistrationPage = () => {
   const [searchText, setSearchText] = React.useState('');
   const [selectedCourse, setSelectedCourse] = React.useState();
 
+  const [instructors, setInstructors] = React.useState([]);
   const [courses, setCourses] = React.useState([]);
+  const [filtered, setFiltered] = React.useState([]);
 
   const getCourses = React.useCallback(() => {
     api
       .get('/courses/all/')
-      .then(res => setCourses(res.data))
+      .then(res => {
+        setCourses(res.data);
+        setFiltered(res.data);
+      })
       .catch(err => console.log(err));
-    // setCourses(coursesData);
+  }, []);
+
+  const getInstructors = React.useCallback(() => {
+    api
+      .get('/instructors/all/')
+      .then(res => setInstructors(res.data))
+      .catch(err => console.log(err));
   }, []);
 
   React.useEffect(() => {
+    getInstructors();
+  }, [getInstructors]);
+
+  React.useEffect(() => {
     getCourses();
-  }, []);
+  }, [getCourses]);
 
   const resetFilters = () => {
     setSchool('');
@@ -81,9 +52,46 @@ export const RegistrationPage = () => {
     setMajor('');
     setDays([false, false, false, false, false]);
     setSearchText('');
+    setFiltered(courses);
   };
 
-  const showCourses = () => {};
+  const showCourses = () => {
+    let newCourses = courses;
+
+    if (school) {
+      newCourses = newCourses.filter(course => course.school === school);
+    }
+
+    if (instructor) {
+      newCourses = newCourses.filter(
+        course =>
+          course.lectures.some(c => c.instructors.includes(instructor)) ||
+          course.recitations.some(r => r.instructors.includes(instructor)) ||
+          course.labs.some(l => l.instructors.includes(instructor))
+      );
+    }
+
+    if (days.some(day => day === true)) {
+      const stringedDays = days
+        .map((day, index) => (day === true ? getDayLetter(index) : ''))
+        .join('');
+      newCourses = newCourses.filter(
+        course =>
+          course.lectures.some(c => c.days === stringedDays) ||
+          course.recitations.some(r => r.days === stringedDays) ||
+          course.labs.some(l => l.days === stringedDays)
+      );
+    }
+
+    if (searchText) {
+      newCourses = newCourses.filter(
+        course =>
+          course.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          course.code.toLowerCase().includes(searchText.toLowerCase())
+      );
+    }
+    setFiltered(newCourses);
+  };
 
   const goToSelectedCourses = () => {
     history.push('/registration/selected');
@@ -103,6 +111,7 @@ export const RegistrationPage = () => {
                   value={school}
                   onChange={e => setSchool(e.target.value)}
                 >
+                  <option value="">Select School</option>
                   {SCHOOLS.map(school => (
                     <option key={school} value={school}>
                       {school}
@@ -118,9 +127,10 @@ export const RegistrationPage = () => {
                   value={instructor}
                   onChange={e => setInstructor(e.target.value)}
                 >
-                  {INSTRUCTORS.map(instructor => (
-                    <option key={instructor} value={instructor}>
-                      {instructor}
+                  <option value="">Select Instructor</option>
+                  {instructors.map(instructor => (
+                    <option key={instructor.name} value={instructor.name}>
+                      {instructor.name}
                     </option>
                   ))}
                 </select>
@@ -133,6 +143,7 @@ export const RegistrationPage = () => {
                   value={major}
                   onChange={e => setMajor(e.target.value)}
                 >
+                  <option value="">Select Major</option>
                   {MAJORS.map(major => (
                     <option key={major} value={major}>
                       {major}
@@ -144,6 +155,7 @@ export const RegistrationPage = () => {
             <div className="search">
               <label htmlFor="search">Course title/code: </label>
               <input
+                placeholder="Code/Name of the Course"
                 type="text"
                 name="search"
                 id="search"
@@ -154,14 +166,14 @@ export const RegistrationPage = () => {
           </div>
           <div className="checkboxes">
             <div>Class Meetings: </div>
-            {DAYS.map((day, index) => (
+            {days.map((day, index) => (
               <div key={index} className="day-checkbox">
-                <label htmlFor={day}>{day}</label>
+                <label htmlFor={index}>{getDayLetter(index)}</label>
                 <input
-                  id={day}
+                  id={index}
                   type="checkbox"
                   name="days"
-                  value={days[index]}
+                  checked={days[index]}
                   onChange={e =>
                     setDays([...days.slice(0, index), !days[index], ...days.slice(index + 1)])
                   }
@@ -179,12 +191,14 @@ export const RegistrationPage = () => {
         </div>
       </UpperRegistrationPage>
       <FilterResults>
-        <RegistrationCourseList
-          courses={courses}
-          selectedCourse={selectedCourse}
-          setSelectedCourse={setSelectedCourse}
-        />
-        <SelectedCourse selectedCourse={selectedCourse} />
+        <div>
+          <RegistrationCourseList
+            courses={filtered}
+            selectedCourse={selectedCourse}
+            setSelectedCourse={setSelectedCourse}
+          />
+        </div>
+        {selectedCourse && <SelectedCourse selectedCourse={selectedCourse} />}
       </FilterResults>
     </div>
   );

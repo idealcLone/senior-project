@@ -10,6 +10,16 @@ export const CourseTable = styled.table`
     color: #fff;
   }
 
+  th:nth-child(1) {
+    width: 8%;
+  }
+  th:nth-child(3) {
+    width: 20%;
+  }
+  th:nth-child(4) {
+    width: 20%;
+  }
+
   td {
     border: 0.5px solid #2b6777;
     border-top: none;

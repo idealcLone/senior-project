@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics, status
+from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.permissions import IsAdminUser
+from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from university.serializers.event import EventSerializer, EventCreateSerializer, EventUpdateSerializer
@@ -11,6 +14,9 @@ from university.models import Event, Club
 class EventListView(generics.ListAPIView):
     serializer_class = EventSerializer
     queryset = Event.objects.all()
+
+    def get_queryset(self):
+        return self.queryset.order_by('start_date', 'start_time')
 
 
 class EventCreateView(generics.CreateAPIView):
@@ -68,3 +74,31 @@ class EventRetrieveDestroyView(generics.RetrieveDestroyAPIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         return super().destroy(request, pk, **kwargs)
+
+
+@api_view(['POST'])
+@renderer_classes([JSONRenderer])
+def add_user_to_event(request):
+    user_id = request.data['userId']
+    event_id = request.data['eventId']
+
+    user = get_user_model().objects.get(id=user_id)
+    event = Event.objects.get(id=event_id)
+    event.users.add(user)
+    event.save()
+
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['DELETE'])
+@renderer_classes([JSONRenderer])
+def remove_user_from_event(request):
+    user_id = request.query_params.get('userId')
+    event_id = request.query_params.get('eventId')
+
+    user = get_user_model().objects.get(id=user_id)
+    event = Event.objects.get(id=event_id)
+    event.users.remove(user)
+    event.save()
+
+    return Response(status=status.HTTP_200_OK)

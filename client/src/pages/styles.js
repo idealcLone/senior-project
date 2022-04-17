@@ -23,6 +23,10 @@ export const Container = styled.div`
 
   .useful-links {
     line-height: 2;
+
+    li {
+      cursor: pointer;
+    }
   }
 `;
 

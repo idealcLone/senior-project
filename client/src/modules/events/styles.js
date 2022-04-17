@@ -58,8 +58,42 @@ export const EventContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
 
-  img {
-    max-width: 370px;
+  .image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    img {
+      max-width: 370px;
+      margin-bottom: 5px;
+    }
+
+    button {
+      width: 100%;
+      height: 45px;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 550;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background-color: #2b677799;
+
+      :hover {
+        background-color: #2b6777;
+      }
+    }
+
+    .remove-btn {
+      background: indianred;
+
+      :hover {
+        background: darkred;
+      }
+    }
   }
 
   .event-info {
@@ -74,31 +108,20 @@ export const EventContainer = styled.div`
 
     .event-header {
       width: 100%;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
 
       h2 {
+        max-width: 500px;
         font-size: 3rem;
+        line-height: 3rem;
         font-weight: 500;
         text-transform: uppercase;
-        padding-right: 50px;
       }
 
       h3 {
-        flex: 50%;
         font-size: 1rem;
         color: #b8b8b8;
         padding-bottom: 8px;
-      }
-
-      .add-btn {
-        padding: 1rem;
-        background-color: blueviolet;
-        color: #fff;
-        font-size: 1rem;
-        border-radius: 5px;
-        cursor: pointer;
+        align-self: flex-end;
       }
     }
 

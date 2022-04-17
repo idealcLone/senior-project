@@ -8,6 +8,7 @@ import { EventDialog } from './dialogs/EventDialog';
 import { FAQDialog } from './dialogs/FAQDialog';
 import { RestaurantDialog } from './dialogs/RestaurantDialog';
 import { FoodDialog } from './dialogs/FoodDialog';
+import { LinkDialog } from './dialogs/LinkDialog';
 
 export const AdminDialog = ({ open, setOpen, selected }) => {
   const getDialog = () => {
@@ -20,12 +21,14 @@ export const AdminDialog = ({ open, setOpen, selected }) => {
         return <ClubDialog clubId={open} setOpen={setOpen} />;
       case 'Events':
         return <EventDialog eventId={open} setOpen={setOpen} />;
-      case 'FAQ':
+      case 'FAQs':
         return <FAQDialog faqId={open} setOpen={setOpen} />;
       case 'Restaurants':
         return <RestaurantDialog restaurantId={open} setOpen={setOpen} />;
       case 'Foods':
         return <FoodDialog foodId={open} setOpen={setOpen} />;
+      case 'Links':
+        return <LinkDialog linkId={open} setOpen={setOpen} />;
       default:
         return <></>;
     }

@@ -9,10 +9,22 @@ class RestaurantSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class RestaurantUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Restaurant
+        exclude = ['image']
+
+
 class FoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food
         fields = '__all__'
+
+
+class FoodUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Food
+        exclude = ['image']
 
 
 class OrderSerializer(serializers.ModelSerializer):

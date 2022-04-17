@@ -6,12 +6,12 @@ from university.models import Event
 class EventSerializer(serializers.ModelSerializer):
     club = serializers.SerializerMethodField()
 
+    def get_club(self, event):
+        return event.club.name
+
     class Meta:
         model = Event
         fields = '__all__'
-
-    def get_club(self, event):
-        return event.club.name
 
 
 class EventCreateSerializer(serializers.ModelSerializer):

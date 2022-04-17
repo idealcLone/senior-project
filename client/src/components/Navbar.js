@@ -6,7 +6,7 @@ import { getUser } from '../store/selectors/UserSelectors';
 import { Link } from 'react-router-dom';
 import { Nav } from './styles';
 import { MoreIcon } from '../utils/icons';
-import { useHistory } from 'react-router';
+import { ADMIN } from '../consts/roles';
 
 const routes = [
   {
@@ -18,7 +18,7 @@ const routes = [
     name: 'Events',
   },
   {
-    link: '/schedule',
+    link: '/schedule-maker',
     name: 'Schedule Maker',
   },
   {
@@ -47,7 +47,6 @@ const dropdown = [
 ];
 
 export const Navbar = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const token = localStorage.getItem('token');
 
@@ -91,11 +90,11 @@ export const Navbar = () => {
               {showDropdown && (
                 <ul className="dropdown" onClick={() => setShowDropdown(false)}>
                   {dropdown.map(option => (
-                    <li key={option.path} onClick={() => history.push(option.path)}>
+                    <li key={option.path}>
                       <Link to={option.path}>{option.name}</Link>
                     </li>
                   ))}
-                  {user.is_admin && (
+                  {user?.roles.find(role => role.name === ADMIN) && (
                     <li key={'/admin'}>
                       <Link to={'/admin'}>Admin Page</Link>
                     </li>
@@ -106,7 +105,7 @@ export const Navbar = () => {
             </>
           )}
           {!token && (
-            <div>
+            <div className="auth-buttons">
               <Link to="/login" className="btn">
                 LOG IN
               </Link>

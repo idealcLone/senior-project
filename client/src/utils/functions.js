@@ -1,6 +1,6 @@
-export const sortDays = days => {
-  const weekDays = ['M', 'T', 'W', 'R', 'F'];
+const weekDays = ['M', 'T', 'W', 'R', 'F'];
 
+export const sortDays = days => {
   return weekDays.filter(day => days.includes(day));
 };
 
@@ -18,4 +18,24 @@ export const formatDate = date => {
 
 export const getToday = () => {
   return new Date().toJSON().slice(0, 10);
+};
+
+export const getDayLetter = index => {
+  return weekDays[index];
+};
+
+export const getDayValue = day => {
+  return weekDays.findIndex(weekDay => weekDay === day);
+};
+
+export const addDays = days => {
+  const result = new Date();
+  result.setDate(result.getDate() + days);
+  return result;
+};
+
+export const subtractDays = (date, days) => {
+  const result = new Date(date);
+  result.setDate(result.getDate() - days);
+  return result;
 };

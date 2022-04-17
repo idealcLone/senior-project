@@ -5,7 +5,16 @@ import { AdminList } from './AdminList';
 import { AdminDialog } from './AdminDialog';
 import { AdminProvider } from './context';
 
-const RADIO_ITEMS = ['Courses', 'Users', 'Clubs', 'Events', 'FAQ', 'Restaurants', 'Foods'];
+const RADIO_ITEMS = [
+  'Courses',
+  'Users',
+  'Clubs',
+  'Events',
+  'FAQs',
+  'Restaurants',
+  'Foods',
+  'Links',
+];
 
 export const AdminPage = () => {
   const [selected, setSelected] = React.useState('Courses');

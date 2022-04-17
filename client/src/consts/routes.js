@@ -15,6 +15,8 @@ import DeliveryPage from '../modules/delivery/DeliveryPage';
 import CafePage from '../modules/delivery/CafePage';
 import Checkout from '../modules/delivery/Checkout';
 import { RegistrationPage } from '../modules/registration/RegistrationPage';
+import { SelectedCourses } from '../modules/registration/SelectedCourses';
+import { ScheduleMaker } from '../modules/schedule-maker/ScheduleMaker';
 
 export const routes = [
   {
@@ -53,6 +55,11 @@ export const routes = [
     path: '/registration',
     name: 'Registration Training',
     component: RegistrationPage,
+  },
+  {
+    path: '/registration/selected',
+    name: 'Selected Courses',
+    component: SelectedCourses,
   },
   {
     path: '/faq',
@@ -94,5 +101,10 @@ export const routes = [
     path: '/delivery/:id',
     name: 'Cafe',
     component: CafePage,
+  },
+  {
+    path: '/schedule-maker',
+    name: 'Schedule Maker',
+    component: ScheduleMaker,
   },
 ];

@@ -15,11 +15,12 @@ body {
   height: 100%;
 }
 
-html {
-  overflow-y: overlay;
+body::-webkit-scrollbar {
+  width: 0.3rem;
 }
 
-main {
+body::-webkit-scrollbar-thumb {
+  background: rgba(43, 103, 119, 0.6);
 }
 
 textarea {

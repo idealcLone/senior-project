@@ -15,8 +15,12 @@ export const RegistrationCourseList = ({ courses, selectedCourse, setSelectedCou
         {courses.map(course => (
           <tr
             key={course.id}
-            className={course.id === selectedCourse && 'selected'}
-            onClick={() => setSelectedCourse(course.id)}
+            className={course.id === selectedCourse?.id ? 'selected' : ''}
+            onClick={() =>
+              course.id === selectedCourse?.id
+                ? setSelectedCourse(undefined)
+                : setSelectedCourse(course)
+            }
           >
             <td>{course.code}</td>
             <td>{course.name}</td>

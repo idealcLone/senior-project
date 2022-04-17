@@ -7,7 +7,6 @@ import { getToken } from './utils/token';
 import { useDispatch } from 'react-redux';
 import api from './utils/api';
 import { GET_USER_INFO } from './store/types/UserTypes';
-import { Footer } from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,21 +24,24 @@ function App() {
         .catch(err => {});
     } else {
       const refreshToken = localStorage.getItem('token');
-      refreshToken
-        ? api
-            .get('/account/refresh/', {
-              params: {
-                token: refreshToken,
-              },
-            })
-            .then(res => {
-              localStorage.setItem('token', res.data);
-              setStatus(true);
-            })
-            .catch(err => {
-              console.log(err);
-            })
-        : setStatus(true);
+      if (refreshToken) {
+        api
+          .get('/account/refresh/', {
+            params: {
+              token: refreshToken,
+            },
+          })
+          .then(res => {
+            res && localStorage.setItem('token', res.data);
+            setStatus(true);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        localStorage.removeItem('token');
+        setStatus(true);
+      }
     }
   }, [dispatch, token]);
 

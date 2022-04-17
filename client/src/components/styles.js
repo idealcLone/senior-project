@@ -49,11 +49,19 @@ export const Radio = styled.div`
 `;
 
 export const Nav = styled.nav`
-  width: 100%;
   background: rgba(43, 103, 119, 0.6);
 
   a {
     color: #fff;
+  }
+
+  .auth-buttons {
+    a {
+      border: 1px solid #2b6777;
+    }
+    a:hover {
+      color: #000;
+    }
   }
 
   .container {

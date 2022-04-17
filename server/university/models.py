@@ -21,22 +21,47 @@ class Instructor(models.Model):
 
 
 class Course(models.Model):
-    COURSE_DURATION_CHOICES = [
-        (50, 50),
-        (75, 75)
-    ]
-
     id = models.AutoField(primary_key=True, editable=False)
 
     school = models.CharField(max_length=100, choices=SCHOOL_NAME_CHOICES, default=SEDS)
-    instructors = models.ManyToManyField(Instructor)
     terms = models.CharField(max_length=100, null=False, blank=True)
-    days = models.CharField(max_length=10, null=False, blank=True)
 
-    duration = models.IntegerField(choices=COURSE_DURATION_CHOICES, default=50)
     name = models.CharField(max_length=100, null=False, blank=True)
-    start_time = models.CharField(max_length=10, null=True)
     code = models.CharField(max_length=10, null=False, blank=True)
+    credits = models.IntegerField(default=6, null=True)
+
+
+class Lecture(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    number = models.IntegerField(null=False)
+    days = models.CharField(max_length=10, null=False, blank=True)
+    start_time = models.CharField(max_length=10, null=True)
+    end_time = models.CharField(max_length=10, null=True)
+    instructors = models.ManyToManyField(Instructor)
+
+
+class Recitation(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    number = models.IntegerField(null=False)
+    days = models.CharField(max_length=10, null=False, blank=True)
+    start_time = models.CharField(max_length=10, null=True)
+    end_time = models.CharField(max_length=10, null=True)
+    instructors = models.ManyToManyField(Instructor)
+
+
+class Lab(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    number = models.IntegerField(null=False)
+    days = models.CharField(max_length=10, null=False, blank=True)
+    start_time = models.CharField(max_length=10, null=True)
+    end_time = models.CharField(max_length=10, null=True)
+    instructors = models.ManyToManyField(Instructor)
 
 
 class Syllabus(models.Model):
@@ -62,6 +87,7 @@ class Event(models.Model):
     additional_info = models.CharField(max_length=255, null=True)
 
     club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    users = models.ManyToManyField(get_user_model())
 
 
 class Deadline(models.Model):
@@ -76,3 +102,8 @@ class Deadline(models.Model):
 class FAQ(models.Model):
     question = models.CharField(max_length=256, null=False, blank=True)
     answer = models.CharField(max_length=256, null=False, blank=True)
+
+
+class Link(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=256)

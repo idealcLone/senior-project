@@ -71,7 +71,7 @@ export const Deadline = ({ open, setOpen, data, getDeadlines }) => {
     <DeadlineContainer>
       <Mask onClick={() => setOpen(null)} />
       <DeadlineDialog>
-        <h2>Deadline Dialog</h2>
+        <h2>Appointment/Deadline</h2>
         <div className="form">
           <input
             type="text"

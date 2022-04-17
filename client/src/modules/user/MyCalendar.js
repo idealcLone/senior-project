@@ -37,8 +37,12 @@ export const MyCalendar = () => {
             id: event.id,
             title: event.name,
             description: event.description,
-            startDate: `${event.start_date}T07:00`,
-            endDate: `${event.start_date}T${event.start_time}`,
+            startDate: `${event.start_date}T${event.start_time}`,
+            endDate: `${event.start_date}T23:59`,
+            image: event.image,
+            location: event.location,
+            club: event.club,
+            additional_info: event.additional_info,
           });
         });
         setData([
@@ -55,15 +59,11 @@ export const MyCalendar = () => {
         ]);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [user.events]);
 
   React.useEffect(() => {
     getDeadlines();
-  }, []);
-
-  React.useEffect(() => {
-    console.log(data);
-  }, [data]);
+  }, [getDeadlines]);
 
   React.useEffect(() => {
     if (openDialog) {
@@ -78,11 +78,15 @@ export const MyCalendar = () => {
       <Appointments.Appointment
         {...props}
         style={{
-          background: data.isActive ? 'rgb(100, 181, 246)' : 'red',
+          background: data.type === 'event' ? 'lightgreen' : 'lightblue',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          textAlign: 'center',
           color: '#fff',
+          fontSize: 13,
+          lineHeight: 1.1,
+          fontWeight: 550,
         }}
         onClick={() => {
           if (data.type === 'deadline') {
@@ -94,7 +98,8 @@ export const MyCalendar = () => {
           }
         }}
       >
-        {`${data.title} - ${data.endDate.slice(11, 16)}`}
+        {data.title} <br />{' '}
+        {data.type === 'event' ? data.startDate.slice(11, 16) : data.endDate.slice(11, 16)}
       </Appointments.Appointment>
     );
   };
@@ -129,7 +134,7 @@ export const MyCalendar = () => {
           getDeadlines={getDeadlines}
         />
       )}
-      <h2>My Deadlines</h2>
+      <h2>My Calendar</h2>
       <Paper>
         <Scheduler data={data} firstDayOfWeek={1}>
           <ViewState defaultCurrentDate={today} />
