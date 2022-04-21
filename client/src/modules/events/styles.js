@@ -115,6 +115,7 @@ export const EventContainer = styled.div`
         line-height: 3rem;
         font-weight: 500;
         text-transform: uppercase;
+        margin-right: 20px;
       }
 
       h3 {

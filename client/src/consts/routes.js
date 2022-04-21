@@ -17,6 +17,7 @@ import Checkout from '../modules/delivery/Checkout';
 import { RegistrationPage } from '../modules/registration/RegistrationPage';
 import { SelectedCourses } from '../modules/registration/SelectedCourses';
 import { ScheduleMaker } from '../modules/schedule-maker/ScheduleMaker';
+import { ManagerPage } from '../modules/manager/ManagerPage';
 
 export const routes = [
   {
@@ -71,6 +72,12 @@ export const routes = [
     name: 'Admin Page',
     component: AdminPage,
     adminRoute: true,
+  },
+  {
+    path: '/manager',
+    name: 'Manager Page',
+    component: ManagerPage,
+    managerRoute: true,
   },
   {
     path: '/courses',

@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -12,6 +13,8 @@ class Restaurant(models.Model):
     telegram = models.CharField(max_length=100, null=True)
 
     is_active = models.BooleanField(default=True)
+
+    manager = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, null=True)
 
 
 class Food(models.Model):
@@ -35,5 +38,5 @@ class Order(models.Model):
     price = models.IntegerField()
     comment = models.CharField(max_length=500)
 
-    food = models.ManyToManyField(Food, related_name='foods')
+    foods = models.ManyToManyField(Food)
     restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)

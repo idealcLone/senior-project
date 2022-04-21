@@ -1,12 +1,16 @@
 from django.urls import path
 
+from delivery.bot import start
 from delivery.views import OrderCreateView, RestaurantListCreateView, RestaurantRetrieveUpdateDestroyView, \
-    FoodListCreateView, FoodRetrieveUpdateDestroyView, RestaurantUpdateView, FoodUpdateView, FoodListView
+    FoodListCreateView, FoodRetrieveUpdateDestroyView, RestaurantUpdateView, FoodUpdateView, FoodListView, \
+    RestaurantFoodListView, OrderListView
 
 urlpatterns = [
     path('restaurants/', RestaurantListCreateView.as_view()),
     path('restaurants/all/', RestaurantListCreateView.as_view()),
     path('restaurants/<int:pk>/', RestaurantRetrieveUpdateDestroyView.as_view()),
+    path('restaurants/<int:pk>/foods/', RestaurantFoodListView.as_view()),
+    path('restaurants/<int:pk>/orders/', OrderListView.as_view()),
     path('restaurants/update/<int:pk>/', RestaurantUpdateView.as_view()),
 
     path('foods/', FoodListCreateView.as_view()),
@@ -16,3 +20,5 @@ urlpatterns = [
 
     path('order/', OrderCreateView.as_view()),
 ]
+
+# start()

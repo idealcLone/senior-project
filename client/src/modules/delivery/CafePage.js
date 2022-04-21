@@ -4,18 +4,22 @@ import MenuItem from './MenuItem';
 import Cart from './Cart';
 import { CafeContacts, CafeContainer, CafeHeader, CafeTitle } from './styles';
 import { CartProvider } from './CartContext';
-import { useLocation } from 'react-router';
+import { useParams } from 'react-router';
 import api from '../../utils/api';
 import { Spinner } from '../../components/Spinner';
 
 const CafePage = () => {
-  const location = useLocation();
-  const cafe = location.state.cafe;
-
+  const { id } = useParams();
   const [loading, setLoading] = React.useState(false);
+  const [cafe, setCafe] = React.useState({});
   const [foods, setFoods] = React.useState([]);
 
-  console.log(cafe);
+  const getCafe = React.useCallback(() => {
+    api
+      .get(`/restaurants/${id}/`)
+      .then(res => setCafe(res.data))
+      .catch(err => console.log(err));
+  }, [id]);
 
   const getFoods = React.useCallback(() => {
     setLoading(true);
@@ -27,8 +31,16 @@ const CafePage = () => {
   }, [cafe]);
 
   React.useEffect(() => {
-    getFoods();
-  }, [getFoods]);
+    localStorage.setItem('cart', JSON.stringify({}));
+  }, [id]);
+
+  React.useEffect(() => {
+    getCafe();
+  }, [getCafe]);
+
+  React.useEffect(() => {
+    cafe.id && getFoods();
+  }, [cafe.id, getFoods]);
 
   if (loading) {
     return <Spinner />;

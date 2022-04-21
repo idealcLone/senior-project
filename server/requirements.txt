@@ -7,6 +7,7 @@ pycparser==2.20
 pyjwt==2.1.0
 python-dotenv==0.15.0
 python3-openid==3.2.0
+python-telegram-bot
 pytz==2021.1
 social-auth-core==4.1.0
 sqlparse==0.4.0

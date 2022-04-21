@@ -17,10 +17,10 @@ class EventSerializer(serializers.ModelSerializer):
 class EventCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = '__all__'
+        exclude = ['users']
 
 
 class EventUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
-        fields = ['name', 'description', 'club', 'start_time', 'start_date', 'location', 'additional_info']
+        fields = ['name', 'description', 'club', 'start_time', 'start_date', 'location', 'additional_info', 'image']

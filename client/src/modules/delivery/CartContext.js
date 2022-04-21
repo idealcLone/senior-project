@@ -40,7 +40,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToCart = toAddItem => {
-    const item = cart.find(cartItem => cartItem.name === 'Hamburger');
+    const item = cart.find(cartItem => cartItem.id === toAddItem.id);
 
     if (item) {
       removeFromCart(item);

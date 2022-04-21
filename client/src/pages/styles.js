@@ -28,6 +28,33 @@ export const Container = styled.div`
       cursor: pointer;
     }
   }
+
+  .ask-q {
+    width: 600px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+
+    textarea {
+      width: 100%;
+      resize: none;
+      border-radius: 5px;
+      border: 1px solid #2b6777;
+      padding: 10px;
+      margin-bottom: 2px;
+    }
+
+    button {
+      background: #2b677760;
+      color: #fff;
+      padding: 10px 0;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      outline: none;
+    }
+  }
 `;
 
 export const GPALink = styled.div`
@@ -35,14 +62,28 @@ export const GPALink = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding-top: 30px;
 
-  a {
+  .link {
     padding: 1rem;
     color: #f6f6f6;
     border-radius: 50px;
     background: rgba(43, 103, 119, 0.6);
     min-width: 225px;
     text-align: center;
+  }
+
+  .upcoming-event {
+    flex: 1;
+
+    a {
+      border: 1px solid #2b6777;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #2b6777;
+    }
   }
 `;

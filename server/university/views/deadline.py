@@ -10,8 +10,11 @@ from ..serializers.deadline import DeadlineCreateSerializer, DeadlineDestroySeri
 
 class DeadlineListView(generics.ListAPIView):
     serializer_class = DeadlineListSerializer
-    queryset = Deadline.objects.all()
     permission_classes = [IsAuthenticated, ]
+
+    def get_queryset(self):
+        u = get_user_model().objects.get(pk=self.request.user.id)
+        return u.deadline_set
 
 
 class DeadlineCreateView(generics.CreateAPIView):

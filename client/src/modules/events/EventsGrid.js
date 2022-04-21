@@ -7,12 +7,7 @@ export const EventsGrid = ({ events }) => {
 
   const onEventClick = event => {
     localStorage.setItem('from', 'grid');
-    history.push({
-      pathname: `/events/${event.id}`,
-      state: {
-        event,
-      },
-    });
+    history.push(`/events/${event.id}`);
   };
 
   return (

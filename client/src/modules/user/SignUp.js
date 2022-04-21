@@ -1,7 +1,5 @@
 import React from 'react';
 
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
 import api from '../../utils/api';
 import { useHistory } from 'react-router';
 
@@ -13,14 +11,26 @@ export const SignUp = () => {
     major: '',
     password: '',
   });
+  const [error, setError] = React.useState('');
+
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
+  };
 
   const onSubmit = e => {
-    setLoading(true);
-    api.post('/account/create/', { ...info }).then(res => {
-      setLoading(false);
-      history.push('/login');
-      window.location.reload();
-    });
+    e.preventDefault();
+
+    if (!info.email.endsWith('@nu.edu.kz')) {
+      setError('The email must be NU-based');
+    } else {
+      setLoading(true);
+      api.post('/account/create/', { ...info }).then(res => {
+        setLoading(false);
+        history.push('/login');
+        window.location.reload();
+      });
+    }
   };
 
   return (
@@ -42,6 +52,7 @@ export const SignUp = () => {
           value={info.password}
           onChange={e => setInfo({ ...info, password: e.target.value })}
         />
+        {error.length > 0 && <p className="error">{error}</p>}
         <button className={'btn'} onClick={onSubmit}>
           Sign Up
         </button>

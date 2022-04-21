@@ -1,5 +1,9 @@
+import datetime
+
+import pytz
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.permissions import IsAdminUser
@@ -102,3 +106,26 @@ def remove_user_from_event(request):
     event.save()
 
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@renderer_classes([JSONRenderer])
+def get_upcoming_event(request):
+    user_id = request.query_params.get('userId')
+
+    if user_id:
+        user = get_user_model().objects.get(pk=user_id)
+        events = user.event_set
+    else:
+        events = Event.objects.all()
+
+    now = datetime.datetime.now(pytz.timezone('Asia/Almaty'))
+
+    utc = pytz.UTC
+
+    for event in events.order_by('start_date', 'start_time'):
+        date = datetime.datetime.fromisoformat(event.start_date + ' ' + event.start_time)
+        if now < utc.localize(date):
+            return Response(EventSerializer(event).data)
+
+    return Response(status=status.HTTP_404_NOT_FOUND)

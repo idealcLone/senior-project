@@ -27,6 +27,12 @@ class FoodUpdateSerializer(serializers.ModelSerializer):
         exclude = ['image']
 
 
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        exclude = ['id', 'created_at', 'status']
+
+
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order

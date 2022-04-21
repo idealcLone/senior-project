@@ -6,7 +6,7 @@ import { getUser } from '../store/selectors/UserSelectors';
 import { Link } from 'react-router-dom';
 import { Nav } from './styles';
 import { MoreIcon } from '../utils/icons';
-import { ADMIN } from '../consts/roles';
+import { ADMIN, MANAGER } from '../consts/roles';
 
 const routes = [
   {
@@ -88,7 +88,7 @@ export const Navbar = () => {
                 <MoreIcon />
               </div>
               {showDropdown && (
-                <ul className="dropdown" onClick={() => setShowDropdown(false)}>
+                <ul className="dropdown">
                   {dropdown.map(option => (
                     <li key={option.path}>
                       <Link to={option.path}>{option.name}</Link>
@@ -97,6 +97,11 @@ export const Navbar = () => {
                   {user?.roles.find(role => role.name === ADMIN) && (
                     <li key={'/admin'}>
                       <Link to={'/admin'}>Admin Page</Link>
+                    </li>
+                  )}
+                  {user?.restaurant && (
+                    <li key={'/manager'}>
+                      <Link to={'/manager'}>Manager Page</Link>
                     </li>
                   )}
                   <li onClick={handleLogout}>Log Out</li>

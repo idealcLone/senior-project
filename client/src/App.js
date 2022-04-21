@@ -7,6 +7,7 @@ import { getToken } from './utils/token';
 import { useDispatch } from 'react-redux';
 import api from './utils/api';
 import { GET_USER_INFO } from './store/types/UserTypes';
+import { Footer } from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ function App() {
             <main>
               <Routes />
             </main>
-            {/*<Footer />*/}
+            <Footer />
           </div>
         </Router>
       )}

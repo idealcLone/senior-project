@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { EventContainer } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from '../../store/selectors/UserSelectors';
@@ -8,13 +8,24 @@ import { getUserInfo } from '../../store/actions/UserActions';
 
 export const EventPage = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const location = useLocation();
-  const event = location.state.event;
+  const [event, setEvent] = React.useState({});
 
   const user = useSelector(getUser);
 
   const [isAdded, setIsAdded] = React.useState(false);
+
+  const getEvent = React.useCallback(() => {
+    api
+      .get(`/events/${id}`)
+      .then(res => setEvent(res.data))
+      .catch(err => console.log(err));
+  }, [id]);
+
+  React.useEffect(() => {
+    getEvent();
+  }, [getEvent]);
 
   React.useEffect(() => {
     setIsAdded(user?.events?.some(e => e.id === event.id));

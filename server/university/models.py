@@ -104,6 +104,10 @@ class FAQ(models.Model):
     answer = models.CharField(max_length=256, null=False, blank=True)
 
 
+class Question(models.Model):
+    text = models.CharField(max_length=1000, null=False)
+
+
 class Link(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=256)

@@ -144,6 +144,18 @@ export const RestaurantDialog = ({ restaurantId, setOpen }) => {
             />
           </div>
         </div>
+        <div className="form-data">
+          <div className="field">
+            <label htmlFor="manager">Manager</label>
+            <input
+              id={'manager'}
+              name={'manager'}
+              type="text"
+              value={restaurantInfo.manager || ''}
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
       </div>
       <ButtonGroup className={'dialog-footer'}>
         <Button save onClick={handleSaveButton}>

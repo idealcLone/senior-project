@@ -3,15 +3,13 @@ import React from 'react';
 import { SearchBar } from '../styles';
 import { Container } from './styles';
 import api from '../utils/api';
-import { useHistory } from 'react-router';
 
 export const FAQ = () => {
-  const history = useHistory();
-
   const [faqs, setFaqs] = React.useState([]);
   const [links, setLinks] = React.useState([]);
   const [data, setData] = React.useState([]);
   const [searchText, setSearchText] = React.useState('');
+  const [question, setQuestion] = React.useState('');
 
   const getLinks = React.useCallback(() => {
     api
@@ -37,7 +35,15 @@ export const FAQ = () => {
 
   React.useEffect(() => {
     setData(faqs.filter(faq => faq.question.toLowerCase().includes(searchText.toLowerCase())));
-  }, [searchText]);
+  }, [faqs, searchText]);
+
+  const handleAskQuestion = () => {
+    api
+      .post('questions/create/', { text: question })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err))
+      .finally(() => setQuestion(''));
+  };
 
   return (
     <Container>
@@ -49,9 +55,11 @@ export const FAQ = () => {
       <div className="body">
         <div className="faq">
           {data.map(faq => (
-            <div className="qa">
+            <div className="qa" key={faq.id}>
               <div className="question">{faq.question}</div>
-              <div className="answer">{faq.answer}</div>
+              <div className="answer">
+                <pre>{faq.answer}</pre>
+              </div>
             </div>
           ))}
         </div>
@@ -63,6 +71,15 @@ export const FAQ = () => {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="ask-q">
+        <textarea
+          rows={10}
+          placeholder={'Ask a question, we will try to find an answer to it.'}
+          value={question}
+          onChange={e => setQuestion(e.target.value)}
+        />
+        <button onClick={handleAskQuestion}>Submit</button>
       </div>
     </Container>
   );

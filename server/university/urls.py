@@ -4,9 +4,10 @@ from university.views.course import CourseListView, CourseCreateView, CourseUpda
     upload_syllabus, InstructorListView
 from university.views.club import ClubListView, ClubCreateView, ClubUpdateView, ClubRetrieveDestroyView
 from university.views.event import EventListView, EventCreateView, EventUpdateView, EventRetrieveDestroyView, \
-    add_user_to_event, remove_user_from_event
+    add_user_to_event, remove_user_from_event, get_upcoming_event
 from university.views.user import UserListView, UserCreateView, UserUpdateView, UserRetrieveDestroyView
-from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveDestroyView
+from university.views.faq import FAQListView, FAQCreateView, FAQUpdateView, FAQRetrieveDestroyView, \
+    QuestionListCreateView, QuestionRetrieveUpdateDestroyView, answer_question
 from university.views.deadline import DeadlineListView, DeadlineCreateView, DeadlineDestroyView, DeadlineUpdateView
 from university.views.link import LinkListCreateView, LinkRetrieveUpdateDestroyView
 
@@ -29,6 +30,7 @@ urlpatterns = [
     path('events/<int:pk>/', EventRetrieveDestroyView.as_view()),
     path('events/add_user/', add_user_to_event),
     path('events/remove_user/', remove_user_from_event),
+    path('events/upcoming/', get_upcoming_event),
 
     path('users/all/', UserListView.as_view()),
     path('users/create/', UserCreateView.as_view()),
@@ -39,6 +41,12 @@ urlpatterns = [
     path('faqs/create/', FAQCreateView.as_view()),
     path('faqs/update/<int:pk>/', FAQUpdateView.as_view()),
     path('faqs/<int:pk>/', FAQRetrieveDestroyView.as_view()),
+
+    path('questions/all/', QuestionListCreateView.as_view()),
+    path('questions/create/', QuestionListCreateView.as_view()),
+    path('questions/<int:pk>/', QuestionRetrieveUpdateDestroyView.as_view()),
+    path('questions/update/<int:pk>/', QuestionRetrieveUpdateDestroyView.as_view()),
+    path('questions/answer/', answer_question),
 
     path('deadline/all/', DeadlineListView.as_view()),
     path('deadline/create/', DeadlineCreateView.as_view()),

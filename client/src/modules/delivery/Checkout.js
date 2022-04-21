@@ -1,6 +1,9 @@
 import React from 'react';
 import { CheckoutContainer } from './styles';
 import { useHistory } from 'react-router';
+import api from '../../utils/api';
+import { useSelector } from 'react-redux';
+import { getUser } from '../../store/selectors/UserSelectors';
 
 const initialState = {
   block: '',
@@ -10,10 +13,12 @@ const initialState = {
   error: '',
 };
 
-const blocks = [11, 19, 20, 21, 22, 23, 24, 25, 26, 27];
+const blocks = ['', 11, 19, 20, 21, 22, 23, 24, 25, 26, 27];
 
 const Checkout = () => {
   const history = useHistory();
+
+  const user = useSelector(getUser);
 
   const cart = JSON.parse(localStorage.getItem('cart'));
   const items = cart?.items || [];
@@ -24,10 +29,19 @@ const Checkout = () => {
   const handleCheckoutClick = e => {
     e.preventDefault();
 
-    setInfo(initialState);
-    localStorage.removeItem('cart');
-    history.goBack();
-    alert('You order is processing...');
+    api
+      .post('order/', {
+        ...info,
+        foods: items.map(item => item.id),
+        restaurant: user.restaurant.id,
+        price: totalPrice,
+      })
+      .then(() => {
+        localStorage.removeItem('cart');
+        history.goBack();
+      })
+      .catch(err => console.log(err))
+      .finally(() => setInfo(initialState));
   };
 
   const handleInputChange = e => {

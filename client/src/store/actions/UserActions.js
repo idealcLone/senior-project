@@ -17,5 +17,5 @@ export const getUserInfo = () => dispatch => {
     .then(res => {
       dispatch({ type: GET_USER_INFO, payload: res.data });
     })
-    .catch(err => {});
+    .catch(err => console.log(err));
 };

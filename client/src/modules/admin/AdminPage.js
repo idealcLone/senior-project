@@ -14,6 +14,7 @@ const RADIO_ITEMS = [
   'Restaurants',
   'Foods',
   'Links',
+  'Questions',
 ];
 
 export const AdminPage = () => {

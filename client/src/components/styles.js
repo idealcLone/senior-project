@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const FooterDiv = styled.footer`
+  margin-top: 100px;
   min-height: 125px;
   width: 100%;
-  position: absolute;
-  bottom: 0;
-  border-top: 1px solid #000000;
+  background: #2b677760;
 `;
 
 export const LoaderContainer = styled.div`

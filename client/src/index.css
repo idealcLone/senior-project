@@ -15,6 +15,11 @@ body {
   height: 100%;
 }
 
+main {
+  flex: 1;
+  min-height: calc(100vh - 100px);
+}
+
 body::-webkit-scrollbar {
   width: 0.3rem;
 }
@@ -260,7 +265,7 @@ th {
 
 /* quote*/
 .quote {
-  padding: 10rem 0;
+  padding: 9rem calc(20% / 2);
 }
 
 .quote__container h1 {
@@ -269,7 +274,6 @@ th {
   color: rgba(43, 103, 119, 0.6);
   font-weight: 600;
   opacity: 0.96;
-  text-align: center;
 }
 
 /*features*/
@@ -336,24 +340,57 @@ footer .footer__container .links a {
 
 /*Login Form*/
 .login-container {
-  padding: 5rem 0;
+  padding: 4rem 0;
+  color: #fff;
+}
+
+.login-container a {
+  color: #fff;
+}
+
+.login-container input {
+  border: none;
 }
 
 .login-container .btn {
   background: #fff;
+  border: none;
 }
 
 .login-form.form {
   background: rgba(43, 103, 119, 0.6);
+  border: none;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  font-weight: 600;
 }
 
 /*Signup Form*/
 .signup-container {
   padding: 4rem 0;
+  color: #fff;
+  border: none;
+}
+
+.signup-container a {
+  color: #fff;
+}
+
+.signup-container input {
+  border: none;
+}
+
+.signup-container button {
+  border: none;
+  background: #fff;
 }
 
 .signup-form.form {
   background: rgba(43, 103, 119, 0.6);
+  border: none;
 }
 
 /*Filters*/

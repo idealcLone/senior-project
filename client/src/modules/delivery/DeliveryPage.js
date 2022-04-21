@@ -12,12 +12,7 @@ const DeliveryPage = () => {
   const [filtered, setFiltered] = useState([]);
 
   const onCafeClick = cafe => {
-    history.push({
-      pathname: `/delivery/${cafe.id}`,
-      state: {
-        cafe,
-      },
-    });
+    history.push(`/delivery/${cafe.id}`);
   };
 
   const getCafes = useCallback(() => {

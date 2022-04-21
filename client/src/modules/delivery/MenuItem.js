@@ -8,6 +8,7 @@ const MenuItem = ({ food }) => {
 
   const handleAddClick = () => {
     addToCart({
+      id: food.id,
       name: food.name,
       price: food.price,
       count: 1,

@@ -36,6 +36,8 @@ export const Routes = () => {
       {routes.map(route =>
         route.adminRoute ? (
           <AdminRoute key={route.path} exact path={route.path} component={route.component} />
+        ) : route.managerRoute ? (
+          <ManagerRoute key={route.path} exact path={route.path} component={route.component} />
         ) : route.protected ? (
           <ProtectedRoute key={route.path} exact path={route.path} component={route.component} />
         ) : (

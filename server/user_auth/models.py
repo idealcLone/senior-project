@@ -67,6 +67,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     major = models.CharField(max_length=100, null=True)
 
+    tg_chat_id = models.CharField(max_length=100, null=True)
+
     roles = models.ManyToManyField(Role, related_name='roles')
 
     is_staff = models.BooleanField(default=False)

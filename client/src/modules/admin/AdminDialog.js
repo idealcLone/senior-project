@@ -9,6 +9,7 @@ import { FAQDialog } from './dialogs/FAQDialog';
 import { RestaurantDialog } from './dialogs/RestaurantDialog';
 import { FoodDialog } from './dialogs/FoodDialog';
 import { LinkDialog } from './dialogs/LinkDialog';
+import { QuestionDialog } from './dialogs/QuestionDialog';
 
 export const AdminDialog = ({ open, setOpen, selected }) => {
   const getDialog = () => {
@@ -29,6 +30,8 @@ export const AdminDialog = ({ open, setOpen, selected }) => {
         return <FoodDialog foodId={open} setOpen={setOpen} />;
       case 'Links':
         return <LinkDialog linkId={open} setOpen={setOpen} />;
+      case 'Questions':
+        return <QuestionDialog questionId={open} setOpen={setOpen} />;
       default:
         return <></>;
     }

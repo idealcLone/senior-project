@@ -50,12 +50,7 @@ export const EventsCalendar = ({ events }) => {
         onClick={() => {
           const event = restProps.data.event;
           localStorage.setItem('from', 'calendar');
-          history.push({
-            pathname: `/events/${event.id}`,
-            state: {
-              event,
-            },
-          });
+          history.push(`/events/${event.id}`);
         }}
       />
     );
